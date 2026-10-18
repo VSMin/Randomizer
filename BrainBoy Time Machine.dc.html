@@ -733,14 +733,16 @@ class Component extends DCLogic {
   toggleFs() { try { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {}); else document.exitFullscreen(); } catch (e) {} }
   openAudience() {
     if (this.mirror && !this.mirror.win.closed) { this.mirror.win.focus(); return; }
-    let embedded = false; try { embedded = window.top !== window; } catch (e) { embedded = true; }
-    if (!embedded) { try { const u = new URL(location.href); u.searchParams.set('view', 'audience'); window.open(u.toString(), 'bbtm-audience', 'popup=yes,width=1280,height=720'); } catch (e) {} return; }
     const w = window.open('', '', 'popup=yes,width=1280,height=720'); if (!w) return; this.buildMirror(w);
   }
   buildMirror(w) {
     const abs = p => new URL(p, location.href).toString(), d = w.document;
     const css = Array.from(document.querySelectorAll('link[rel=stylesheet], style')).map(n => n.tagName === 'LINK' ? '<link rel="stylesheet" href="' + n.href + '">' : n.outerHTML).join('');
-    const asset = (n, f) => { const el = document.querySelector('img[data-asset="' + n + '"]'); return el && el.src ? el.src : abs(f); };
+    const asset = (n, f) => {
+      const el = document.querySelector('img[data-asset="' + n + '"]') || Array.from(document.images).find(i => (i.getAttribute('src') || '').indexOf(f) >= 0 || (i.alt === 'BrainBoy' && n === 'mascot' && /mascot/.test(i.src)));
+      if (el && el.complete && el.naturalWidth) { try { const c = document.createElement('canvas'); c.width = el.naturalWidth; c.height = el.naturalHeight; c.getContext('2d').drawImage(el, 0, 0); return c.toDataURL('image/png'); } catch (e) {} }
+      return el && el.src ? el.src : abs(f);
+    };
     d.open(); d.write('<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>BrainBoy Time Machine — экран зрителей</title>' + css + '<style>:root{--font-heading:"Caprasimo", "Nunito", system-ui, sans-serif;--font-body:"Figtree", "Nunito", system-ui, sans-serif}html,body{margin:0;height:100%;overflow:hidden;background:#0b0806}</style></head><body><div style="position:fixed;inset:0;overflow:hidden;font-family:var(--font-body)"><canvas id="cv" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas><div id="ms" style="position:absolute;pointer-events:none;display:none"></div><div id="ov" style="position:absolute;inset:0;pointer-events:none"></div></div></body></html>'); d.close();
     const ms = d.getElementById('ms'), shadow = 'filter:drop-shadow(0 18px 18px rgba(0,0,0,.55));transition:opacity .3s;position:absolute;max-width:none;';
     ms.innerHTML = '<img src="' + asset('mascot', 'assets/mascot.png') + '" style="' + shadow + 'left:0;bottom:0;height:100%;width:auto;transform:scaleX(-1)">';
