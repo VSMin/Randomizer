@@ -71,7 +71,7 @@
     <sc-if value="{{ chrome }}" hint-placeholder-val="{{ true }}">
 
       <sc-if value="{{ showHostPanel }}" hint-placeholder-val="{{ true }}">
-        <div style="position:absolute;left:28px;top:112px;width:272px;max-height:calc(100vh - 112px - 120px);display:flex;flex-direction:column;pointer-events:auto;padding:4px;border-radius:28px;background:linear-gradient(180deg, var(--sk-m3) 0%, var(--sk-m1) 20%, var(--sk-m2) 55%, var(--sk-m0) 90%, var(--sk-m2) 100%);box-shadow:0 16px 34px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.5)">
+        <div data-tour="host" style="position:absolute;left:28px;top:112px;width:272px;max-height:calc(100vh - 112px - 120px);display:flex;flex-direction:column;pointer-events:auto;padding:4px;border-radius:28px;background:linear-gradient(180deg, var(--sk-m3) 0%, var(--sk-m1) 20%, var(--sk-m2) 55%, var(--sk-m0) 90%, var(--sk-m2) 100%);box-shadow:0 16px 34px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.5)">
           <div style="display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto;padding:16px 16px 18px;border-radius:24px;background:linear-gradient(180deg, var(--sk-d1), var(--sk-d0));box-shadow:inset 0 3px 12px rgba(0,0,0,.75)">
             <div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px">
               <span style="font-size:11px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--sk-hi);white-space:pre-line">{{ tx.hostPanel }}</span>
@@ -96,29 +96,33 @@
 
       <div style="position:absolute;top:22px;right:28px;display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:linear-gradient(180deg, var(--sk-m3) 0%, var(--sk-m1) 20%, var(--sk-m2) 55%, var(--sk-m0) 90%, var(--sk-m2) 100%);box-shadow:0 12px 26px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.55), inset 0 -2px 3px rgba(0,0,0,.4);pointer-events:auto">
         <span style="flex:none;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--sk-hi), var(--sk-m0) 75%);box-shadow:0 1px 1px rgba(0,0,0,.5)"></span>
-        <button title="{{ tx.tQuick }}" onClick="{{ toggleQuick }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+        <button data-tour="quickBtn" title="{{ tx.tQuick }}" onClick="{{ toggleQuick }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
           <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><line x1="21" x2="14" y1="4" y2="4"></line><line x1="10" x2="3" y1="4" y2="4"></line><line x1="21" x2="12" y1="12" y2="12"></line><line x1="8" x2="3" y1="12" y2="12"></line><line x1="21" x2="16" y1="20" y2="20"></line><line x1="12" x2="3" y1="20" y2="20"></line><line x1="14" x2="14" y1="2" y2="6"></line><line x1="8" x2="8" y1="10" y2="14"></line><line x1="16" x2="16" y1="18" y2="22"></line></svg>
         </button>
-        <button title="{{ tx.tSettings }}" onClick="{{ openSettings }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+        <button data-tour="settingsBtn" title="{{ tx.tSettings }}" onClick="{{ openSettings }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
           <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
         </button>
-        <button title="{{ tx.tHist }}" onClick="{{ toggleHist }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+        <button data-tour="hist" title="{{ tx.tHist }}" onClick="{{ toggleHist }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
           <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg>
         </button>
-        <button title="{{ tx.tAud }}" onClick="{{ openAudience }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+        
+        <button data-tour="aud" title="{{ tx.tAud }}" onClick="{{ openAudience }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
           <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><rect width="20" height="14" x="2" y="3" rx="2"></rect><line x1="8" x2="16" y1="21" y2="21"></line><line x1="12" x2="12" y1="17" y2="21"></line></svg>
         </button>
-        <button title="{{ tx.tPub }}" onClick="{{ togglePub }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+        <button data-tour="pub" title="{{ tx.tPub }}" onClick="{{ togglePub }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
           <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
         </button>
-        <button title="{{ tx.tFs }}" onClick="{{ toggleFs }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+        <button data-tour="fs" title="{{ tx.tFs }}" onClick="{{ toggleFs }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
           <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
+        </button>
+        <button data-tour="help" title="{{ tx.tHelp }}" onClick="{{ toggleHelp }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+          <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
         </button>
       <span style="flex:none;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--sk-hi), var(--sk-m0) 75%);box-shadow:0 1px 1px rgba(0,0,0,.5)"></span>
       </div>
 
       <sc-if value="{{ quickOpen }}" hint-placeholder-val="{{ false }}">
-        <div class="card elev-lg" style="position:absolute;top:84px;right:32px;width:min(400px, calc(100vw - 64px));max-height:calc(100vh - 84px - 112px);overflow:auto;z-index:5;pointer-events:auto;background:var(--color-bg);gap:14px;padding:20px">
+        <div data-tour="quickPanel" class="card elev-lg" style="position:absolute;top:84px;right:32px;width:min(400px, calc(100vw - 64px));max-height:calc(100vh - 84px - 112px);overflow:auto;z-index:5;pointer-events:auto;background:var(--color-bg);gap:14px;padding:20px">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <span class="card-title"><span style="white-space:pre-line">{{ tx.quick }}</span></span>
             <button class="btn btn-ghost" onClick="{{ toggleQuick }}"><span style="white-space:pre-line">{{ tx.collapse }}</span></button>
@@ -148,15 +152,38 @@
           <span style="flex:none;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--sk-hi), var(--sk-m0) 75%);box-shadow:0 1px 1px rgba(0,0,0,.5)"></span>
           <div style="display:flex;align-items:center;gap:12px;padding:6px 6px 6px 14px;border-radius:999px;background:linear-gradient(180deg, var(--sk-d1), var(--sk-d0));box-shadow:inset 0 3px 10px rgba(0,0,0,.8), 0 1px 0 rgba(255,255,255,.35)">
             <span style="flex:none;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #ffffff, var(--sk-glow) 45%, var(--sk-glow2));box-shadow:0 0 12px var(--sk-glow);opacity:{{ lampOp }}"></span>
-            <button disabled="{{ primaryDisabled }}" onClick="{{ primary }}" style="all:unset;box-sizing:border-box;cursor:pointer;min-width:min(340px, 32vw);padding:15px clamp(22px, 3vw, 42px);border-radius:999px;text-align:center;font-family:var(--font-heading);font-size:clamp(16px, 1.7vw, 22px);line-height:1.15;letter-spacing:0.06em;color:var(--sk-lo);background:radial-gradient(130% 160% at 50% 0%, #ffffff 0%, var(--sk-glow) 30%, var(--sk-glow2) 100%);box-shadow:0 0 26px color-mix(in srgb, var(--sk-glow) 70%, transparent), inset 0 2px 0 rgba(255,255,255,.75), inset 0 -5px 10px rgba(0,0,0,.3);text-shadow:0 1px 0 rgba(255,255,255,.5);opacity:{{ primaryOp }}" style-hover="filter:brightness(1.08) saturate(1.1)" style-active="transform:translateY(2px);box-shadow:inset 0 3px 10px rgba(0,0,0,.45)" style-focus="outline:2px solid var(--sk-hi);outline-offset:3px"><span style="white-space:pre-line">{{ primaryLabel }}</span></button>
+            <button data-tour="primary" disabled="{{ primaryDisabled }}" onClick="{{ primary }}" onPointerDown="{{ primaryDown }}" onPointerUp="{{ calUp }}" onPointerLeave="{{ calLeave }}" onPointerCancel="{{ calLeave }}" onKeyDown="{{ primaryKey }}" onKeyUp="{{ calUp }}" onContextMenu="{{ noCtx }}" style="all:unset;position:relative;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;box-sizing:border-box;cursor:pointer;min-width:min(340px, 32vw);padding:15px clamp(22px, 3vw, 42px);border-radius:999px;text-align:center;font-family:var(--font-heading);font-size:clamp(16px, 1.7vw, 22px);line-height:1.15;letter-spacing:0.06em;color:var(--sk-lo);background:radial-gradient(130% 160% at 50% 0%, #ffffff 0%, var(--sk-glow) 30%, var(--sk-glow2) 100%);box-shadow:0 0 26px color-mix(in srgb, var(--sk-glow) 70%, transparent), inset 0 2px 0 rgba(255,255,255,.75), inset 0 -5px 10px rgba(0,0,0,.3);text-shadow:0 1px 0 rgba(255,255,255,.5);opacity:{{ primaryOp }}" style-hover="filter:brightness(1.08) saturate(1.1)" style-active="transform:translateY(2px);box-shadow:inset 0 3px 10px rgba(0,0,0,.45)" style-focus="outline:2px solid var(--sk-hi);outline-offset:3px"><span style="position:absolute;left:0;top:0;bottom:0;width:{{ calPctP }}%;background:rgba(0,0,0,.3);pointer-events:none"></span><span style="position:relative;white-space:pre-line">{{ primaryLabel }}</span></button>
           </div>
-          <button disabled="{{ recalDisabled }}" onClick="{{ recalibrate }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);font-size:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;line-height:1.2;box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45);opacity:{{ recalOp }}" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
-            <svg width="16" height="16" viewBox="0 0 24 24" style="flex:none;fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path><path d="M16 16h5v5"></path></svg>
-            <span style="white-space:pre-line">{{ tx.recal }}</span>
+          <button data-tour="recal" title="{{ tx.holdHint1 }}" disabled="{{ recalDisabled }}" onPointerDown="{{ recalDown }}" onPointerUp="{{ calUp }}" onPointerLeave="{{ calLeave }}" onPointerCancel="{{ calLeave }}" onKeyDown="{{ recalKey }}" onKeyUp="{{ calUp }}" onContextMenu="{{ noCtx }}" style="all:unset;position:relative;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);font-size:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;line-height:1.2;box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45);opacity:{{ recalOp }}" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+            <span style="position:absolute;left:0;top:0;bottom:0;width:{{ calPctR }}%;background:rgba(0,0,0,.35);pointer-events:none"></span><svg width="16" height="16" viewBox="0 0 24 24" style="position:relative;flex:none;fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path><path d="M16 16h5v5"></path></svg>
+            <span style="position:relative;white-space:pre-line">{{ recalLabelR }}</span>
           </button>
           <span style="flex:none;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--sk-hi), var(--sk-m0) 75%);box-shadow:0 1px 1px rgba(0,0,0,.5)"></span>
         </div>
       </div>
+
+      <sc-if value="{{ helpOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:0;right:0;bottom:0;width:min(660px, 100%);background:var(--color-bg);box-shadow:var(--shadow-lg);pointer-events:auto;overflow:auto;padding:28px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px;border-radius:28px 0 0 28px;z-index:6">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 12px">
+            <h3 style="margin:0"><span style="white-space:pre-line">{{ tx.helpTitle }}</span></h3>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-primary" onClick="{{ startTour }}"><span style="white-space:pre-line">{{ tx.tourStart }}</span></button>
+              <button class="btn btn-secondary" onClick="{{ toggleHelp }}"><span style="white-space:pre-line">{{ tx.close }}</span></button>
+            </div>
+          </div>
+          <sc-for list="{{ helpSections }}" as="sec" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span class="card-kicker" style="color:var(--color-accent-700)"><span style="white-space:pre-line">{{ sec.title }}</span></span>
+              <sc-for list="{{ sec.items }}" as="it" hint-placeholder-count="3">
+                <div style="display:flex;flex-direction:column;gap:4px;padding:12px 16px;border-radius:18px;background:var(--color-surface)">
+                  <span style="font-size:14px;font-weight:700"><span style="white-space:pre-line">{{ it.k }}</span></span>
+                  <span style="font-size:13px;line-height:1.45;color:var(--color-neutral-800);text-wrap:pretty"><span style="white-space:pre-line">{{ it.v }}</span></span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
 
       <sc-if value="{{ histOpen }}" hint-placeholder-val="{{ false }}">
         <div style="position:absolute;top:0;right:0;bottom:0;width:min(560px, 100%);background:var(--color-bg);box-shadow:var(--shadow-lg);pointer-events:auto;overflow:auto;padding:28px;display:flex;flex-direction:column;gap:18px;border-radius:28px 0 0 28px">
@@ -212,7 +239,7 @@
           <div class="dialog-title" style="font-size:26px"><span style="white-space:pre-line">{{ tx.settings }}</span></div>
           <button class="btn btn-secondary" onClick="{{ closeSettings }}"><span style="white-space:pre-line">{{ tx.close }}</span></button>
         </div>
-        <div class="seg" style="flex:none;align-self:flex-start;flex-wrap:wrap">
+        <div data-tour="tabs" class="seg" style="flex:none;align-self:flex-start;flex-wrap:wrap">
           <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="6"><label class="seg-opt"><input type="radio" name="tabs" checked="{{ tb.checked }}" onChange="{{ tb.pick }}"><span style="white-space:pre-line">{{ tb.label }}</span></label></sc-for>
         </div>
 
@@ -263,7 +290,7 @@
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
               <button class="btn btn-primary" onClick="{{ askNewSession }}"><span style="white-space:pre-line">{{ tx.newSession }}</span></button>
-              <button class="btn btn-secondary" disabled="{{ recalDisabled }}" onClick="{{ recalibrate }}"><span style="white-space:pre-line">{{ tx.recal }}</span></button>
+              <button class="btn btn-secondary" disabled="{{ recalDisabled }}" onPointerDown="{{ recalDownS }}" onPointerUp="{{ calUp }}" onPointerLeave="{{ calLeave }}" onPointerCancel="{{ calLeave }}" onKeyDown="{{ recalKeyS }}" onKeyUp="{{ calUp }}" onContextMenu="{{ noCtx }}" style="touch-action:none;user-select:none;-webkit-user-select:none;background:linear-gradient(90deg, var(--color-accent-300) {{ calPctS }}%, transparent {{ calPctS }}%)"><span style="white-space:pre-line">{{ recalLabelS }}</span></button>
             </div>
             <p style="margin:0;font-size:13px;color:var(--color-neutral-700);text-wrap:pretty"><span style="white-space:pre-line">{{ tx.fair }}</span></p>
           </div>
@@ -435,6 +462,29 @@
     </div>
   </sc-if>
 
+  <sc-if value="{{ tourOn }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ tourBlock }}" onDoubleClick="{{ tourBlock }}" style="position:fixed;inset:0;z-index:40">
+      <sc-if value="{{ spotOn }}" hint-placeholder-val="{{ false }}">
+        <div style="position:fixed;left:{{ spotL }}px;top:{{ spotT }}px;width:{{ spotW }}px;height:{{ spotH }}px;border-radius:{{ spotR }}px;box-shadow:0 0 0 3px var(--sk-glow), 0 0 28px var(--sk-glow), 0 0 0 9999px rgba(0,0,0,.66);pointer-events:none;transition:left .3s ease, top .3s ease, width .3s ease, height .3s ease"></div>
+      </sc-if>
+      <sc-if value="{{ spotOff }}" hint-placeholder-val="{{ true }}">
+        <div style="position:fixed;inset:0;background:rgba(0,0,0,.66)"></div>
+      </sc-if>
+      <div class="card elev-lg" style="position:fixed;left:{{ cardL }}px;top:{{ cardTop }};bottom:{{ cardBottom }};width:{{ cardW }}px;box-sizing:border-box;background:var(--color-bg);gap:12px;padding:22px;opacity:{{ tourCardOp }};transition:opacity .18s ease">
+        <span class="card-kicker" style="color:var(--color-accent-700)">{{ tourCount }}</span>
+        <span class="card-title"><span style="white-space:pre-line">{{ tourTitle }}</span></span>
+        <span class="card-body" style="text-wrap:pretty"><span style="white-space:pre-line">{{ tourText }}</span></span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center">
+          <button class="btn btn-ghost" onClick="{{ tourSkip }}"><span style="white-space:pre-line">{{ tourSkipLabel }}</span></button>
+          <div style="display:flex;gap:8px">
+            <sc-if value="{{ tourHasBack }}" hint-placeholder-val="{{ false }}"><button class="btn btn-secondary" onClick="{{ tourBack }}"><span style="white-space:pre-line">{{ tx.back }}</span></button></sc-if>
+            <button class="btn btn-primary" onClick="{{ tourNext }}"><span style="white-space:pre-line">{{ tourNextLabel }}</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
   <sc-if value="{{ confirmOpen }}" hint-placeholder-val="{{ false }}">
     <div class="dialog-backdrop" style="z-index:30">
       <div class="dialog" style="background:var(--color-bg)">
@@ -452,7 +502,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  static DEF = { tickets: 150, sound: true, confetti: true, fanfare: true, spinSec: 8, calibSec: 8, intensity: 1, fx: 1, lowGfx: false, flashes: true, digitSpeed: 1, skin: 'classic', mode: 'dial', vol: 0.8, volMech: 0.7, volFan: 0.85, soundSet: 'brass', muteTicks: false, muteMotor: false, muteImpacts: false, muteChimes: false, uiScale: 1, numScale: 1, decor: true, showDrawNo: true, showRemaining: true, minimal: false, hostPanel: true, audienceHistory: false, mascot: true, lang: 'both', skipNext: false, showStatusBar: false, drawTarget: 'tickets', countdown: 0, autoHoliday: true, autoHolidayDay: '', music: true, volMus: 0.5, duckMusic: true, showDate: true, showWinStatus: true, teamsRing: true, teams: [{"n":"The killers","on":true},{"n":"АСК","on":true},{"n":"Mighty Minds","on":true},{"n":"108 кг ярости","on":true},{"n":"Миндальная связь","on":true},{"n":"Как тебе такое Илон Маск?","on":true},{"n":"Mozgoclue","on":true},{"n":"Double belly buster","on":true},{"n":"Маша, думай, а не пей","on":true},{"n":"Baursak lives matter","on":true},{"n":"Михаил Светлов","on":true},{"n":"The best from the west","on":true},{"n":"Давайте есть пчел","on":true},{"n":"Вечно молодой","on":true},{"n":"Без изысков","on":true},{"n":"Разношерстные","on":true},{"n":"Скрытый потанцевал","on":true},{"n":"Поцелуй всадницу","on":true},{"n":"Активные-Позитивные","on":true},{"n":"Snatch","on":true},{"n":"Йогини","on":true},{"n":"Блондинки в загоне","on":true},{"n":"Чурбачки","on":true},{"n":"50/50","on":true},{"n":"Кукушечка","on":true},{"n":"Синева","on":true},{"n":"Merci Ky-Ky","on":true}] };
+  static DEF = { tickets: 150, sound: true, confetti: true, fanfare: true, spinSec: 8, calibSec: 8, intensity: 1, fx: 1, lowGfx: false, flashes: true, digitSpeed: 1, skin: 'classic', mode: 'dial', vol: 0.8, volMech: 0.7, volFan: 0.85, soundSet: 'brass', muteTicks: false, muteMotor: false, muteImpacts: false, muteChimes: false, uiScale: 1, numScale: 1, decor: true, showDrawNo: true, showRemaining: true, minimal: false, hostPanel: true, audienceHistory: false, mascot: true, lang: 'both', skipNext: false, showStatusBar: false, drawTarget: 'tickets', countdown: 0, autoHoliday: true, autoHolidayDay: '', autoSeason: true, autoSeasonKey: '', autoHolSkin: '', music: true, volMus: 0.5, duckMusic: true, showDate: true, showWinStatus: true, teamsRing: true, teams: [{"n":"The killers","on":true},{"n":"АСК","on":true},{"n":"Mighty Minds","on":true},{"n":"108 кг ярости","on":true},{"n":"Миндальная связь","on":true},{"n":"Как тебе такое Илон Маск?","on":true},{"n":"Mozgoclue","on":true},{"n":"Double belly buster","on":true},{"n":"Маша, думай, а не пей","on":true},{"n":"Baursak lives matter","on":true},{"n":"Михаил Светлов","on":true},{"n":"The best from the west","on":true},{"n":"Давайте есть пчел","on":true},{"n":"Вечно молодой","on":true},{"n":"Без изысков","on":true},{"n":"Разношерстные","on":true},{"n":"Скрытый потанцевал","on":true},{"n":"Поцелуй всадницу","on":true},{"n":"Активные-Позитивные","on":true},{"n":"Snatch","on":true},{"n":"Йогини","on":true},{"n":"Блондинки в загоне","on":true},{"n":"Чурбачки","on":true},{"n":"50/50","on":true},{"n":"Кукушечка","on":true},{"n":"Синева","on":true},{"n":"Merci Ky-Ky","on":true}] };
   static K = { s: 'bbtm.v2.settings', ses: 'bbtm.v2.session', ar: 'bbtm.v2.archive' };
   static SKINS = [
     { id: 'brand', name: 'BrainBoy', desc: 'Фирменные жёлтый, чёрный и красный, летящие знаки вопроса', kdesc: 'Фирмалық сары, қара және қызыл, ұшқан сұрақ белгілері', sw: ['#000000', '#f5c02c', '#d80018', '#ffdf5e'] },
@@ -500,13 +550,14 @@ class Component extends DCLogic {
     const C = Component, st = this.lj(C.K.s, {}), settings = Object.assign({}, C.DEF, st && typeof st === 'object' ? st : {}); if (!settings.cdOffV1) { settings.countdown = 0; settings.cdOffV1 = true; }
     let session = this.lj(C.K.ses, null); if (!session || !session.id || !Array.isArray(session.history)) session = this.mkSession(settings.tickets, false);
     const archive = this.lj(C.K.ar, []);
-    return { settings, session, archive: Array.isArray(archive) ? archive : [], quick: false, dlg: false, tab: 'time', hist: false, pub: this.isAud, confirm: null, preview: null, draft: String(session.tickets), draftErr: '', teamDraft: '', customMus: {}, musPreview: 0, holdPct: 0, mHover: false, mPi: 0, fs: false, tick: 0 };
+    return { settings, session, archive: Array.isArray(archive) ? archive : [], quick: false, dlg: false, tab: 'time', hist: false, help: false, tour: -1, tourRect: null, calSrc: '', calPct: 0, calHint: '', pub: this.isAud, confirm: null, preview: null, draft: String(session.tickets), draftErr: '', teamDraft: '', customMus: {}, musPreview: 0, holdPct: 0, mHover: false, mPi: 0, fs: false, tick: 0 };
   }
 
   componentDidMount() {
     const boot = () => { if (!window.TM || !this.canvasRef.current) { this._bt = setTimeout(boot, 50); return; } this.audio = new window.TM.AudioEngine(); this.machine = new window.TM.Machine(this.canvasRef.current, this.audio); this.syncEngine(); };
     boot();
-    if (!this.isAud) { this.loadMus(); this.checkHoliday(); }
+    if (!this.isAud) { this.loadMus(); this.checkHoliday(); setTimeout(() => this.checkHoliday(), 400); let td = null; try { td = localStorage.getItem('bbtm.tourDone'); } catch (e) {} if (!td) this._tt = setTimeout(() => this.goTour(0), 900); }
+    this._ku = e => { if (e.code === 'Space') this.calEnd(true); }; window.addEventListener('keyup', this._ku);
     this._unlock = () => { if (this.audio) this.audio.unlock(); };
     window.addEventListener('pointerdown', this._unlock); window.addEventListener('keydown', this._unlock);
     this._key = e => this.onKey(e); window.addEventListener('keydown', this._key);
@@ -517,17 +568,17 @@ class Component extends DCLogic {
     this._st = ev => { if (this.isAud && ev.key && ev.key.indexOf('bbtm.v2') === 0) this.setState(this.initState()); }; window.addEventListener('storage', this._st);
     if (this.isAud && this.bc) this.bc.postMessage({ hello: 1 });
     this._iv = setInterval(() => this.poll(), 200);
-    this._rs = () => this.forceUpdate(); window.addEventListener('resize', this._rs);
+    this._rs = () => { this.forceUpdate(); this.measureTour(); }; window.addEventListener('resize', this._rs);
   }
   componentWillUnmount() {
-    clearTimeout(this._bt); clearInterval(this._iv); if (this.audio) this.audio.setMusic(null); if (this.machine) this.machine.destroy(); if (this.mirror) { this.mirror.machine.destroy(); this.mirror = null; }
+    clearTimeout(this._bt); clearTimeout(this._tt); clearTimeout(this._tm); clearTimeout(this._chT); if (this._ch) cancelAnimationFrame(this._ch); window.removeEventListener('keyup', this._ku); clearInterval(this._iv); if (this.audio) this.audio.setMusic(null); if (this.machine) this.machine.destroy(); if (this.mirror) { this.mirror.machine.destroy(); this.mirror = null; }
     window.removeEventListener('pointerdown', this._unlock); window.removeEventListener('keydown', this._unlock); window.removeEventListener('keydown', this._key); window.removeEventListener('mouseup', this._blur); window.removeEventListener('storage', this._st); window.removeEventListener('resize', this._rs); document.removeEventListener('fullscreenchange', this._fs);
     if (this.bc) this.bc.close();
   }
   componentDidUpdate() { this.syncEngine(); }
 
   poll() {
-    this.updateMirror(); this.syncMusic(); if (!this.isAud) this.checkHoliday();
+    this.updateMirror(); this.syncMusic();
     const now = Date.now(), s = this.state.session, p = this.state.preview;
     if (!this.isAud && s.calib && now >= s.calib.startAt + s.calib.duration) { this.commit({ session: Object.assign({}, s, { calib: null, calibrated: true }) }); return; }
     if (p && now >= p.startAt + p.duration + 1800) { this.commit({ preview: null }); return; }
@@ -609,14 +660,17 @@ class Component extends DCLogic {
   primaryLabelText(ph) {
     const L = (a, b) => this.L(a, b), T = this.isTeams();
     if (ph === 'revealed' && this.state.settings.skipNext && this.remaining() > 0) ph = 'ready';
-    return { boot: L('КАЛИБРЛЕУДІ БАСТАУ', 'НАЧАТЬ КАЛИБРОВКУ'), calibrating: L('КАЛИБРЛЕУ…', 'КАЛИБРОВКА…'), ready: L('ІСКЕ ҚОСУ', 'ЗАПУСТИТЬ'), spinning: L('ҰТЫС ЖҮРУДЕ…', 'ИДЁТ РОЗЫГРЫШ…'), preview: L('АЛДЫН АЛА ҚАРАУ…', 'ПРЕДПРОСМОТР…'), revealed: L('КЕЛЕСІ ҰТЫС', 'СЛЕДУЮЩИЙ РОЗЫГРЫШ'), exhausted: T ? L('КОМАНДАЛАР ТАУСЫЛДЫ', 'КОМАНДЫ ЗАКОНЧИЛИСЬ') : L('БИЛЕТТЕР ТАУСЫЛДЫ', 'БИЛЕТЫ ЗАКОНЧИЛИСЬ') }[ph];
+    return { boot: L('КАЛИБРЛЕУ: 2 С БАСЫП ТҰРЫҢЫЗ', 'КАЛИБРОВКА: УДЕРЖИВАЙТЕ 2 С'), calibrating: L('КАЛИБРЛЕУ…', 'КАЛИБРОВКА…'), ready: L('ІСКЕ ҚОСУ', 'ЗАПУСТИТЬ'), spinning: L('ҰТЫС ЖҮРУДЕ…', 'ИДЁТ РОЗЫГРЫШ…'), preview: L('АЛДЫН АЛА ҚАРАУ…', 'ПРЕДПРОСМОТР…'), revealed: L('КЕЛЕСІ ҰТЫС', 'СЛЕДУЮЩИЙ РОЗЫГРЫШ'), exhausted: T ? L('КОМАНДАЛАР ТАУСЫЛДЫ', 'КОМАНДЫ ЗАКОНЧИЛИСЬ') : L('БИЛЕТТЕР ТАУСЫЛДЫ', 'БИЛЕТЫ ЗАКОНЧИЛИСЬ') }[ph];
   }
   static HOL = { '12-31': 'newyear', '01-01': 'newyear', '01-07': 'christmas', '12-25': 'christmas', '02-14': 'valentine', '03-08': 'march8', '03-21': 'nauryz', '03-22': 'nauryz', '03-23': 'nauryz', '05-01': 'may1', '05-09': 'victory', '10-31': 'halloween', '12-16': 'independence' };
-  checkHoliday() {
-    const S = this.state.settings; if (this.isAud || S.autoHoliday === false) return;
-    const d = new Date(), md = String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'), day = d.getFullYear() + '-' + md, sk = Component.HOL[md];
-    if (!sk || S.autoHolidayDay === day) return; this.commit({ settings: Object.assign({}, S, { skin: sk, autoHolidayDay: day }) });
+  autoSkin() {
+    const S = this.state.settings; if (this.isAud) return null;
+    const d = new Date(), m = d.getMonth() + 1, md = String(m).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'), hol = Component.HOL[md];
+    if (hol && S.autoHoliday !== false) return hol;
+    if (S.autoSeason === false) return null;
+    return m === 12 || m <= 2 ? 'winter' : m <= 5 ? 'spring' : m <= 8 ? 'summer' : 'autumn';
   }
+  checkHoliday() { const sk = this.autoSkin(); if (sk && sk !== this.state.settings.skin) this.commit({ settings: Object.assign({}, this.state.settings, { skin: sk }) }); }
   mascotReserve(S, W, H) { return S.mascot === false ? 0 : Math.round(Math.min(W * 0.2, H * 0.27)); }
   mascotPhrase() {
     const ph = this.phase(), s = this.state.session, c = s.current, i = this.state.mPi;
@@ -682,7 +736,7 @@ class Component extends DCLogic {
     if (tau < tm.stop) return P('ТЕЖЕЛУ', 'ТОРМОЖЕНИЕ');
     return P('НӨМІР АШЫЛУДА', 'РАСКРЫТИЕ НОМЕРА');
   }
-  primary() { const ph = this.phase(); if (ph === 'boot') this.calibrate(); else if (ph === 'ready') this.start(); else if (ph === 'revealed') { if (this.state.settings.skipNext && this.remaining() > 0) this.start(Object.assign({}, this.state.session, { current: null })); else this.next(); } }
+  primary() { const ph = this.phase(); if (ph === 'boot') return; else if (ph === 'ready') this.start(); else if (ph === 'revealed') { if (this.state.settings.skipNext && this.remaining() > 0) this.start(Object.assign({}, this.state.session, { current: null })); else this.next(); } }
   start(base) {
     if (this._busy || this.isAud || (!base && this.phase() !== 'ready')) return; this._busy = true;
     try {
@@ -700,9 +754,122 @@ class Component extends DCLogic {
     } finally { setTimeout(() => { this._busy = false; }, 400); }
   }
   next() { if (this.isAud || this.phase() !== 'revealed') return; this.commit({ session: Object.assign({}, this.state.session, { current: null }) }); }
-  calibrate() { if (this.isAud) return; const ph = this.phase(); if (ph === 'calibrating' || ph === 'spinning' || ph === 'preview') return; this.commit({ session: Object.assign({}, this.state.session, { current: null, calib: { startAt: Date.now() + 60, duration: Math.round(this.state.settings.calibSec * 1000) } }), dlg: false }); }
+  calibrateNew() {
+    if (this.isAud) return; const ph = this.phase(); if (['calibrating', 'spinning', 'preview'].includes(ph)) return;
+    const s = this.state.session, S = this.state.settings, ask = this.autoSkin(); let archive = this.state.archive;
+    if (s.history.length) archive = archive.concat([Object.assign({}, s, { current: null, calib: null })]).slice(-50);
+    const ns = Object.assign(this.mkSession(s.tickets, s.allowRepeats), { calib: { startAt: Date.now() + 60, duration: Math.round(S.calibSec * 1000) } });
+    this.commit({ session: ns, archive, settings: ask && ask !== S.skin ? Object.assign({}, S, { skin: ask }) : S, dlg: false, hist: false, draft: String(s.tickets), draftErr: '' });
+  }
+  holdCal(src) {
+    if (this.isAud || this._ch || this.state.tour >= 0) return; if (['calibrating', 'spinning', 'preview'].includes(this.phase())) return;
+    const t0 = performance.now(); this._chSrc = src;
+    const step = () => { const p = Math.min(100, (performance.now() - t0) / 20); if (p >= 100) { this._ch = null; this.setState({ calSrc: '', calPct: 0, calHint: '' }); this.calibrateNew(); return; } this.setState({ calSrc: src, calPct: p }); this._ch = requestAnimationFrame(step); };
+    this._ch = requestAnimationFrame(step);
+  }
+  calEnd(hint) {
+    if (!this._ch) return; cancelAnimationFrame(this._ch); this._ch = null; const src = this._chSrc;
+    this.setState({ calSrc: '', calPct: 0, calHint: hint ? src : '' }); if (hint) { clearTimeout(this._chT); this._chT = setTimeout(() => this.setState({ calHint: '' }), 1800); }
+  }
+  tourSteps() {
+    const L = (a, b) => this.L(a, b), S = this.state.settings;
+    return [
+      { t: L('Қош келдіңіз!', 'Добро пожаловать!'), d: L('Қысқа оқыту батырмалар мен мәзірді көрсетеді. Оны өткізіп жіберіп, кейін «Анықтама» бөлімінен қайта бастауға болады.', 'Короткое обучение покажет кнопки и меню. Его можно пропустить и позже запустить заново из раздела «Помощь».') },
+      { sel: 'primary', t: L('Басты батырма', 'Главная кнопка'), d: L('Машинаны калибрлеп, жаңа сеанс бастау үшін 2 секунд басып тұрыңыз. Содан кейін — «Іске қосу» және «Келесі ұтыс». Бос орын пернесі де солай жұмыс істейді.', 'Удерживайте 2 секунды, чтобы откалибровать машину и начать новый сеанс. Затем — «Запустить» и «Следующий розыгрыш». Пробел работает так же.') },
+      { sel: 'recal', t: L('Қайта калибрлеу', 'Повторить калибровку'), d: L('2 секунд басып тұрыңыз. Жаңа сеанс басталады, ағымдағы тарих мұрағатқа өтеді.', 'Удерживайте 2 секунды. Начнётся новый сеанс, текущая история уйдёт в архив.') },
+      { sel: 'quickPanel', quick: true, t: L('Жылдам баптаулар', 'Быстрые настройки'), d: L('Билеттер саны, дыбыс, конфетти, фанфаралар, музыка және тіл. Жоғарғы панельдегі батырма немесе Q пернесі.', 'Количество билетов, звук, конфетти, фанфары, музыка и язык. Кнопка на верхней панели или клавиша Q.') },
+      { sel: 'tabs', dlg: true, t: L('Машина баптаулары', 'Настройки машины'), d: L('Айналу уақыты, ережелер, скиндер, нөмірді көрсету тәсілі, дыбыс, командалар және интерфейс. S пернесі.', 'Время вращения, правила, скины, способ показа номера, звук, команды и интерфейс. Клавиша S.') },
+      { sel: 'hist', t: L('Тарих', 'История'), d: L('Сеанстағы барлық ұтыстар, өткен сеанстар мұрағаты, CSV экспорты. H пернесі.', 'Все розыгрыши сеанса, архив прошлых сеансов, экспорт CSV. Клавиша H.') },
+      { sel: 'aud', t: L('Көрермен терезесі', 'Окно зрителей'), d: L('Ашып, проектор экранына апарыңыз: онда тек машина, батырмаларсыз.', 'Откройте и перетащите на экран проектора: там только машина, без кнопок.') },
+      { sel: 'pub', t: L('Көрермен режимі', 'Режим зрителей'), d: L('Осы терезедегі батырмаларды жасырады. Шығу — Esc.', 'Скрывает кнопки в этом окне. Выход — Esc.') },
+      { sel: 'fs', t: L('Толық экран', 'Полный экран'), d: L('Терезені бүкіл экранға жаяды. F пернесі.', 'Разворачивает окно на весь экран. Клавиша F.') },
+      { sel: 'help', t: L('Анықтама', 'Помощь'), d: L('Барлық баптаулардың толық сипаттамасы және осы оқытуды қайталау. F1 пернесі.', 'Полное описание всех настроек и повтор этого обучения. Клавиша F1.') },
+      S.hostPanel ? { sel: 'host', t: L('Жүргізуші панелі', 'Панель ведущего'), d: L('Билеттер, қайталау ережесі және соңғы нөмірлер. «Интерфейс» қойындысында өшіріледі.', 'Билеты, правило повторов и последние номера. Отключается во вкладке «Интерфейс».') } : null,
+      { t: L('Бәрі дайын', 'Всё готово'), d: L('Калибрлеуді бастау үшін басты батырманы 2 секунд басып тұрыңыз. Сәттілік!', 'Чтобы начать калибровку, удерживайте главную кнопку 2 секунды. Удачной игры!') }
+    ].filter(Boolean);
+  }
+  goTour(i) {
+    const st = this.tourSteps(); if (i < 0) i = 0; if (i >= st.length) { this.endTour(); return; } const step = st[i];
+    this.setState({ tour: i, tourHide: true, quick: !!step.quick, dlg: !!step.dlg, tab: step.dlg ? 'time' : this.state.tab, hist: false, help: false, pub: false, confirm: null }, () => { clearTimeout(this._tm); this._tm = setTimeout(() => this.measureTour(), 90); });
+  }
+  measureTour() {
+    const i = this.state.tour; if (i < 0) return; const step = this.tourSteps()[i]; if (!step) return;
+    const el = step.sel && this.rootRef.current && this.rootRef.current.querySelector('[data-tour="' + step.sel + '"]');
+    if (!el) { this.setState({ tourRect: null, tourHide: false }); return; }
+    const r = el.getBoundingClientRect(); this.setState({ tourHide: false, tourRect: { l: r.left, t: r.top, w: r.width, h: r.height } });
+  }
+  endTour() { try { localStorage.setItem('bbtm.tourDone', '1'); } catch (e) {} clearTimeout(this._tm); this.setState({ tour: -1, tourRect: null, quick: false, dlg: false }); }
+  helpSections(L) {
+    const sec = (tk, tr, items) => ({ title: L(tk, tr), items: items.map(x => x.length === 2 ? { k: x[0], v: x[1] } : { k: L(x[0], x[1]), v: L(x[2], x[3]) }) });
+    return [
+      sec('Жылдам бастау', 'Быстрый старт', [
+        ['1. Билеттер саны', '1. Количество билетов', '«Жылдам баптаулар» терезесін ашып, билеттер санын енгізіңіз де, «Қолдану» батырмасын басыңыз. Нөмірлеу 1-ден басталады.', 'Откройте «Быстрые настройки», введите количество билетов и нажмите «Применить». Нумерация начинается с 1.'],
+        ['2. Калибрлеу', '2. Калибровка', 'Басты батырманы 2 секунд басып тұрыңыз. Калибрлеу әрқашан жаңа сеанс бастайды: алдыңғы тарих мұрағатқа өтеді.', 'Удерживайте главную кнопку 2 секунды. Калибровка всегда начинает новый сеанс: прежняя история уходит в архив.'],
+        ['3. Ұтыс', '3. Розыгрыш', 'Сыйлықты дауыстап жариялап, «Іске қосу» батырмасын немесе Бос орын пернесін басыңыз. Нөмір басу сәтінде таңдалады.', 'Объявите приз голосом и нажмите «Запустить» или Пробел. Номер выбирается в момент нажатия.'],
+        ['4. Келесі ұтыс', '4. Следующий розыгрыш', 'Ұтқан нөмір экранда қалады. «Келесі ұтыс» машинаны қайта калибрлеусіз дайын күйге қайтарады.', 'Выигравший номер остаётся на экране. «Следующий розыгрыш» возвращает машину в готовность без новой калибровки.']]),
+      sec('Экрандағы батырмалар', 'Кнопки на экране', [
+        ['Басты батырма', 'Главная кнопка', 'Кезекпен: «Калибрлеу» (2 секунд ұстау) → «Іске қосу» → «Келесі ұтыс». Билеттер таусылғанда бұғатталады.', 'По очереди: «Калибровка» (удерживать 2 секунды) → «Запустить» → «Следующий розыгрыш». Блокируется, когда билеты закончились.'],
+        ['Қайта калибрлеу', 'Повторить калибровку', '2 секунд басып тұрыңыз. Жаңа сеанс басталады, ағымдағы тарих мұрағатқа өтеді.', 'Удерживайте 2 секунды. Начинается новый сеанс, текущая история уходит в архив.'],
+        ['Жылдам баптаулар (Q)', 'Быстрые настройки (Q)', 'Билеттер саны, дыбыс, конфетти, фанфаралар, музыка және тіл.', 'Количество билетов, звук, конфетти, фанфары, музыка и язык.'],
+        ['Машина баптаулары (S)', 'Настройки машины (S)', 'Барлық параметрлер жеті қойындыда — төменде сипатталған.', 'Все параметры на семи вкладках — описаны ниже.'],
+        ['Анықтама (F1)', 'Помощь (F1)', 'Осы бет және интерактивті оқыту.', 'Эта страница и интерактивное обучение.'],
+        ['Тарих (H)', 'История (H)', 'Сеанстағы барлық ұтыстар, өткен сеанстар мұрағаты, CSV экспорты, жаңа сеанс және деректерді тазалау.', 'Все розыгрыши сеанса, архив прошлых сеансов, экспорт CSV, новый сеанс и очистка данных.'],
+        ['Көрермен терезесі', 'Окно зрителей', 'Проекторға арналған бөлек терезе: батырмаларсыз тек машина. Оны проектор экранына апарып, екі рет басып толық экранға шығарыңыз.', 'Отдельное окно для проектора: только машина, без кнопок. Перетащите его на экран проектора и разверните двойным кликом.'],
+        ['Көрермен режимі (P)', 'Режим зрителей (P)', 'Осы терезедегі барлық қызметтік элементтерді жасырады. Шығу — Esc.', 'Скрывает все служебные элементы в этом окне. Выход — Esc.'],
+        ['Толық экран (F)', 'Полный экран (F)', 'Терезені бүкіл экранға жаяды.', 'Разворачивает окно на весь экран.'],
+        ['Жүргізуші панелі', 'Панель ведущего', 'Сол жақта: билеттер, қайталау ережесі және соңғы нөмірлер.', 'Слева: билеты, правило повторов и последние номера.'],
+        ['Маскот', 'Маскот', 'Тышқанды маскотқа апарыңыз — ол жауап береді.', 'Наведите на маскота мышь — он отреагирует.']]),
+      sec('Жылдам баптаулар', 'Быстрые настройки', [
+        ['Билеттер саны', 'Количество билетов', '1-ден 9999-ға дейін. Ұтыстар болса, өзгерту растаумен жаңа сеанс құрады.', 'От 1 до 9999. Если розыгрыши уже были, изменение создаёт новый сеанс с подтверждением.'],
+        ['Дыбыс', 'Звук', 'Жалпы қосқыш: өшірілсе, фанфаралар мен музыканы қоса алғанда барлық дыбыс өшеді.', 'Общий переключатель: при выключении молчит всё, включая фанфары и музыку.'],
+        ['Конфетти', 'Конфетти', 'Жеңімпаз шыққандағы мерекелік бөлшектер.', 'Праздничные частицы при появлении победителя.'],
+        ['Фанфаралар', 'Фанфары', 'Жеңімпаз әуені. Механизм дыбыстарына әсер етпейді.', 'Мелодия победителя. На звуки механизма не влияет.'],
+        ['Бірден «Іске қосу»', 'Сразу «Запустить»', 'Нөмір ашылғаннан кейін батырма бірден келесі ұтысты бастайды.', 'После раскрытия номера кнопка сразу запускает следующий розыгрыш.'],
+        ['Музыка', 'Музыка', 'Таңдалған скинге сай фондық әуен.', 'Фоновая мелодия выбранного скина.'],
+        ['Тіл', 'Язык', 'Қазақша, орысша немесе екеуі бірге (қазақша жоғарыда).', 'Казахский, русский или оба сразу (казахский сверху).']]),
+      sec('Баптаулар: уақыт және анимация', 'Настройки: время и анимация', [
+        ['Айналу уақыты', 'Время вращения', '3–30 с, дайын мәндер 5, 8, 12, 20 с. Іске қосудан нөмір ашылғанға дейінгі толық уақыт: үдеу, айналу, тежелу және ашылу.', '3–30 с, пресеты 5, 8, 12, 20 с. Полное время от запуска до раскрытия: разгон, вращение, торможение и раскрытие.'],
+        ['Калибрлеу ұзақтығы', 'Продолжительность калибровки', '3-тен 30 секундқа дейін.', 'От 3 до 30 секунд.'],
+        ['Қарқын және нөмірлер жылдамдығы', 'Интенсивность и скорость номеров', 'Сақиналардың айналу күші және ауысатын цифрлардың жылдамдығы.', 'Сила вращения колец и скорость мелькания цифр.'],
+        ['Эффектілер', 'Эффекты', 'Эффектілер саны, жеңілдетілген графика (әлсіз ноутбуктерге) және жарық жарқылдары.', 'Количество эффектов, упрощённая графика (для слабых ноутбуков) и световые вспышки.'],
+        ['Кері санақ', 'Обратный отсчёт', 'Іске қосар алдында 3 немесе 5 секунд. Әдепкіде өшірулі.', '3 или 5 секунд перед стартом. По умолчанию выключен.'],
+        ['Дайындықсыз', 'Без подготовки', 'Келесі ұтысқа дайындық кезеңін өткізіп жібереді.', 'Пропускает этап подготовки к следующему розыгрышу.']]),
+      sec('Баптаулар: ережелер', 'Настройки: правила', [
+        ['Не ойнатылады', 'Что разыгрываем', 'Билет нөмірі немесе сақинадағы команда. Командалар режимінде сақина жеңімпаз команданы көрсеткіштің астына әкеліп тоқтайды.', 'Номер билета или команда с кольца. В режиме команд кольцо останавливается так, что победившая команда оказывается под указателем.'],
+        ['Жеңімпаздардың қайталануы', 'Повторы победителей', 'Тыйым салынса (әдепкі), ұтқан нөмір сеанс соңына дейін алынып тасталады; нөмірлер таусылғанда ұтыс бұғатталады. Ұтыстардан кейін ережені өзгерту растауды қажет етеді, бұрынғы нәтижелер өзгермейді.', 'При запрете (по умолчанию) выигравший номер исключается до конца сеанса; когда номера кончаются, розыгрыш блокируется. Смена правила после розыгрышей требует подтверждения, прежние результаты не меняются.'],
+        ['Ағымдағы сеанс', 'Текущий сеанс', 'Идентификатор, басталған уақыты, ауқымы және ұтыстар саны. Мұнда «Жаңа сеанс» және «Қайта калибрлеу» батырмалары бар.', 'Идентификатор, время начала, диапазон и число розыгрышей. Здесь же кнопки «Новый сеанс» и «Повторить калибровку».']]),
+      sec('Баптаулар: скиндер', 'Настройки: скины', [
+        ['Скин таңдау', 'Выбор скина', 'Түс палитралары, жыл мезгілдері және мерекелік скиндер — карточканы басыңыз.', 'Цветовые темы, времена года и праздничные — щёлкните по карточке.'],
+        ['Маусымдарды ауыстыру', 'Переключение сезонов', 'ҚОСУЛЫ — бет ашылғанда және әр калибрлеуде ағымдағы маусым скині қосылады. Өз түсті скиніңізді қалдыру үшін өшіріңіз.', 'ВКЛ — при открытии и каждой калибровке включается скин текущего сезона. Чтобы оставить свой цветовой скин, выключите.'],
+        ['Мерекелік скин', 'Праздничный скин', 'Тек мереке күні қосылады және маусымдықтан басым.', 'Включается только в сам день праздника и важнее сезонного.']]),
+      sec('Баптаулар: билеттер', 'Настройки: билеты', [
+        ['Көрсету тәсілі', 'Способ показа', 'Алты нұсқа: циферблат, шарлар, күнтізбе, кеглилер, табло, голограмма. Жеңімпазды таңдауға әсер етпейді.', 'Шесть вариантов: циферблат, шары, календарь, кегли, табло, голограмма. На выбор победителя не влияет.'],
+        ['Алдын ала қарау', 'Предпросмотр', 'Демо-ұтыс; тарихқа жазылмайды.', 'Демонстрационный розыгрыш; в историю не записывается.']]),
+      sec('Баптаулар: дыбыс', 'Настройки: звук', [
+        ['Дыбыс деңгейі', 'Громкость', 'Жалпы, механизм және фанфаралар деңгейі бөлек реттеледі.', 'Общая громкость, громкость механизма и фанфар настраиваются отдельно.'],
+        ['Безендіру', 'Оформление', 'Жез, Электро немесе Музыкалық қорап; тықыл, мотор гуілі, соққылар мен сигналдарды бөлек өшіруге болады. Тыңдау батырмалары бар.', 'Латунь, Электро или Шкатулка; тиканье, гул мотора, удары и сигналы можно выключить отдельно. Есть кнопки прослушивания.'],
+        ['Музыка', 'Музыка', 'Скин музыкасы, оның дыбыс деңгейі және өз MP3 файлыңызды жүктеу.', 'Музыка скина, её громкость и загрузка своего MP3.']]),
+      sec('Баптаулар: командалар', 'Настройки: команды', [
+        ['Командалар тізімі', 'Список команд', 'Сақинадағы командаларды жасыруға, жоюға, жаңасын қосуға немесе бастапқы тізімді қайтаруға болады. Сақинаны толық өшіруге де болады.', 'Команды на кольце можно скрывать, удалять, добавлять или вернуть исходный список. Кольцо можно выключить совсем.']]),
+      sec('Баптаулар: интерфейс', 'Настройки: интерфейс', [
+        ['Экран', 'Экран', 'Толық экран, осы терезедегі көрермен режимі және бөлек көрермен терезесі.', 'Полный экран, режим зрителей в этом окне и отдельное окно зрителей.'],
+        ['Не көрсетіледі', 'Что показывать', 'Тіл, күн, этаптар жолағы, «Ұтысты билет №» жазуы, жүргізуші панелі, ұтыс нөмірі, қалған билеттер, маскот, сәндік жазулар, минималистік режим, көрермендерге арналған тарих.', 'Язык, дата, плашка этапов, надпись «Выигрышный билет №», панель ведущего, номер розыгрыша, остаток билетов, маскот, декоративные надписи, минималистичный режим, история для зрителей.'],
+        ['Масштаб', 'Масштаб', 'Интерфейс масштабы және қорытынды нөмір өлшемі.', 'Масштаб интерфейса и размер итогового номера.'],
+        ['Баптаулар файлы', 'Файл настроек', 'Баптауларды экспорттау, импорттау және қалпына келтіру (басып ұстау арқылы).', 'Экспорт, импорт и сброс настроек (сброс — удержанием кнопки).']]),
+      sec('Пернелер', 'Клавиши', [
+        ['Бос орын', 'Пробел', 'Іске қосу немесе келесі ұтыс. Калибрлеу үшін 2 секунд басып тұрыңыз.', 'Запуск или следующий розыгрыш. Для калибровки удерживайте 2 секунды.'],
+        ['Басқа пернелер', 'Другие клавиши', 'Enter — растау, Esc — панельдерді жабу, F — толық экран, N — келесі ұтыс, Q — жылдам баптаулар, S — баптаулар, H — тарих, P — көрермен режимі, F1 — анықтама.', 'Enter — подтверждение, Esc — закрыть панели, F — полный экран, N — следующий розыгрыш, Q — быстрые настройки, S — настройки, H — история, P — режим зрителей, F1 — помощь.']]),
+      sec('Әділдік және сақтау', 'Честность и сохранение', [
+        [L('Нөмірді таңдау', 'Выбор номера'), L('Нөмір «Іске қосу» басылған сәтте бір рет crypto.getRandomValues() арқылы модуль бойынша ығыссыз таңдалады — тек қолжетімді билеттер арасынан. Анимация, скин және көрсету тәсілі таңдауға әсер етпейді.', 'Номер выбирается один раз в момент нажатия «Запустить» через crypto.getRandomValues() без смещения по модулю — только среди доступных билетов. Анимация, скин и способ показа на выбор не влияют.')],
+        ['Сақтау', 'Сохранение', 'Баптаулар, сеанс және тарих браузерде сақталады және бетті жаңартқаннан кейін қалпына келеді. Офлайн-файл интернетсіз жұмыс істейді.', 'Настройки, сеанс и история хранятся в браузере и восстанавливаются после обновления страницы. Офлайн-файл работает без интернета.']])
+    ];
+  }
+  calibrate() { if (this.isAud) return; const ph = this.phase(); if (ph === 'calibrating' || ph === 'spinning' || ph === 'preview') return; const ask = this.autoSkin(), S = this.state.settings; this.commit({ settings: ask && ask !== S.skin ? Object.assign({}, S, { skin: ask }) : S, session: Object.assign({}, this.state.session, { current: null, calib: { startAt: Date.now() + 60, duration: Math.round(S.calibSec * 1000) } }), dlg: false }); }
   preview() { const ph = this.phase(); if (['calibrating', 'spinning', 'preview'].includes(ph)) return; const N = this.state.session.tickets, T = this.visTeams(), team = this.isTeams() && T.length ? T[this.randInt(T.length)] : null; this.commit({ preview: { ticket: team ? null : 1 + this.randInt(N), team, startAt: Date.now() + 80, duration: Math.min(6000, this.state.settings.spinSec * 1000) }, dlg: false }); }
-  setSetting(k, v) { this.commit({ settings: Object.assign({}, this.state.settings, { [k]: v }) }); }
+  setSetting(k, v) {
+    const p = { [k]: v };
+    this.commit({ settings: Object.assign({}, this.state.settings, p) }); if (k === 'autoSeason' || k === 'autoHoliday') setTimeout(() => this.checkHoliday(), 0);
+  }
   ask(title, body, yes, fn, danger) { this.holdEnd(); this.setState({ confirm: { title, body, yes, fn, danger: !!danger } }); }
   confirmYes() { const c = this.state.confirm; this.setState({ confirm: null }, () => { if (c && c.fn) c.fn(); }); }
   newSession(n) {
@@ -772,10 +939,12 @@ class Component extends DCLogic {
 
   onKey(e) {
     const t = e.target, tag = t && t.tagName, inter = ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(tag) || (t && t.isContentEditable);
-    if (e.key === 'Escape') { if (this.state.confirm) this.setState({ confirm: null }); else if (this.state.dlg || this.state.quick || this.state.hist) this.setState({ dlg: false, quick: false, hist: false }); else if (this.state.pub && !this.isAud) this.setState({ pub: false }); return; }
+    if (this.state.tour >= 0) { if (e.key === 'Escape') { e.preventDefault(); this.endTour(); } else if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); this.goTour(this.state.tour + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); this.goTour(this.state.tour - 1); } else if (e.code === 'Space') e.preventDefault(); return; }
+    if (e.key === 'F1' && !this.isAud) { e.preventDefault(); this.setState({ help: !this.state.help, hist: false, quick: false, dlg: false }); return; }
+    if (e.key === 'Escape') { if (this.state.confirm) this.setState({ confirm: null }); else if (this.state.dlg || this.state.quick || this.state.hist || this.state.help) this.setState({ dlg: false, quick: false, hist: false, help: false }); else if (this.state.pub && !this.isAud) this.setState({ pub: false }); return; }
     if (this.state.confirm) { if (e.key === 'Enter' && !this.state.confirm.danger) { e.preventDefault(); this.confirmYes(); } return; }
     if (inter || this.state.dlg) return;
-    if (e.code === 'Space') { e.preventDefault(); if (!this.isAud) this.primary(); return; }
+    if (e.code === 'Space') { e.preventDefault(); if (!this.isAud) { if (this.phase() === 'boot') { if (!e.repeat) this.holdCal('p'); } else if (!e.repeat) this.primary(); } return; }
     if (this.isAud || e.ctrlKey || e.metaKey || e.altKey) return;
     const k = e.key.toLowerCase();
     if (k === 'f' || k === 'а') this.toggleFs(); else if (k === 'n' || k === 'т') this.next(); else if (k === 'q' || k === 'й') this.setState({ quick: !this.state.quick }); else if (k === 'h' || k === 'р') this.setState({ hist: !this.state.hist }); else if (k === 'p' || k === 'з') this.setState({ pub: !this.state.pub, quick: false, hist: false }); else if (k === 's' || k === 'ы') this.setState({ dlg: true });
@@ -822,13 +991,33 @@ class Component extends DCLogic {
       keys: L('Пернелер: Бос орын — іске қосу / келесі ұтыс, Enter — растау, Esc — панельдерді жабу немесе көрермен режимінен шығу, F — толық экран, N — келесі ұтыс, Q — жылдам баптаулар, H — тарих, P — көрермен режимі. Көрермен терезесі осы тереземен үндестіріледі; онда екі рет басу толық экранды қосады.', 'Клавиши: Пробел — запуск / следующий розыгрыш, Enter — подтверждение, Esc — закрыть панели или выйти из режима зрителей, F — полный экран, N — следующий розыгрыш, Q — быстрые настройки, H — история, P — режим зрителей. Окно зрителей синхронизируется с этим окном; двойной клик в нём включает полный экран.'),
       teamPh: L1('Жаңа команданың атауы', 'Название новой команды'), add: L('Қосу', 'Добавить'), del: L1('Жою', 'Удалить'), resetTeams: L('Бастапқы тізімді қайтару', 'Вернуть исходный список'),
       music: L('Музыка', 'Музыка'), musUpload: L('Өз MP3 жүктеу', 'Загрузить свой MP3'), soundOn: L('Дыбысты қосу', 'Включить звук'), musRemove: L('Өз тректі алып тастау', 'Убрать свой трек'),
-      cancel: L('Болдырмау', 'Отмена'), hold: L('басып ұстап тұрыңыз', 'удерживайте')
+      cancel: L('Болдырмау', 'Отмена'), hold: L('басып ұстап тұрыңыз', 'удерживайте'),
+      holdHint: L('2 секунд басып тұрыңыз', 'Удерживайте 2 секунды'), holdHint1: L1('2 секунд басып тұрыңыз — жаңа сеанс басталады', 'Удерживайте 2 секунды — начнётся новый сеанс'), tHelp: L1('Анықтама', 'Помощь') + ' (F1)', helpTitle: L('Анықтама', 'Помощь'), tourStart: L('Интерактивті оқыту', 'Интерактивное обучение'), back: L('Артқа', 'Назад')
     };
+    const tsteps = this.tourSteps(), ti = this.state.tour, tst = ti >= 0 ? tsteps[Math.min(ti, tsteps.length - 1)] : null, tr = this.state.tourRect, VW = window.innerWidth, VH = window.innerHeight, cw = Math.min(400, VW - 32);
+    let cardL = (VW - cw) / 2, cardTop = Math.round(VH * 0.3) + 'px', cardBottom = 'auto';
+    if (tr) {
+      if (tr.h > VH * 0.45) { cardL = tr.l - cw - 24 >= 16 ? tr.l - cw - 24 : Math.min(VW - cw - 16, tr.l + tr.w + 24); cardTop = Math.max(16, tr.t) + 'px'; }
+      else { cardL = Math.max(16, Math.min(VW - cw - 16, tr.l + tr.w / 2 - cw / 2)); if (tr.t + tr.h / 2 > VH / 2) { cardTop = 'auto'; cardBottom = Math.round(VH - tr.t + 20) + 'px'; } else cardTop = Math.round(tr.t + tr.h + 20) + 'px'; }
+    }
+    const cs = this.state.calSrc, cp = Math.round(this.state.calPct), hint = this.state.calHint;
     return {
+      calPctP: cs === 'p' ? cp : 0, calPctR: cs === 'r' ? cp : 0, calPctS: cs === 's' ? cp : 0,
+      recalLabelR: hint === 'r' ? tx.holdHint : tx.recal, recalLabelS: hint === 's' ? tx.holdHint : tx.recal,
+      primaryDown: () => { if (this.phase() === 'boot') this.holdCal('p'); }, recalDown: () => this.holdCal('r'), recalDownS: () => this.holdCal('s'),
+      calUp: () => this.calEnd(true), calLeave: () => this.calEnd(false),
+      primaryKey: e => { if (this.phase() === 'boot' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); if (!e.repeat) this.holdCal('p'); } },
+      recalKey: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!e.repeat) this.holdCal('r'); } }, recalKeyS: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!e.repeat) this.holdCal('s'); } },
+      helpOpen: !!this.state.help && showChrome, toggleHelp: () => this.setState({ help: !this.state.help, hist: false, quick: false }), helpSections: this.helpSections(L), startTour: () => this.goTour(0),
+      tourOn: !!tst && showChrome, tourTitle: tst ? tst.t : '', tourText: tst ? tst.d : '', tourCount: (ti + 1) + ' / ' + tsteps.length,
+      spotOn: !!tr, spotOff: !tr, spotL: tr ? Math.round(tr.l - 8) : 0, spotT: tr ? Math.round(tr.t - 8) : 0, spotW: tr ? Math.round(tr.w + 16) : 0, spotH: tr ? Math.round(tr.h + 16) : 0, spotR: tr ? Math.round(Math.min(32, (tr.h + 16) / 2)) : 0,
+      cardL: Math.round(cardL), cardTop, cardBottom, cardW: cw,
+      tourCardOp: this.state.tourHide ? 0 : 1, tourHasBack: ti > 0, tourBack: () => this.goTour(ti - 1), tourNext: () => this.goTour(ti + 1), tourSkip: () => this.endTour(), tourBlock: e => e.stopPropagation(),
+      tourNextLabel: ti >= tsteps.length - 1 ? L('Дайын', 'Готово') : L('Келесі', 'Далее'), tourSkipLabel: L('Оқытуды өткізу', 'Пропустить обучение'),
       mHover: !!this.state.mHover, mPhrase: this.mascotPhrase(), mEnter: () => { if (!this.state.mHover) this.setState({ mHover: true, mPi: (this.state.mPi + 1) % 6 }); }, mLeave: () => this.setState({ mHover: false }),
       confirmDanger: !!(this.state.confirm && this.state.confirm.danger), confirmSafe: !(this.state.confirm && this.state.confirm.danger), holdPct: Math.round(this.state.holdPct), holdStart: e => this.holdStart(e), holdEnd: () => this.holdEnd(), holdKey: e => { if ((e.key === 'Enter' || e.key === ' ') && !e.repeat) { e.preventDefault(); this.holdStart(); } }, noCtx: e => e.preventDefault(),
       ruleToggles: [choice('drawTarget', L('Не ойнатылады', 'Что разыгрываем'), L('Билет нөмірі немесе сақинадағы команда', 'Номер билета или команда с кольца'), [['tickets', L('Билеттер', 'Билеты')], ['teams', L('Командалар', 'Команды')]])],
-      skinToggles: [seg('autoHoliday', L('Мерекелік скинді автоматты қосу', 'Праздничный скин в день праздника'), L('Тек мереке күні: 31.12, 1.01, 7.01, 14.02, 8.03, 21–23.03, 1.05, 9.05, 31.10, 16.12, 25.12', 'Только в сам день: 31.12, 1.01, 7.01, 14.02, 8.03, 21–23.03, 1.05, 9.05, 31.10, 16.12, 25.12'))],
+      skinToggles: [seg('autoSeason', L('Маусымдарды ауыстыру', 'Переключение сезонов'), L('ҚОСУЛЫ — бет ашылғанда және әр калибрлеуде ағымдағы маусым скині қосылады (қыс, көктем, жаз, күз). ӨШІРУЛІ — таңдалған түсті скин өзгеріссіз қалады.', 'ВКЛ — при открытии и каждой калибровке включается скин текущего сезона (зима, весна, лето, осень). ВЫКЛ — выбранный цветовой скин остаётся без изменений.')), seg('autoHoliday', L('Мерекелік скинді автоматты қосу', 'Праздничный скин в день праздника'), L('Тек мереке күні: 31.12, 1.01, 7.01, 14.02, 8.03, 21–23.03, 1.05, 9.05, 31.10, 16.12, 25.12', 'Только в сам день: 31.12, 1.01, 7.01, 14.02, 8.03, 21–23.03, 1.05, 9.05, 31.10, 16.12, 25.12'))],
       tx, canvasRef: this.canvasRef, musFileRef: this.musFileRef, ...this.musVals(S, seg, slider, L), rootRef: this.rootRef, showStatus: !!S.showStatusBar && !(ph === 'revealed' && S.showWinStatus === false),
       primaryOp: ['boot', 'ready', 'revealed'].includes(ph) ? 1 : 0.55, lampOp: ['boot', 'ready', 'revealed'].includes(ph) ? 1 : 0.3, recalOp: ['boot', 'calibrating', 'spinning', 'preview'].includes(ph) ? 0.5 : 1, dateText: this.dateText(), showDate: S.showDate !== false,
       teamToggles: [seg('teamsRing', L('Командалар атауы бар сақина', 'Кольцо с названиями команд'), L('Машинаның сыртқы айналмалы сақинасында', 'На внешнем вращающемся кольце машины'))],
@@ -854,7 +1043,7 @@ class Component extends DCLogic {
       toggleQuick: () => this.setState({ quick: !this.state.quick, hist: false }), quickOpen: this.state.quick,
       openSettings: () => this.setState({ dlg: true, quick: false }), closeSettings: () => this.setState({ dlg: false }), dlgOpen: this.state.dlg && showChrome,
       dlgBackdrop: e => { if (e.target === e.currentTarget) this.setState({ dlg: false }); },
-      toggleHist: () => this.setState({ hist: !this.state.hist, quick: false }), histOpen: this.state.hist,
+      toggleHist: () => this.setState({ hist: !this.state.hist, quick: false, help: false }), histOpen: this.state.hist,
       openAudience: () => this.openAudience(), togglePub: () => this.setState({ pub: !this.state.pub, quick: false, hist: false, dlg: false }), toggleFs: () => this.toggleFs(),
       draft: this.state.draft, draftErr: this.state.draftErr,
       onDraft: e => this.setState({ draft: e.target.value, draftErr: '' }), onDraftKey: e => { if (e.key === 'Enter') { e.preventDefault(); this.applyTickets(); } },
@@ -864,7 +1053,7 @@ class Component extends DCLogic {
       hasArchive: this.state.archive.length > 0,
       archiveRows: this.state.archive.slice().reverse().map(a => ({ id: a.id, when: new Date(a.createdAt).toLocaleDateString('ru-RU'), range: a.tickets, countText: L(a.history.length + ' ұтыс', a.history.length + ' розыгр.'), tickets: a.history.map(h => h.team || h.ticket).join(', ') })),
       exportCSV: () => this.exportCSV(),
-      askNewSession: () => this.ask(L('Жаңа сеанс бастау керек пе?', 'Начать новый сеанс?'), L('Ағымдағы тарих мұрағатқа өтеді, қолжетімді билеттер тізімі жаңарады, калибрлеу қажет болады.', 'Текущая история уйдёт в архив, список доступных билетов обновится, понадобится калибровка.'), L('Жаңа сеанс', 'Новый сеанс'), () => this.newSession(), true),
+      askNewSession: () => this.ask(L('Жаңа сеанс бастау керек пе?', 'Начать новый сеанс?'), L('Ағымдағы тарих мұрағатқа өтеді, қолжетімді билеттер тізімі жаңарады, калибрлеу қажет болады. Қайта калибрлеу де жаңа сеанс бастайды.', 'Текущая история уйдёт в архив, список доступных билетов обновится, понадобится калибровка. Повторная калибровка тоже начинает новый сеанс.'), L('Жаңа сеанс', 'Новый сеанс'), () => this.newSession(), true),
       askClear: () => this.ask(L('Барлық деректерді тазалау керек пе?', 'Очистить все данные?'), L('Ағымдағы сеанс тарихы мен өткен сеанстар мұрағаты жойылады. Бұл әрекетті қайтару мүмкін емес.', 'Будут удалены история текущего сеанса и архив прошлых сеансов. Действие необратимо.'), L('Тазалау', 'Очистить'), () => this.commit({ archive: [], session: this.mkSession(s.tickets, s.allowRepeats), hist: false }), true),
       tabs: [['time', L('Уақыт және анимация', 'Время и анимация')], ['rules', L('Ережелер', 'Правила')], ['skins', L('Безендіру', 'Скины')], ['modes', L('Билеттер', 'Билеты')], ['sound', L('Дыбыс', 'Звук')], ['teams', L('Командалар', 'Команды')], ['ui', 'Интерфейс']].map(([id, label]) => ({ label, checked: this.state.tab === id, pick: () => this.setState({ tab: id }) })),
       tabTime: this.state.tab === 'time', tabRules: this.state.tab === 'rules', tabSkins: this.state.tab === 'skins', tabModes: this.state.tab === 'modes', tabSound: this.state.tab === 'sound', tabUI: this.state.tab === 'ui', tabTeams: this.state.tab === 'teams',
@@ -873,7 +1062,7 @@ class Component extends DCLogic {
       timingText: L('Үдеу ' + sec(tm.accel) + ' · айналу ' + sec(tm.decel - tm.accel) + ' · тежелу ' + sec(tm.stop - tm.decel) + ' · ашылу ' + sec(tm.R) + ' = ' + sec(T), 'Разгон ' + sec(tm.accel) + ' · вращение ' + sec(tm.decel - tm.accel) + ' · торможение ' + sec(tm.stop - tm.decel) + ' · раскрытие ' + sec(tm.R) + ' = ' + sec(T)),
       timeToggles: [choice('fx', L('Визуалды эффектілер саны', 'Количество визуальных эффектов'), '', [[0, L('Аз', 'Мало')], [1, L('Қалыпты', 'Норма')], [2, L('Көп', 'Много')]]), seg('lowGfx', L('Жеңілдетілген графика', 'Упрощённый режим графики')), seg('flashes', L('Жарық жарқылдары', 'Световые вспышки')), choice('countdown', L('Кері санақ 3-2-1', 'Обратный отсчёт 3-2-1'), L('Іске қосар алдында, нөмір батырма басылғанда таңдалады', 'Перед стартом; номер выбирается в момент нажатия'), [[0, OFF], [3, '3 с'], [5, '5 с']]), seg('skipNext', L('Келесі ұтысқа дайындықсыз', 'Без подготовки к следующему розыгрышу'), L('Нөмір ашылғаннан кейін бірден «Іске қосу»', 'После раскрытия номера сразу «Запустить»'))],
       repeatOpts: [{ label: L('Рұқсат', 'Разрешены'), checked: s.allowRepeats, pick: () => this.setRepeats(true) }, { label: L('Тыйым', 'Запрещены'), checked: !s.allowRepeats, pick: () => this.setRepeats(false) }],
-      skinGroups: [['color', L('Түс палитралары', 'Цветовые темы')], ['season', L('Жыл мезгілдері', 'Времена года')], ['holiday', L('Мерекелік', 'Праздничные')]].map(([gid, title]) => ({ title, cards: C.SKINS.filter(k => (k.group || 'color') === gid).map(k => ({ name: k.kname && k.kname !== k.name ? L(k.kname, k.name) : k.name, desc: L(k.kdesc || SKK[k.id], k.desc), c0: k.sw[0], c1: k.sw[1], c2: k.sw[2], c3: k.sw[3], outline: S.skin === k.id ? '3px solid var(--color-accent)' : '3px solid transparent', pick: () => this.setSetting('skin', k.id) })) })),
+      skinGroups: [['color', L('Түс палитралары', 'Цветовые темы')], ['season', L('Жыл мезгілдері', 'Времена года')], ['holiday', L('Мерекелік', 'Праздничные')]].map(([gid, title]) => ({ title, cards: C.SKINS.filter(k => (k.group || 'color') === gid).map(k => ({ name: k.kname && k.kname !== k.name ? L(k.kname, k.name) : k.name, desc: L(k.kdesc || SKK[k.id], k.desc), c0: k.sw[0], c1: k.sw[1], c2: k.sw[2], c3: k.sw[3], outline: S.skin === k.id ? '3px solid var(--color-accent)' : '3px solid transparent', pick: () => this.commit({ settings: Object.assign({}, this.state.settings, { skin: k.id, autoHolSkin: '' }) }) })) })),
       modeCards: C.MODES.map((m, i) => ({ kicker: L((i + 1) + '-режим', 'Режим ' + (i + 1)), name: L(MKK[m.id][0], m.name), desc: L(MKK[m.id][1], m.desc), outline: S.mode === m.id ? '3px solid var(--color-accent)' : '3px solid transparent', pick: () => this.setSetting('mode', m.id) })),
       preview: () => this.preview(), previewDisabled: ['calibrating', 'spinning', 'preview'].includes(ph),
       soundToggles: [seg('sound', L('Дыбыс', 'Звук'), L('Жалпы қосқыш — басымдыққа ие', 'Общий переключатель — имеет приоритет')), seg('fanfare', L('Фанфаралар', 'Фанфары'), L('Механизм дыбыстарынан тәуелсіз', 'Независимо от звуков механизма')), choice('soundSet', L('Дыбыстық безендіру', 'Звуковое оформление'), '', [['brass', L('Жез', 'Латунь')], ['electro', 'Электро'], ['box', L('Музыкалық қорап', 'Шкатулка')]]), seg('muteTicks', L('Механизмнің тықылы', 'Тиканье механизма'), '', true), seg('muteMotor', L('Мотордың гуілі', 'Гул мотора'), '', true), seg('muteImpacts', L('Бекіту соққылары', 'Удары фиксации'), '', true), seg('muteChimes', L('Калибрлеу сигналдары', 'Сигналы калибровки'), '', true)],
@@ -884,7 +1073,7 @@ class Component extends DCLogic {
       exportSettings: () => this.download(new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' }), 'brainboy-settings.json'),
       pickImport: () => { if (this.fileRef.current) this.fileRef.current.click(); },
       onImport: e => { const f = e.target.files && e.target.files[0]; if (!f) return; f.text().then(txt => { try { const o = JSON.parse(txt), clean = {}; Object.keys(C.DEF).forEach(k => { if (o && k in o && typeof o[k] === typeof C.DEF[k]) clean[k] = o[k]; }); delete clean.tickets; if (clean.teams && !(Array.isArray(clean.teams) && clean.teams.every(t => t && typeof t.n === 'string'))) delete clean.teams; this.commit({ settings: Object.assign({}, this.state.settings, clean) }); } catch (err) {} }); e.target.value = ''; },
-      askResetSettings: () => this.ask(L('Баптауларды қалпына келтіру керек пе?', 'Сбросить настройки?'), L('Барлық параметрлер әдепкі мәндерге оралады. Тарих пен сеанс өзгермейді.', 'Все параметры вернутся к значениям по умолчанию. История и сеанс не изменятся.'), L('Қалпына келтіру', 'Сбросить'), () => this.commit({ settings: Object.assign({}, C.DEF, { tickets: s.tickets, lang: S.lang, teams: S.teams, autoHolidayDay: S.autoHolidayDay }) }), true),
+      askResetSettings: () => this.ask(L('Баптауларды қалпына келтіру керек пе?', 'Сбросить настройки?'), L('Барлық параметрлер әдепкі мәндерге оралады. Тарих пен сеанс өзгермейді.', 'Все параметры вернутся к значениям по умолчанию. История и сеанс не изменятся.'), L('Қалпына келтіру', 'Сбросить'), () => this.commit({ settings: Object.assign({}, C.DEF, { tickets: s.tickets, lang: S.lang, teams: S.teams, autoHolidayDay: S.autoHolidayDay, autoSeasonKey: S.autoSeasonKey }) }), true),
       confirmOpen: !!this.state.confirm, confirmTitle: this.state.confirm ? this.state.confirm.title : '', confirmBody: this.state.confirm ? this.state.confirm.body : '', confirmYesLabel: this.state.confirm ? this.state.confirm.yes : '',
       confirmYes: () => this.confirmYes(), confirmNo: () => this.setState({ confirm: null })
     };
