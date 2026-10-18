@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#140d06"/><circle cx="50" cy="50" r="30" fill="none" stroke="#e6bd72" stroke-width="6"/><circle cx="50" cy="50" r="19" fill="none" stroke="#ffae42" stroke-width="3"/><text x="50" y="57" text-anchor="middle" font-family="Georgia,serif" font-size="20" font-weight="700" fill="#ffe8b0">BB</text></svg></template>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/organic-52d09a5a-5972-4992-b67d-8469bdc33b54/styles.css">
+<script src="_ds/organic-52d09a5a-5972-4992-b67d-8469bdc33b54/_ds_bundle.js"></script>
+<script src="tm-engine.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap">
+<style>:root{--font-heading:"Caprasimo", 'Nunito', system-ui, sans-serif;--font-body:"Figtree", 'Nunito', system-ui, sans-serif}html,body{margin:0;height:100%;overflow:hidden;background:#0b0806}a{color:var(--color-accent)}a:hover{color:var(--color-accent-600)}input[type=range]{accent-color:var(--color-accent)}:root{--sk-m0:#5c3d18;--sk-m1:#e6bd72;--sk-m2:#7d5524;--sk-m3:#f8e2a6;--sk-hi:#ffe8b0;--sk-lo:#1d1107;--sk-ink:#1d1107;--sk-glow:#ffae42;--sk-glow2:#ff7b2e;--sk-d0:#3b2711;--sk-d1:#140d06;--sk-paper:#f2e7cf;--sk-pink:#2b1c0c}</style>
+</helmet>
+<div style="display:none"><img data-asset="logo" src="assets/logo.png" alt=""><img data-asset="mascot" src="assets/mascot.png" alt=""></div>
+<div ref="{{ rootRef }}" onDoubleClick="{{ rootDbl }}" style="position:fixed;inset:0;overflow:hidden;background:var(--color-neutral-900);font-family:var(--font-body);color:var(--color-text)">
+  <canvas ref="{{ canvasRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+  <div style="position:absolute;inset:0;pointer-events:none;zoom:{{ uiScale }}">
+
+    <sc-if value="{{ showBrand }}" hint-placeholder-val="{{ true }}">
+      <img src="assets/logo.png" alt="BrainBoy — интеллектуальная битва" style="position:absolute;top:20px;left:28px;height:clamp(44px, 6.4vh, 72px);width:auto;filter:drop-shadow(0 4px 14px rgba(0,0,0,.6))">
+    </sc-if>
+
+    <div style="position:absolute;top:{{ statusTop }}px;left:24px;right:24px;display:flex;flex-direction:column;align-items:center;gap:6px">
+      <sc-if value="{{ showDate }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent-300);text-shadow:0 1px 6px rgba(0,0,0,.8)">{{ dateText }}</span></sc-if>
+      <sc-if value="{{ showStatus }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:12px;max-width:100%;padding:10px 24px;border-radius:999px;background:color-mix(in srgb, var(--color-neutral-900) 72%, transparent);border:1px solid color-mix(in srgb, var(--color-bg) 16%, transparent);color:var(--color-bg);font-family:var(--font-heading);font-size:clamp(14px, 1.6vw, 22px);letter-spacing:0.06em;text-align:center;text-wrap:balance">
+        <span style="flex:none;width:12px;height:12px;border-radius:50%;background:{{ statusDot }};box-shadow:0 0 14px {{ statusDot }}"></span>
+        <span><span style="white-space:pre-line">{{ statusText }}</span></span>
+      </div></sc-if>
+    </div>
+
+    <sc-if value="{{ showMascot }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;left:{{ mascotLeft }}px;bottom:{{ mascotBottom }}px;width:{{ mascotW }}px;height:{{ mascotH }}px;pointer-events:none">
+        <sc-if value="{{ mHover }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;left:72%;bottom:74%;z-index:6;display:flex;flex-direction:column-reverse;align-items:flex-start;gap:6px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.5))">
+            <span style="width:max-content;max-width:min(220px, 30vw);padding:12px 18px;border-radius:24px;background:var(--sk-paper);color:var(--sk-pink);font-family:var(--font-heading);font-size:17px;line-height:1.2;white-space:pre-line;text-wrap:balance">{{ mPhrase }}</span>
+            <span style="margin-left:2px;width:8px;height:8px;border-radius:50%;background:var(--sk-paper)"></span>
+            <span style="margin-left:10px;width:14px;height:14px;border-radius:50%;background:var(--sk-paper)"></span>
+          </div>
+        </sc-if>
+        <img src="assets/mascot.png" alt="BrainBoy" onMouseEnter="{{ mEnter }}" onMouseLeave="{{ mLeave }}" onClick="{{ mEnter }}" style="position:absolute;left:0;bottom:0;height:100%;width:auto;max-width:none;pointer-events:auto;cursor:pointer;transform-origin:50% 100%;transform:scaleX(-1);filter:drop-shadow(0 18px 18px rgba(0,0,0,.55));transition:transform .45s cubic-bezier(.34,1.56,.64,1), filter .3s" style-hover="transform:scaleX(-1) translateY(-12px) rotate(-5deg) scale(1.07);filter:drop-shadow(0 0 22px var(--sk-glow)) drop-shadow(0 26px 22px rgba(0,0,0,.5))">
+      </div>
+    </sc-if>
+    <sc-if value="{{ showDrawNo }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;left:32px;bottom:{{ countersBottom }}px;display:flex;flex-direction:column;gap:2px;color:var(--color-bg)">
+        <span style="font-size:12px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--color-accent-300)"><span style="white-space:pre-line">{{ tx.draw }}</span></span>
+        <span style="font-family:var(--font-heading);font-size:40px;line-height:1"><span style="white-space:pre-line">№ {{ drawNo }}</span></span>
+      </div>
+    </sc-if>
+    <sc-if value="{{ showRemaining }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;right:32px;bottom:{{ countersBottom }}px;display:flex;flex-direction:column;align-items:flex-end;gap:2px;color:var(--color-bg)">
+        <span style="font-size:12px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--color-accent-300)"><span style="white-space:pre-line">{{ remainingLabel }}</span></span>
+        <span style="font-family:var(--font-heading);font-size:40px;line-height:1"><span style="white-space:pre-line">{{ remainingText }}</span></span>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showAudHistory }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:32px;top:120px;display:flex;flex-direction:column;gap:8px;max-width:180px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.24em;text-transform:uppercase;color:var(--sk-glow);text-shadow:0 1px 6px rgba(0,0,0,.8);white-space:pre-line">{{ tx.winners }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <sc-for list="{{ lastWinners }}" as="w" hint-placeholder-count="0">
+            <span style="display:inline-flex;align-items:center;justify-content:center;min-width:46px;padding:5px 14px;font-family:var(--font-heading);font-size:18px;line-height:1.1;color:var(--sk-pink);background:radial-gradient(circle at 0 50%, transparent 6px, var(--sk-paper) 6.5px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 6px, var(--sk-paper) 6.5px) right / 51% 100% no-repeat;filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))">{{ w.ticket }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ chrome }}" hint-placeholder-val="{{ true }}">
+
+      <sc-if value="{{ showHostPanel }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;left:28px;top:112px;width:272px;max-height:calc(100vh - 112px - 120px);display:flex;flex-direction:column;pointer-events:auto;padding:4px;border-radius:28px;background:linear-gradient(180deg, var(--sk-m3) 0%, var(--sk-m1) 20%, var(--sk-m2) 55%, var(--sk-m0) 90%, var(--sk-m2) 100%);box-shadow:0 16px 34px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.5)">
+          <div style="display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto;padding:16px 16px 18px;border-radius:24px;background:linear-gradient(180deg, var(--sk-d1), var(--sk-d0));box-shadow:inset 0 3px 12px rgba(0,0,0,.75)">
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px">
+              <span style="font-size:11px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--sk-hi);white-space:pre-line">{{ tx.hostPanel }}</span>
+            </div>
+            <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px;align-items:baseline">
+              <span style="color:color-mix(in srgb, var(--sk-hi) 62%, transparent);white-space:pre-line">{{ tx.tickets }}</span><span style="font-weight:800;color:var(--sk-glow);text-shadow:0 0 10px color-mix(in srgb, var(--sk-glow) 50%, transparent);font-variant-numeric:tabular-nums;white-space:pre-line">1 — {{ ticketsN }}</span>
+              <span style="color:color-mix(in srgb, var(--sk-hi) 62%, transparent);white-space:pre-line">{{ tx.rule }}</span><span style="font-weight:800;color:var(--sk-glow);text-shadow:0 0 10px color-mix(in srgb, var(--sk-glow) 50%, transparent);font-variant-numeric:tabular-nums;white-space:pre-line">{{ ruleLabel }}</span>
+            </div>
+            <sc-if value="{{ hasWinners }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <span style="font-size:11px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:color-mix(in srgb, var(--sk-hi) 62%, transparent);white-space:pre-line">{{ tx.lastTickets }}</span>
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <sc-for list="{{ lastWinners }}" as="w" hint-placeholder-count="0">
+                    <span style="display:inline-flex;align-items:center;justify-content:center;min-width:46px;padding:5px 14px;font-family:var(--font-heading);font-size:18px;line-height:1.1;color:var(--sk-pink);background:radial-gradient(circle at 0 50%, transparent 6px, var(--sk-paper) 6.5px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 6px, var(--sk-paper) 6.5px) right / 51% 100% no-repeat;filter:drop-shadow(0 2px 3px rgba(0,0,0,.55));font-size:16px;min-width:40px;padding:4px 12px">{{ w.ticket }}</span>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="position:absolute;top:22px;right:28px;display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:linear-gradient(180deg, var(--sk-m3) 0%, var(--sk-m1) 20%, var(--sk-m2) 55%, var(--sk-m0) 90%, var(--sk-m2) 100%);box-shadow:0 12px 26px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.55), inset 0 -2px 3px rgba(0,0,0,.4);pointer-events:auto">
+        <span style="flex:none;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--sk-hi), var(--sk-m0) 75%);box-shadow:0 1px 1px rgba(0,0,0,.5)"></span>
+        <button title="{{ tx.tQuick }}" onClick="{{ toggleQuick }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+          <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><line x1="21" x2="14" y1="4" y2="4"></line><line x1="10" x2="3" y1="4" y2="4"></line><line x1="21" x2="12" y1="12" y2="12"></line><line x1="8" x2="3" y1="12" y2="12"></line><line x1="21" x2="16" y1="20" y2="20"></line><line x1="12" x2="3" y1="20" y2="20"></line><line x1="14" x2="14" y1="2" y2="6"></line><line x1="8" x2="8" y1="10" y2="14"></line><line x1="16" x2="16" y1="18" y2="22"></line></svg>
+        </button>
+        <button title="{{ tx.tSettings }}" onClick="{{ openSettings }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+          <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+        <button title="{{ tx.tHist }}" onClick="{{ toggleHist }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+          <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg>
+        </button>
+        <button title="{{ tx.tAud }}" onClick="{{ openAudience }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+          <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><rect width="20" height="14" x="2" y="3" rx="2"></rect><line x1="8" x2="16" y1="21" y2="21"></line><line x1="12" x2="12" y1="17" y2="21"></line></svg>
+        </button>
+        <button title="{{ tx.tPub }}" onClick="{{ togglePub }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+          <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+        <button title="{{ tx.tFs }}" onClick="{{ toggleFs }}" style="all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;cursor:pointer;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45)" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+          <svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
+        </button>
+      <span style="flex:none;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--sk-hi), var(--sk-m0) 75%);box-shadow:0 1px 1px rgba(0,0,0,.5)"></span>
+      </div>
+
+      <sc-if value="{{ quickOpen }}" hint-placeholder-val="{{ false }}">
+        <div class="card elev-lg" style="position:absolute;top:84px;right:32px;width:min(400px, calc(100vw - 64px));max-height:calc(100vh - 84px - 112px);overflow:auto;z-index:5;pointer-events:auto;background:var(--color-bg);gap:14px;padding:20px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="card-title"><span style="white-space:pre-line">{{ tx.quick }}</span></span>
+            <button class="btn btn-ghost" onClick="{{ toggleQuick }}"><span style="white-space:pre-line">{{ tx.collapse }}</span></button>
+          </div>
+          <div class="field">
+            <label><span style="white-space:pre-line">{{ tx.ticketCount }}</span></label>
+            <div style="display:flex;gap:8px">
+              <input class="input" type="number" min="1" max="9999" value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onDraftKey }}" style="flex:1;font-size:16px;font-weight:700">
+              <button class="btn btn-primary" onClick="{{ applyTickets }}"><span style="white-space:pre-line">{{ tx.apply }}</span></button>
+            </div>
+            <sc-if value="{{ draftErr }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:var(--color-accent-700);margin-top:6px"><span style="white-space:pre-line">{{ draftErr }}</span></div></sc-if>
+          </div>
+          <sc-for list="{{ quickToggles }}" as="t" hint-placeholder-count="3">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
+              <div style="display:flex;flex-direction:column;flex:1 1 150px;min-width:0">
+                <span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ t.label }}</span></span>
+                <span style="font-size:11px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ t.hint }}</span></span>
+              </div>
+              <div class="seg"><sc-for list="{{ t.opts }}" as="o"><label class="seg-opt"><input type="radio" name="{{ t.name }}" checked="{{ o.checked }}" onChange="{{ o.pick }}"><span style="white-space:pre-line">{{ o.label }}</span></label></sc-for></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <div style="position:absolute;bottom:22px;left:0;right:0;display:flex;justify-content:center">
+        <div style="display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:999px;background:linear-gradient(180deg, var(--sk-m3) 0%, var(--sk-m1) 20%, var(--sk-m2) 55%, var(--sk-m0) 90%, var(--sk-m2) 100%);box-shadow:0 16px 34px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.55), inset 0 -3px 4px rgba(0,0,0,.4);pointer-events:auto">
+          <span style="flex:none;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--sk-hi), var(--sk-m0) 75%);box-shadow:0 1px 1px rgba(0,0,0,.5)"></span>
+          <div style="display:flex;align-items:center;gap:12px;padding:6px 6px 6px 14px;border-radius:999px;background:linear-gradient(180deg, var(--sk-d1), var(--sk-d0));box-shadow:inset 0 3px 10px rgba(0,0,0,.8), 0 1px 0 rgba(255,255,255,.35)">
+            <span style="flex:none;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #ffffff, var(--sk-glow) 45%, var(--sk-glow2));box-shadow:0 0 12px var(--sk-glow);opacity:{{ lampOp }}"></span>
+            <button disabled="{{ primaryDisabled }}" onClick="{{ primary }}" style="all:unset;box-sizing:border-box;cursor:pointer;min-width:min(340px, 32vw);padding:15px clamp(22px, 3vw, 42px);border-radius:999px;text-align:center;font-family:var(--font-heading);font-size:clamp(16px, 1.7vw, 22px);line-height:1.15;letter-spacing:0.06em;color:var(--sk-lo);background:radial-gradient(130% 160% at 50% 0%, #ffffff 0%, var(--sk-glow) 30%, var(--sk-glow2) 100%);box-shadow:0 0 26px color-mix(in srgb, var(--sk-glow) 70%, transparent), inset 0 2px 0 rgba(255,255,255,.75), inset 0 -5px 10px rgba(0,0,0,.3);text-shadow:0 1px 0 rgba(255,255,255,.5);opacity:{{ primaryOp }}" style-hover="filter:brightness(1.08) saturate(1.1)" style-active="transform:translateY(2px);box-shadow:inset 0 3px 10px rgba(0,0,0,.45)" style-focus="outline:2px solid var(--sk-hi);outline-offset:3px"><span style="white-space:pre-line">{{ primaryLabel }}</span></button>
+          </div>
+          <button disabled="{{ recalDisabled }}" onClick="{{ recalibrate }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);font-size:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;line-height:1.2;box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45);opacity:{{ recalOp }}" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
+            <svg width="16" height="16" viewBox="0 0 24 24" style="flex:none;fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path><path d="M16 16h5v5"></path></svg>
+            <span style="white-space:pre-line">{{ tx.recal }}</span>
+          </button>
+          <span style="flex:none;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--sk-hi), var(--sk-m0) 75%);box-shadow:0 1px 1px rgba(0,0,0,.5)"></span>
+        </div>
+      </div>
+
+      <sc-if value="{{ histOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:0;right:0;bottom:0;width:min(560px, 100%);background:var(--color-bg);box-shadow:var(--shadow-lg);pointer-events:auto;overflow:auto;padding:28px;display:flex;flex-direction:column;gap:18px;border-radius:28px 0 0 28px">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
+            <h3 style="margin:0"><span style="white-space:pre-line">{{ tx.histTitle }}</span></h3>
+            <button class="btn btn-secondary" onClick="{{ toggleHist }}"><span style="white-space:pre-line">{{ tx.close }}</span></button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <span class="tag tag-accent"><span style="white-space:pre-line">Сеанс #{{ sessionId }}</span></span>
+            <span class="tag tag-neutral"><span style="white-space:pre-line">1 — {{ ticketsN }}</span></span>
+            <span class="tag tag-accent-2"><span style="white-space:pre-line">{{ ruleLabel }}</span></span>
+            <span class="tag tag-neutral"><span style="white-space:pre-line">{{ sinceText }}</span></span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <button class="btn btn-primary" onClick="{{ exportCSV }}"><span style="white-space:pre-line">{{ tx.exportCsv }}</span></button>
+            <button class="btn btn-secondary" onClick="{{ askNewSession }}"><span style="white-space:pre-line">{{ tx.newSession }}</span></button>
+            <button class="btn btn-ghost" onClick="{{ askClear }}"><span style="white-space:pre-line">{{ tx.clear }}</span></button>
+          </div>
+          <sc-if value="{{ hasWinners }}" hint-placeholder-val="{{ false }}">
+            <table class="table">
+              <thead><tr><th>№</th><th>Билет</th><th><span style="white-space:pre-line">{{ tx.thWhen }}</span></th><th><span style="white-space:pre-line">{{ tx.rule }}</span></th></tr></thead>
+              <tbody>
+                <sc-for list="{{ histRows }}" as="h" hint-placeholder-count="0">
+                  <tr><td><span style="white-space:pre-line">{{ h.no }}</span></td><td style="font-family:var(--font-heading);font-size:18px"><span style="white-space:pre-line">{{ h.ticket }}</span></td><td><span style="white-space:pre-line">{{ h.when }}</span></td><td><span style="white-space:pre-line">{{ h.rule }}</span></td></tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </sc-if>
+          <sc-if value="{{ noWinners }}" hint-placeholder-val="{{ true }}">
+            <p class="text-muted" style="margin:0"><span style="white-space:pre-line">{{ tx.noDraws }}</span></p>
+          </sc-if>
+          <sc-if value="{{ hasArchive }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <h5 style="margin:0"><span style="white-space:pre-line">{{ tx.pastSessions }}</span></h5>
+              <sc-for list="{{ archiveRows }}" as="a" hint-placeholder-count="0">
+                <div class="card" style="gap:4px">
+                  <div class="card-meta"><span><span style="white-space:pre-line">#{{ a.id }}</span></span><span><span style="white-space:pre-line">{{ a.when }}</span></span><span><span style="white-space:pre-line">1 — {{ a.range }}</span></span><span><span style="white-space:pre-line">{{ a.countText }}</span></span></div>
+                  <div style="font-size:14px;font-weight:700"><span style="white-space:pre-line">{{ a.tickets }}</span></div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+    </sc-if>
+  </div>
+
+  <sc-if value="{{ dlgOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="dialog-backdrop" onClick="{{ dlgBackdrop }}" style="z-index:20">
+      <div class="dialog" style="width:min(820px, 100%);max-height:88vh;overflow:auto;background:var(--color-bg);gap:18px;padding:28px">
+        <div style="flex:none;display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <div class="dialog-title" style="font-size:26px"><span style="white-space:pre-line">{{ tx.settings }}</span></div>
+          <button class="btn btn-secondary" onClick="{{ closeSettings }}"><span style="white-space:pre-line">{{ tx.close }}</span></button>
+        </div>
+        <div class="seg" style="flex:none;align-self:flex-start;flex-wrap:wrap">
+          <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="6"><label class="seg-opt"><input type="radio" name="tabs" checked="{{ tb.checked }}" onChange="{{ tb.pick }}"><span style="white-space:pre-line">{{ tb.label }}</span></label></sc-for>
+        </div>
+
+        <sc-if value="{{ tabTime }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:none;display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+              <span style="font-size:13px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ tx.drawTime }}</span></span>
+              <sc-for list="{{ spinPresets }}" as="p" hint-placeholder-count="4"><button class="{{ p.cls }}" onClick="{{ p.pick }}"><span style="white-space:pre-line">{{ p.label }}</span></button></sc-for>
+            </div>
+            <sc-for list="{{ timeSliders }}" as="s" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center">
+                <span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ s.label }}</span></span>
+                <span style="font-family:var(--font-heading);font-size:16px;color:var(--color-accent-700)"><span style="white-space:pre-line">{{ s.display }}</span></span>
+                <input type="range" min="{{ s.min }}" max="{{ s.max }}" step="{{ s.step }}" value="{{ s.value }}" onChange="{{ s.onInput }}" style="grid-column:1 / -1;width:100%">
+              </div>
+            </sc-for>
+            <div class="card" style="gap:4px"><span class="card-kicker" style="color:var(--color-accent-700)"><span style="white-space:pre-line">{{ tx.timeSplit }}</span></span><span style="font-size:14px"><span style="white-space:pre-line">{{ timingText }}</span></span></div>
+            <sc-for list="{{ timeToggles }}" as="t" hint-placeholder-count="3">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
+                <span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ t.label }}</span></span>
+                <div class="seg"><sc-for list="{{ t.opts }}" as="o"><label class="seg-opt"><input type="radio" name="{{ t.name }}" checked="{{ o.checked }}" onChange="{{ o.pick }}"><span style="white-space:pre-line">{{ o.label }}</span></label></sc-for></div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ tabRules }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:none;display:flex;flex-direction:column;gap:18px">
+            <sc-for list="{{ ruleToggles }}" as="t" hint-placeholder-count="1">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
+                <div style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ t.label }}</span></span><span style="font-size:11px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ t.hint }}</span></span></div>
+                <div class="seg"><sc-for list="{{ t.opts }}" as="o"><label class="seg-opt"><input type="radio" name="{{ t.name }}" checked="{{ o.checked }}" onChange="{{ o.pick }}"><span style="white-space:pre-line">{{ o.label }}</span></label></sc-for></div>
+              </div>
+            </sc-for>
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
+              <div style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:700"><span style="white-space:pre-line">{{ tx.repeats }}</span></span><span style="font-size:12px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ tx.repeatsHint }}</span></span></div>
+              <div class="seg"><sc-for list="{{ repeatOpts }}" as="o"><label class="seg-opt"><input type="radio" name="repeats" checked="{{ o.checked }}" onChange="{{ o.pick }}"><span style="white-space:pre-line">{{ o.label }}</span></label></sc-for></div>
+            </div>
+            <div class="card" style="gap:6px">
+              <span class="card-kicker" style="color:var(--color-accent-700)"><span style="white-space:pre-line">{{ tx.curSession }}</span></span>
+              <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:14px">
+                <span class="text-muted">Идентификатор</span><span style="font-weight:700"><span style="white-space:pre-line">#{{ sessionId }}</span></span>
+                <span class="text-muted"><span style="white-space:pre-line">{{ tx.started }}</span></span><span><span style="white-space:pre-line">{{ sessionStarted }}</span></span>
+                <span class="text-muted"><span style="white-space:pre-line">{{ tx.range }}</span></span><span><span style="white-space:pre-line">1 — {{ ticketsN }}</span></span>
+                <span class="text-muted"><span style="white-space:pre-line">{{ tx.draws }}</span></span><span><span style="white-space:pre-line">{{ drawsDone }}</span></span>
+                <span class="text-muted"><span style="white-space:pre-line">{{ tx.available }}</span></span><span><span style="white-space:pre-line">{{ remainingText }}</span></span>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-primary" onClick="{{ askNewSession }}"><span style="white-space:pre-line">{{ tx.newSession }}</span></button>
+              <button class="btn btn-secondary" disabled="{{ recalDisabled }}" onClick="{{ recalibrate }}"><span style="white-space:pre-line">{{ tx.recal }}</span></button>
+            </div>
+            <p style="margin:0;font-size:13px;color:var(--color-neutral-700);text-wrap:pretty"><span style="white-space:pre-line">{{ tx.fair }}</span></p>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ tabSkins }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:none;display:flex;flex-direction:column;gap:22px">
+            <sc-for list="{{ skinToggles }}" as="t" hint-placeholder-count="1">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
+                <div style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ t.label }}</span></span><span style="font-size:11px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ t.hint }}</span></span></div>
+                <div class="seg"><sc-for list="{{ t.opts }}" as="o"><label class="seg-opt"><input type="radio" name="{{ t.name }}" checked="{{ o.checked }}" onChange="{{ o.pick }}"><span style="white-space:pre-line">{{ o.label }}</span></label></sc-for></div>
+              </div>
+            </sc-for>
+            <sc-for list="{{ skinGroups }}" as="grp" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <span class="card-kicker" style="color:var(--color-accent-700)"><span style="white-space:pre-line">{{ grp.title }}</span></span>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:12px">
+                  <sc-for list="{{ grp.cards }}" as="k" hint-placeholder-count="5">
+                    <button onClick="{{ k.pick }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:24px;background:var(--color-surface);outline:{{ k.outline }};outline-offset:2px">
+                      <div style="display:flex;gap:6px">
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c0 }}"></span>
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c1 }}"></span>
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c2 }}"></span>
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c3 }}"></span>
+                      </div>
+                      <span style="font-family:var(--font-heading);font-size:17px"><span style="white-space:pre-line">{{ k.name }}</span></span>
+                      <span style="font-size:12px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ k.desc }}</span></span>
+                    </button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ tabModes }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:none;display:flex;flex-direction:column;gap:14px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));gap:10px">
+              <sc-for list="{{ modeCards }}" as="m" hint-placeholder-count="6">
+                <button onClick="{{ m.pick }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:24px;background:var(--color-surface);outline:{{ m.outline }};outline-offset:2px">
+                  <span class="card-kicker" style="color:var(--color-accent-700)"><span style="white-space:pre-line">{{ m.kicker }}</span></span>
+                  <span style="font-family:var(--font-heading);font-size:17px"><span style="white-space:pre-line">{{ m.name }}</span></span>
+                  <span style="font-size:12px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ m.desc }}</span></span>
+                </button>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+              <button class="btn btn-primary" disabled="{{ previewDisabled }}" onClick="{{ preview }}"><span style="white-space:pre-line">{{ tx.preview }}</span></button>
+              <span style="font-size:12px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ tx.previewHint }}</span></span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ tabSound }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:none;display:flex;flex-direction:column;gap:18px">
+            <sc-for list="{{ soundToggles }}" as="t" hint-placeholder-count="2">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
+                <div style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ t.label }}</span></span><span style="font-size:11px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ t.hint }}</span></span></div>
+                <div class="seg"><sc-for list="{{ t.opts }}" as="o"><label class="seg-opt"><input type="radio" name="{{ t.name }}" checked="{{ o.checked }}" onChange="{{ o.pick }}"><span style="white-space:pre-line">{{ o.label }}</span></label></sc-for></div>
+              </div>
+            </sc-for>
+            <sc-for list="{{ soundSliders }}" as="s" hint-placeholder-count="3">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center">
+                <span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ s.label }}</span></span>
+                <span style="font-family:var(--font-heading);font-size:16px;color:var(--color-accent-700)"><span style="white-space:pre-line">{{ s.display }}</span></span>
+                <input type="range" min="{{ s.min }}" max="{{ s.max }}" step="{{ s.step }}" value="{{ s.value }}" onChange="{{ s.onInput }}" style="grid-column:1 / -1;width:100%">
+              </div>
+            </sc-for>
+            <div style="display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:24px;background:var(--color-surface)">
+              <span class="card-kicker" style="color:var(--color-accent-700);white-space:pre-line">{{ tx.music }}</span>
+              <sc-for list="{{ musToggles }}" as="t" hint-placeholder-count="2">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
+                <div style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ t.label }}</span></span><span style="font-size:11px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ t.hint }}</span></span></div>
+                <div class="seg"><sc-for list="{{ t.opts }}" as="o"><label class="seg-opt"><input type="radio" name="{{ t.name }}" checked="{{ o.checked }}" onChange="{{ o.pick }}"><span style="white-space:pre-line">{{ o.label }}</span></label></sc-for></div>
+              </div>
+            </sc-for>
+              <sc-for list="{{ musSliders }}" as="s" hint-placeholder-count="1">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center">
+                <span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ s.label }}</span></span>
+                <span style="font-family:var(--font-heading);font-size:16px;color:var(--color-accent-700)"><span style="white-space:pre-line">{{ s.display }}</span></span>
+                <input type="range" min="{{ s.min }}" max="{{ s.max }}" step="{{ s.step }}" value="{{ s.value }}" onChange="{{ s.onInput }}" style="grid-column:1 / -1;width:100%">
+              </div>
+            </sc-for>
+              <div style="display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:13px;color:var(--color-neutral-700);white-space:pre-line">{{ musSkinLabel }}</span>
+                <span style="font-family:var(--font-heading);font-size:17px;white-space:pre-line">{{ musTitle }}</span>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                <button class="btn btn-primary" onClick="{{ toggleMusPreview }}" style="min-width:150px"><span style="white-space:pre-line">{{ musPlayLabel }}</span></button>
+                <button class="btn btn-secondary" onClick="{{ pickMus }}"><span style="white-space:pre-line">{{ tx.musUpload }}</span></button>
+                <sc-if value="{{ hasCustomMus }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost" onClick="{{ removeMus }}"><span style="white-space:pre-line">{{ tx.musRemove }}</span></button></sc-if>
+                <input type="file" accept="audio/*" ref="{{ musFileRef }}" onChange="{{ onMusFile }}" style="display:none">
+              </div>
+              <sc-if value="{{ musWarn }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px 10px 10px 16px;border-radius:999px;background:var(--color-accent-100)">
+                  <span style="flex:1 1 220px;font-size:13px;font-weight:600;color:var(--color-accent-800);white-space:pre-line">{{ musWarnText }}</span>
+                  <button class="btn btn-primary" onClick="{{ enableSound }}" style="padding:8px 16px"><span style="white-space:pre-line">{{ tx.soundOn }}</span></button>
+                </div>
+              </sc-if>
+              <span style="font-size:12px;color:var(--color-neutral-700);white-space:pre-line">{{ musHint }}</span>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-secondary" onClick="{{ hearMech }}"><span style="white-space:pre-line">{{ tx.hMech }}</span></button>
+              <button class="btn btn-secondary" onClick="{{ hearFanfare }}"><span style="white-space:pre-line">{{ tx.hFan }}</span></button>
+              <button class="btn btn-secondary" onClick="{{ hearChime }}"><span style="white-space:pre-line">{{ tx.hChime }}</span></button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ tabTeams }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:none;display:flex;flex-direction:column;gap:16px">
+            <sc-for list="{{ teamToggles }}" as="t" hint-placeholder-count="1">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
+                <div style="display:flex;flex-direction:column;flex:1 1 200px;min-width:0"><span style="font-size:14px;font-weight:600;white-space:pre-line">{{ t.label }}</span><span style="font-size:11px;color:var(--color-neutral-700);white-space:pre-line">{{ t.hint }}</span></div>
+                <div class="seg"><sc-for list="{{ t.opts }}" as="o"><label class="seg-opt"><input type="radio" name="{{ t.name }}" checked="{{ o.checked }}" onChange="{{ o.pick }}"><span style="white-space:pre-line">{{ o.label }}</span></label></sc-for></div>
+              </div>
+            </sc-for>
+            <div style="display:flex;gap:8px">
+              <input class="input" placeholder="{{ tx.teamPh }}" value="{{ teamDraft }}" onChange="{{ onTeamDraft }}" onKeyDown="{{ onTeamKey }}" style="flex:1;min-width:0">
+              <button class="btn btn-primary" onClick="{{ addTeam }}"><span style="white-space:pre-line">{{ tx.add }}</span></button>
+            </div>
+            <span style="font-size:13px;color:var(--color-neutral-700);white-space:pre-line">{{ teamCountText }}</span>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{ teamRows }}" as="tm" hint-placeholder-count="8">
+                <div style="display:flex;align-items:center;gap:10px;padding:4px 6px 4px 16px;border-radius:999px;background:var(--color-surface);opacity:{{ tm.op }}">
+                  <span style="width:26px;flex:none;font-weight:700;color:var(--color-neutral-700)">{{ tm.no }}</span>
+                  <span style="flex:1;min-width:0;font-weight:600">{{ tm.name }}</span>
+                  <button class="btn btn-ghost" onClick="{{ tm.toggle }}" style="padding:6px 12px"><span style="white-space:pre-line">{{ tm.toggleLabel }}</span></button>
+                  <button class="btn btn-icon btn-ghost" title="{{ tx.del }}" onClick="{{ tm.del }}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                  </button>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex"><button class="btn btn-secondary" onClick="{{ askResetTeams }}"><span style="white-space:pre-line">{{ tx.resetTeams }}</span></button></div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ tabUI }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:none;display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-primary" onClick="{{ toggleFs }}"><span style="white-space:pre-line">{{ tx.fs }}</span></button>
+              <button class="btn btn-secondary" onClick="{{ togglePub }}"><span style="white-space:pre-line">{{ tx.pub }}</span></button>
+              <button class="btn btn-secondary" onClick="{{ openAudience }}"><span style="white-space:pre-line">{{ tx.aud }}</span></button>
+            </div>
+            <sc-for list="{{ uiToggles }}" as="t" hint-placeholder-count="6">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
+                <div style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ t.label }}</span></span><span style="font-size:11px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ t.hint }}</span></span></div>
+                <div class="seg"><sc-for list="{{ t.opts }}" as="o"><label class="seg-opt"><input type="radio" name="{{ t.name }}" checked="{{ o.checked }}" onChange="{{ o.pick }}"><span style="white-space:pre-line">{{ o.label }}</span></label></sc-for></div>
+              </div>
+            </sc-for>
+            <sc-for list="{{ uiSliders }}" as="s" hint-placeholder-count="2">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center">
+                <span style="font-size:14px;font-weight:600"><span style="white-space:pre-line">{{ s.label }}</span></span>
+                <span style="font-family:var(--font-heading);font-size:16px;color:var(--color-accent-700)"><span style="white-space:pre-line">{{ s.display }}</span></span>
+                <input type="range" min="{{ s.min }}" max="{{ s.max }}" step="{{ s.step }}" value="{{ s.value }}" onChange="{{ s.onInput }}" style="grid-column:1 / -1;width:100%">
+              </div>
+            </sc-for>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <button class="btn btn-secondary" onClick="{{ exportSettings }}"><span style="white-space:pre-line">{{ tx.expSet }}</span></button>
+              <button class="btn btn-secondary" onClick="{{ pickImport }}"><span style="white-space:pre-line">{{ tx.impSet }}</span></button>
+              <button class="btn btn-ghost" onClick="{{ askResetSettings }}"><span style="white-space:pre-line">{{ tx.resetSet }}</span></button>
+              <input type="file" accept=".json,application/json" ref="{{ fileRef }}" onChange="{{ onImport }}" style="display:none">
+            </div>
+            <p style="margin:0;font-size:13px;color:var(--color-neutral-700);text-wrap:pretty"><span style="white-space:pre-line">{{ tx.keys }}</span></p>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ confirmOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="dialog-backdrop" style="z-index:30">
+      <div class="dialog" style="background:var(--color-bg)">
+        <div class="dialog-title"><span style="white-space:pre-line">{{ confirmTitle }}</span></div>
+        <div class="dialog-body"><span style="white-space:pre-line">{{ confirmBody }}</span></div>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" onClick="{{ confirmNo }}"><span style="white-space:pre-line">{{ tx.cancel }}</span></button>
+          <sc-if value="{{ confirmSafe }}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{ confirmYes }}"><span style="white-space:pre-line">{{ confirmYesLabel }} · Enter</span></button></sc-if>
+          <sc-if value="{{ confirmDanger }}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onPointerDown="{{ holdStart }}" onPointerUp="{{ holdEnd }}" onPointerLeave="{{ holdEnd }}" onPointerCancel="{{ holdEnd }}" onKeyDown="{{ holdKey }}" onKeyUp="{{ holdEnd }}" onContextMenu="{{ noCtx }}" style="touch-action:none;user-select:none;-webkit-user-select:none;background:linear-gradient(90deg, var(--color-accent-800) {{ holdPct }}%, var(--color-accent) {{ holdPct }}%)"><span style="white-space:pre-line">{{ confirmYesLabel }} · {{ tx.hold }}</span></button></sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  static DEF = { tickets: 150, sound: true, confetti: true, fanfare: true, spinSec: 8, calibSec: 8, intensity: 1, fx: 1, lowGfx: false, flashes: true, digitSpeed: 1, skin: 'classic', mode: 'dial', vol: 0.8, volMech: 0.7, volFan: 0.85, soundSet: 'brass', muteTicks: false, muteMotor: false, muteImpacts: false, muteChimes: false, uiScale: 1, numScale: 1, decor: true, showDrawNo: true, showRemaining: true, minimal: false, hostPanel: true, audienceHistory: false, mascot: true, lang: 'both', skipNext: false, showStatusBar: false, drawTarget: 'tickets', countdown: 0, autoHoliday: true, autoHolidayDay: '', music: true, volMus: 0.5, duckMusic: true, showDate: true, showWinStatus: true, teamsRing: true, teams: [{"n":"The killers","on":true},{"n":"АСК","on":true},{"n":"Mighty Minds","on":true},{"n":"108 кг ярости","on":true},{"n":"Миндальная связь","on":true},{"n":"Как тебе такое Илон Маск?","on":true},{"n":"Mozgoclue","on":true},{"n":"Double belly buster","on":true},{"n":"Маша, думай, а не пей","on":true},{"n":"Baursak lives matter","on":true},{"n":"Михаил Светлов","on":true},{"n":"The best from the west","on":true},{"n":"Давайте есть пчел","on":true},{"n":"Вечно молодой","on":true},{"n":"Без изысков","on":true},{"n":"Разношерстные","on":true},{"n":"Скрытый потанцевал","on":true},{"n":"Поцелуй всадницу","on":true},{"n":"Активные-Позитивные","on":true},{"n":"Snatch","on":true},{"n":"Йогини","on":true},{"n":"Блондинки в загоне","on":true},{"n":"Чурбачки","on":true},{"n":"50/50","on":true},{"n":"Кукушечка","on":true},{"n":"Синева","on":true},{"n":"Merci Ky-Ky","on":true}] };
+  static K = { s: 'bbtm.v2.settings', ses: 'bbtm.v2.session', ar: 'bbtm.v2.archive' };
+  static SKINS = [
+    { id: 'brand', name: 'BrainBoy', desc: 'Фирменные жёлтый, чёрный и красный, летящие знаки вопроса', kdesc: 'Фирмалық сары, қара және қызыл, ұшқан сұрақ белгілері', sw: ['#000000', '#f5c02c', '#d80018', '#ffdf5e'] },
+    { id: 'classic', name: 'Classic Time Machine', desc: 'Графит, бронза, латунь, янтарная подсветка', sw: ['#14100c', '#8a5d2a', '#e6bd72', '#ffae42'] },
+    { id: 'cyber', name: 'Cyber Chronos', desc: 'Чёрный, холодный синий, бирюзовые кольца', sw: ['#03101a', '#2f4a5c', '#3b6bff', '#22e5ff'] },
+    { id: 'golden', name: 'Golden Era', desc: 'Чёрное с золотом, мягкое свечение', sw: ['#0b0803', '#a87a12', '#ffe9a0', '#ffd25e'] },
+    { id: 'steel', name: 'Industrial Steel', desc: 'Сталь, серебро, холодный белый свет', sw: ['#101214', '#6c737a', '#dfe4e8', '#dff1ff'] },
+    { id: 'neon', name: 'Neon Reactor', desc: 'Фиолетовый, синий, малиновый', sw: ['#0d0221', '#6b2fb0', '#5b6bff', '#ff2bd6'] },
+    { id: 'newyear', group: 'holiday', name: 'Новый год', kname: 'Жаңа жыл', desc: 'Ночное небо, серебро, снег и гирлянда', kdesc: 'Түнгі аспан, күміс, қар және гирлянда', sw: ['#071a36', '#bcd4ec', '#7fd8ff', '#ffd25e'] },
+    { id: 'valentine', group: 'holiday', name: 'День влюблённых', kname: 'Ғашықтар күні', desc: 'Розовое золото, парящие сердца', kdesc: 'Қызғылт алтын, қалқыған жүректер', sw: ['#250514', '#e9a59a', '#ff4f8b', '#ff9ec0'] },
+    { id: 'march8', group: 'holiday', name: '8 Марта', kname: '8 наурыз', desc: 'Тюльпаны, мимоза, лепестки', kdesc: 'Қызғалдақтар, мимоза, гүл жапырақтары', sw: ['#2a0f30', '#e2b8de', '#ff6fb5', '#ffd23a'] },
+    { id: 'nauryz', group: 'holiday', name: 'Наурыз', kname: 'Наурыз мейрамы', desc: 'Казахский орнамент, бирюза и золото, цветение', kdesc: 'Қазақ ою-өрнегі, көгілдір мен алтын, гүлдену', sw: ['#06262a', '#f0c75a', '#3ee0d0', '#ffffff'] },
+    { id: 'may1', group: 'holiday', name: '1 Мая — День единства', kname: '1 мамыр — Бірлік күні', desc: 'Весеннее небо, солнце и воздушные шары', kdesc: 'Көктемгі аспан, күн және әуе шарлары', sw: ['#0b3a6a', '#2ea85a', '#ffd23a', '#e8433a'] },
+    { id: 'victory', group: 'holiday', name: 'День Победы', kname: 'Жеңіс күні', desc: 'Красный и бронза, звёзды, праздничный салют', kdesc: 'Қызыл мен қола, жұлдыздар, мерекелік салют', sw: ['#250404', '#c98a44', '#b3121b', '#ffd25e'] },
+    { id: 'halloween', group: 'holiday', name: 'Хэллоуин', kname: 'Хэллоуин', desc: 'Луна, летучие мыши, тыквы и паутина', kdesc: 'Ай, жарқанаттар, асқабақтар және өрмек', sw: ['#0e0614', '#5a4636', '#ff7a1a', '#9dff3a'] },
+    { id: 'independence', group: 'holiday', name: 'День независимости', kname: 'Тәуелсіздік күні', desc: 'Небесно-голубой и золото, солнечные лучи', kdesc: 'Көк пен алтын, күн шұғыласы', sw: ['#044a66', '#00afca', '#f0c75a', '#ffd23a'] },
+    { id: 'christmas', group: 'holiday', name: 'Рождество', kname: 'Рождество', desc: 'Красный, зелёный и золото, снег и огни', kdesc: 'Қызыл, жасыл және алтын, қар мен шамдар', sw: ['#1e0507', '#1f6b3a', '#e8b84a', '#ff3b3b'] },
+    { id: 'winter', group: 'season', name: 'Зима', kname: 'Қыс', desc: 'Иней, серебро и тихий снегопад', kdesc: 'Қырау, күміс және ақырын жауған қар', sw: ['#101c30', '#c8cce8', '#bfe6ff', '#d6c8ff'] },
+    { id: 'spring', group: 'season', name: 'Весна', kname: 'Көктем', desc: 'Цветущие ветви, ромашки, зелень', kdesc: 'Гүлдеген бұтақтар, түймедақтар, жасыл шөп', sw: ['#163a1e', '#c4dc8a', '#b8f070', '#ff9ec8'] },
+    { id: 'summer', group: 'season', name: 'Лето', kname: 'Жаз', desc: 'Солнце, море и бабочки', kdesc: 'Күн, теңіз және көбелектер', sw: ['#0a4a78', '#e8c07a', '#ffd23a', '#ff7a3a'] },
+    { id: 'autumn', group: 'season', name: 'Осень', kname: 'Күз', desc: 'Медь, золотые деревья, листопад', kdesc: 'Мыс, алтын ағаштар, жапырақ түсуі', sw: ['#2a1406', '#d88a54', '#ff9a2a', '#ffcf4a'] }
+  ];
+  static MODES = [
+    { id: 'dial', name: 'Механический циферблат', desc: 'Цифры на вращающихся барабанах' },
+    { id: 'balls', name: 'Лотерейные шары', desc: 'Шары вылетают из барабана и собирают номер' },
+    { id: 'calendar', name: 'Отрывной календарь', desc: 'Листки перелистываются и останавливаются' },
+    { id: 'pins', name: 'Лотерейные кегли', desc: 'Кегли падают в желоба и фиксируются' },
+    { id: 'flip', name: 'Электромеханическое табло', desc: 'Flip-панели перещёлкиваются до номера' },
+    { id: 'holo', name: 'Голографический номер', desc: 'Световые цифры материализуются в центре' }
+  ];
+  isAud = (() => { try { return new URLSearchParams(location.search).get('view') === 'audience'; } catch (e) { return false; } })();
+  canvasRef = React.createRef();
+  rootRef = React.createRef();
+  musFileRef = React.createRef();
+  mascotRef = React.createRef();
+  musUrls = {};
+  fileRef = React.createRef();
+  state = this.initState();
+
+  lj(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } }
+  uid() { const a = new Uint8Array(3); crypto.getRandomValues(a); return Array.from(a, b => b.toString(16).padStart(2, '0')).join('').toUpperCase(); }
+  randInt(n) { const lim = 4294967296 - (4294967296 % n), a = new Uint32Array(1); let x; do { crypto.getRandomValues(a); x = a[0]; } while (x >= lim); return x % n; }
+  mkSession(tickets, allowRepeats) { return { id: this.uid(), createdAt: Date.now(), tickets, allowRepeats: !!allowRepeats, history: [], current: null, calibrated: false, calib: null }; }
+  initState() {
+    const C = Component, st = this.lj(C.K.s, {}), settings = Object.assign({}, C.DEF, st && typeof st === 'object' ? st : {}); if (!settings.cdOffV1) { settings.countdown = 0; settings.cdOffV1 = true; }
+    let session = this.lj(C.K.ses, null); if (!session || !session.id || !Array.isArray(session.history)) session = this.mkSession(settings.tickets, false);
+    const archive = this.lj(C.K.ar, []);
+    return { settings, session, archive: Array.isArray(archive) ? archive : [], quick: false, dlg: false, tab: 'time', hist: false, pub: this.isAud, confirm: null, preview: null, draft: String(session.tickets), draftErr: '', teamDraft: '', customMus: {}, musPreview: 0, holdPct: 0, mHover: false, mPi: 0, fs: false, tick: 0 };
+  }
+
+  componentDidMount() {
+    const boot = () => { if (!window.TM || !this.canvasRef.current) { this._bt = setTimeout(boot, 50); return; } this.audio = new window.TM.AudioEngine(); this.machine = new window.TM.Machine(this.canvasRef.current, this.audio); this.syncEngine(); };
+    boot();
+    if (!this.isAud) { this.loadMus(); this.checkHoliday(); }
+    this._unlock = () => { if (this.audio) this.audio.unlock(); };
+    window.addEventListener('pointerdown', this._unlock); window.addEventListener('keydown', this._unlock);
+    this._key = e => this.onKey(e); window.addEventListener('keydown', this._key);
+    this._blur = e => { const b = e.target.closest && e.target.closest('button'); if (b && !b.closest('.dialog')) setTimeout(() => b.blur(), 0); };
+    window.addEventListener('mouseup', this._blur);
+    this._fs = () => this.setState({ fs: !!document.fullscreenElement }); document.addEventListener('fullscreenchange', this._fs);
+    try { this.bc = new BroadcastChannel('bbtm'); this.bc.onmessage = ev => { if (this.isAud && ev.data) this.setState({ settings: ev.data.settings, session: ev.data.session, preview: ev.data.preview || null }); else if (!this.isAud && ev.data && ev.data.hello) this.broadcast(); }; } catch (e) {}
+    this._st = ev => { if (this.isAud && ev.key && ev.key.indexOf('bbtm.v2') === 0) this.setState(this.initState()); }; window.addEventListener('storage', this._st);
+    if (this.isAud && this.bc) this.bc.postMessage({ hello: 1 });
+    this._iv = setInterval(() => this.poll(), 200);
+    this._rs = () => this.forceUpdate(); window.addEventListener('resize', this._rs);
+  }
+  componentWillUnmount() {
+    clearTimeout(this._bt); clearInterval(this._iv); if (this.audio) this.audio.setMusic(null); if (this.machine) this.machine.destroy(); if (this.mirror) { this.mirror.machine.destroy(); this.mirror = null; }
+    window.removeEventListener('pointerdown', this._unlock); window.removeEventListener('keydown', this._unlock); window.removeEventListener('keydown', this._key); window.removeEventListener('mouseup', this._blur); window.removeEventListener('storage', this._st); window.removeEventListener('resize', this._rs); document.removeEventListener('fullscreenchange', this._fs);
+    if (this.bc) this.bc.close();
+  }
+  componentDidUpdate() { this.syncEngine(); }
+
+  poll() {
+    this.updateMirror(); this.syncMusic(); if (!this.isAud) this.checkHoliday();
+    const now = Date.now(), s = this.state.session, p = this.state.preview;
+    if (!this.isAud && s.calib && now >= s.calib.startAt + s.calib.duration) { this.commit({ session: Object.assign({}, s, { calib: null, calibrated: true }) }); return; }
+    if (p && now >= p.startAt + p.duration + 1800) { this.commit({ preview: null }); return; }
+    const ph = this.phase();
+    if (ph !== this._lastPh || ph === 'calibrating' || ph === 'spinning' || ph === 'preview') { this._lastPh = ph; this.setState({ tick: now }); }
+  }
+  broadcast() { if (this.isAud || !this.bc) return; try { this.bc.postMessage({ settings: this.state.settings, session: this.state.session, preview: this.state.preview }); } catch (e) {} }
+  commit(p) {
+    const C = Component, next = { settings: p.settings || this.state.settings, session: p.session || this.state.session, archive: p.archive || this.state.archive, preview: 'preview' in p ? p.preview : this.state.preview };
+    if (!this.isAud) { try { localStorage.setItem(C.K.s, JSON.stringify(next.settings)); localStorage.setItem(C.K.ses, JSON.stringify(next.session)); localStorage.setItem(C.K.ar, JSON.stringify(next.archive)); } catch (e) {} try { if (this.bc) this.bc.postMessage({ settings: next.settings, session: next.session, preview: next.preview }); } catch (e) {} }
+    this.setState(p);
+  }
+  static MUS_T = { classic: ['Механикалық шкатулка вальсі', 'Вальс механической шкатулки'], cyber: ['Синт-арпеджио', 'Синт-арпеджио'], golden: ['Свинг-джаз', 'Свинг-джаз'], steel: ['Индустриалды ырғақ', 'Индустриальный ритм'], neon: ['Синтвейв', 'Синтвейв'], brand: ['Викторина әуені', 'Мелодия викторины'], newyear: ['Jingle Bells (Дж. Пирпонт, 1857)'], christmas: ['Тыныш түн (Ф. Грубер, 1818)', 'Тихая ночь (Ф. Грубер, 1818)'], halloween: ['Тау патшасының үңгірінде (Э. Григ, 1875)', 'В пещере горного короля (Э. Григ, 1875)'], nauryz: ['Домбыра мен сыбызғы', 'Домбра и сыбызгы'], may1: ['Көктемгі марш', 'Весенний марш'], victory: ['Салтанатты марш', 'Торжественный марш'], valentine: ['Романтикалық баллада', 'Романтическая баллада'], march8: ['Көктем вальсі', 'Весенний вальс'], independence: ['Дала әнұраны', 'Степной гимн'], winter: ['Қысқы челеста', 'Зимняя челеста'], spring: ['Көктемгі пиццикато', 'Весеннее пиццикато'], summer: ['Босса-нова', 'Босса-нова'], autumn: ['Күзгі гитара', 'Осенняя гитара'] };
+  idb() { if (!this._db) this._db = new Promise((res, rej) => { try { const r = indexedDB.open('bbtm-music', 1); r.onupgradeneeded = () => r.result.createObjectStore('tracks'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); } catch (e) { rej(e); } }); return this._db; }
+  idbDo(mode, fn) { return this.idb().then(db => new Promise((res, rej) => { const tx = db.transaction('tracks', mode), q = fn(tx.objectStore('tracks')); tx.oncomplete = () => res(q && q.result); tx.onerror = () => rej(tx.error); })); }
+  loadMus() { this.idbDo('readonly', st => st.getAll()).then(list => { const cm = {}; (list || []).forEach(r => { if (r && r.skin && r.blob) { this.musUrls[r.skin] = URL.createObjectURL(r.blob); cm[r.skin] = r.name; } }); this.setState({ customMus: cm }); }).catch(() => {}); }
+  saveMus(skin, f) { this.idbDo('readwrite', st => st.put({ skin, name: f.name, blob: f }, skin)).catch(() => {}); const old = this.musUrls[skin]; this.musUrls[skin] = URL.createObjectURL(f); if (old) setTimeout(() => URL.revokeObjectURL(old), 2000); this.setState({ customMus: Object.assign({}, this.state.customMus, { [skin]: f.name }) }); }
+  removeMus(skin) { this.idbDo('readwrite', st => st.delete(skin)).catch(() => {}); const u = this.musUrls[skin]; delete this.musUrls[skin]; const cm = Object.assign({}, this.state.customMus); delete cm[skin]; this.setState({ customMus: cm }); if (u) setTimeout(() => URL.revokeObjectURL(u), 2000); }
+  syncMusic() {
+    if (!this.audio || this.isAud) return; const S = this.state.settings, ph = this.phase(), now = Date.now(), c = this.state.session.current;
+    const pv = this.state.musPreview > now, wait = ph === 'boot' || ph === 'ready' || (ph === 'revealed' && c && now > c.startAt + c.duration + 4500);
+    const on = S.sound && (pv || (S.music !== false && wait));
+    if (this.audio.cfg.music !== on) this.audio.setConfig({ music: on });
+    this.audio.setMusic(on ? S.skin : null, on ? (this.musUrls[S.skin] || null) : null);
+    if (this.state.musPreview && !pv) this.setState({ musPreview: 0 });
+  }
+  musVals(S, seg, slider, L) {
+    const C = Component, sk = C.SKINS.find(k => k.id === S.skin) || C.SKINS[0], T = C.MUS_T[S.skin] || C.MUS_T.classic, cm = this.state.customMus[S.skin];
+    const nm = sk.kname && sk.kname !== sk.name ? L(sk.kname, sk.name) : sk.name;
+    return {
+      musToggles: [seg('music', L('Фондық музыка', 'Фоновая музыка'), L('Машина іске қосуды күткенде және жеңімпаз жарияланғаннан кейін ойнайды', 'Играет, пока машина ждёт запуска, и после объявления победителя')), seg('duckMusic', L('Эффектілер кезінде бәсеңдету', 'Приглушать под эффекты'), L('Механизм мен фанфаралар музыкадан қаттырақ', 'Механизм и фанфары громче музыки'))],
+      musSliders: [slider('volMus', L('Музыка дыбысының деңгейі', 'Громкость музыки'), 0, 1, 0.05, v => Math.round(v * 100) + '%')],
+      musSkinLabel: S.lang === 'kk' ? '«' + sk.kname + '» скинінің әуені' : S.lang === 'ru' ? 'Мелодия скина «' + sk.name + '»' : '«' + (sk.kname || sk.name) + '» скинінің әуені\nМелодия скина «' + sk.name + '»',
+      musTitle: cm ? L('Өз тректі: ' + cm, 'Свой трек: ' + cm) : (T.length === 1 ? T[0] : L(T[0], T[1])),
+      hasCustomMus: !!cm,
+      musPlaying: this.state.musPreview > Date.now(),
+      musPlayLabel: this.state.musPreview > Date.now() ? L('■ Тоқтату', '■ Остановить') : L('▶ Тыңдау', '▶ Прослушать'),
+      toggleMusPreview: () => { if (this.audio) this.audio.unlock(); this.setState({ musPreview: this.state.musPreview > Date.now() ? 0 : Date.now() + 25000 }, () => this.syncMusic()); },
+      musWarn: !S.sound, musWarnText: L('Жалпы дыбыс өшірулі — музыканы есту үшін «Дыбыс» қосқышын қосыңыз.', 'Общий звук выключен — включите «Звук», чтобы услышать музыку.'), enableSound: () => { if (this.audio) this.audio.unlock(); this.setSetting('sound', true); },
+      pickMus: () => { if (this.musFileRef.current) this.musFileRef.current.click(); },
+      removeMus: () => this.removeMus(S.skin),
+      onMusFile: e => { const f = e.target.files && e.target.files[0]; e.target.value = ''; if (f) this.saveMus(S.skin, f); },
+      musHint: L('Әр скиннің өз әуені бар. Өз MP3 файлыңызды жүктесеңіз, ол осы скин үшін синтезделген әуеннің орнына ойнайды. Файл осы браузерде сақталады.', 'У каждого скина своя мелодия. Свой MP3 заменит синтезированную мелодию для этого скина. Файл хранится в этом браузере.')
+    };
+  }
+  plaque() {
+    const G = { brand: ['ЗИЯТКЕРЛІК ШАЙҚАС', 'ИНТЕЛЛЕКТУАЛЬНАЯ БИТВА'], newyear: ['ЖАҢА ЖЫЛЫҢЫЗБЕН!', 'С НОВЫМ ГОДОМ!'], valentine: ['ҒАШЫҚТАР КҮНІМЕН!', 'С ДНЁМ ВЛЮБЛЁННЫХ!'], march8: ['8 НАУРЫЗ МЕРЕКЕСІМЕН!', 'С 8 МАРТА!'], nauryz: ['НАУРЫЗ ҚҰТТЫ БОЛСЫН!', 'С ПРАЗДНИКОМ НАУРЫЗ!'], may1: ['БІРЛІК КҮНІМЕН!', 'С ДНЁМ ЕДИНСТВА!'], victory: ['ЖЕҢІС КҮНІМЕН!', 'С ДНЁМ ПОБЕДЫ!'], halloween: ['HAPPY HALLOWEEN!'], independence: ['ТӘУЕЛСІЗДІК КҮНІМЕН!', 'С ДНЁМ НЕЗАВИСИМОСТИ!'], christmas: ['РОЖДЕСТВО МЕРЕКЕСІМЕН!', 'С РОЖДЕСТВОМ!'], winter: ['ҚЫСҚЫ ҰТЫС', 'ЗИМНИЙ РОЗЫГРЫШ'], spring: ['КӨКТЕМГІ ҰТЫС', 'ВЕСЕННИЙ РОЗЫГРЫШ'], summer: ['ЖАЗҒЫ ҰТЫС', 'ЛЕТНИЙ РОЗЫГРЫШ'], autumn: ['КҮЗГІ ҰТЫС', 'ОСЕННИЙ РОЗЫГРЫШ'] };
+    const g = G[this.state.settings.skin]; if (!g) return 'BRAINBOY · TIME MACHINE'; return g.length === 1 ? g[0] : this.L(g[0], g[1]);
+  }
+  dateText() {
+    const d = new Date(), KK = ['қаңтар', 'ақпан', 'наурыз', 'сәуір', 'мамыр', 'маусым', 'шілде', 'тамыз', 'қыркүйек', 'қазан', 'қараша', 'желтоқсан'], RU = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    return this.L1(d.getDate() + ' ' + KK[d.getMonth()] + ' ' + d.getFullYear() + ' ж.', d.getDate() + ' ' + RU[d.getMonth()] + ' ' + d.getFullYear() + ' г.').replace(' / ', ' · ');
+  }
+  addTeam() {
+    const n = String(this.state.teamDraft || '').trim().slice(0, 48), T = this.state.settings.teams || [];
+    if (!n) return; if (T.some(t => t.n.toLowerCase() === n.toLowerCase())) { this.setState({ teamDraft: '' }); return; }
+    this.setSetting('teams', T.concat([{ n, on: true }])); this.setState({ teamDraft: '' });
+  }
+  engineCfg() { const S = this.state.settings; return { skin: S.skin, mode: S.mode, intensity: S.intensity, fx: S.fx, lowGfx: S.lowGfx, flashes: S.flashes, digitSpeed: S.digitSpeed, confetti: S.confetti, numScale: S.numScale, decor: S.decor && !S.minimal, minimal: S.minimal, teamsRing: !!S.teamsRing || S.drawTarget === 'teams', teams: (S.teamsRing || S.drawTarget === 'teams') ? this.visTeams() : [], drawTarget: S.drawTarget, plaque: this.plaque(), leftInset: (S.hostPanel && !this.state.pub && !this.isAud) ? 290 * S.uiScale : this.mascotReserve(S, window.innerWidth, window.innerHeight) }; }
+  statusDot(ph) { return { boot: 'var(--color-neutral-500)', calibrating: 'var(--color-accent-400)', ready: 'var(--color-accent-2-400)', spinning: 'var(--color-accent)', preview: 'var(--color-accent-300)', revealed: 'var(--color-accent-300)', exhausted: 'var(--color-neutral-400)' }[ph]; }
+  syncEngine() {
+    this.skinVars(this.rootRef.current);
+    this.updateMirror();
+    if (!this.machine) return; const S = this.state.settings;
+    this.machine.setConfig(this.engineCfg());
+    this.audio.setConfig({ volMus: S.volMus, duckMusic: S.duckMusic !== false, sound: this.isAud ? false : S.sound, fanfare: S.fanfare, vol: S.vol, volMech: S.volMech, volFan: S.volFan, set: S.soundSet, mute: { ticks: S.muteTicks, motor: S.muteMotor, impacts: S.muteImpacts, chimes: S.muteChimes } });
+    this.machine.setScene(this.scene()); this.syncMusic();
+  }
+
+  visHist() { const s = this.state.session; return s.current && this.phase() === 'spinning' ? s.history.filter(x => x.drawNo !== s.current.drawNo) : s.history; }
+  isTeams() { return this.state.settings.drawTarget === 'teams'; }
+  visTeams() { return (this.state.settings.teams || []).filter(t => t.on).map(t => t.n); }
+  remaining(vis) {
+    const s = this.state.session, Hs = vis ? this.visHist() : s.history;
+    if (this.isTeams()) { const T = this.visTeams(); if (s.allowRepeats) return T.length; const won = new Set(Hs.filter(x => x.team).map(x => x.team)); return T.filter(n => !won.has(n)).length; }
+    if (s.allowRepeats) return s.tickets; return Math.max(0, s.tickets - new Set(Hs.filter(x => x.ticket != null).map(x => x.ticket)).size);
+  }
+  remainingInfo() { const s = this.state.session, L = (a, b) => this.L(a, b); if (this.isTeams()) { const n = this.visTeams().length; return { label: s.allowRepeats ? L('Ойындағы командалар', 'Команд в игре') : L('Қалған командалар', 'Осталось команд'), text: s.allowRepeats ? String(n) : this.remaining(true) + ' / ' + n }; } return { label: s.allowRepeats ? L('Ойындағы билеттер', 'Билетов в игре') : L('Қалған билеттер', 'Осталось билетов'), text: s.allowRepeats ? String(s.tickets) : this.remaining(true) + ' / ' + s.tickets }; }
+  primaryLabelText(ph) {
+    const L = (a, b) => this.L(a, b), T = this.isTeams();
+    if (ph === 'revealed' && this.state.settings.skipNext && this.remaining() > 0) ph = 'ready';
+    return { boot: L('КАЛИБРЛЕУДІ БАСТАУ', 'НАЧАТЬ КАЛИБРОВКУ'), calibrating: L('КАЛИБРЛЕУ…', 'КАЛИБРОВКА…'), ready: L('ІСКЕ ҚОСУ', 'ЗАПУСТИТЬ'), spinning: L('ҰТЫС ЖҮРУДЕ…', 'ИДЁТ РОЗЫГРЫШ…'), preview: L('АЛДЫН АЛА ҚАРАУ…', 'ПРЕДПРОСМОТР…'), revealed: L('КЕЛЕСІ ҰТЫС', 'СЛЕДУЮЩИЙ РОЗЫГРЫШ'), exhausted: T ? L('КОМАНДАЛАР ТАУСЫЛДЫ', 'КОМАНДЫ ЗАКОНЧИЛИСЬ') : L('БИЛЕТТЕР ТАУСЫЛДЫ', 'БИЛЕТЫ ЗАКОНЧИЛИСЬ') }[ph];
+  }
+  static HOL = { '12-31': 'newyear', '01-01': 'newyear', '01-07': 'christmas', '12-25': 'christmas', '02-14': 'valentine', '03-08': 'march8', '03-21': 'nauryz', '03-22': 'nauryz', '03-23': 'nauryz', '05-01': 'may1', '05-09': 'victory', '10-31': 'halloween', '12-16': 'independence' };
+  checkHoliday() {
+    const S = this.state.settings; if (this.isAud || S.autoHoliday === false) return;
+    const d = new Date(), md = String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'), day = d.getFullYear() + '-' + md, sk = Component.HOL[md];
+    if (!sk || S.autoHolidayDay === day) return; this.commit({ settings: Object.assign({}, S, { skin: sk, autoHolidayDay: day }) });
+  }
+  mascotReserve(S, W, H) { return S.mascot === false ? 0 : Math.round(Math.min(W * 0.2, H * 0.27)); }
+  mascotPhrase() {
+    const ph = this.phase(), s = this.state.session, c = s.current, i = this.state.mPi;
+    if (ph === 'spinning' || ph === 'preview') return this.L('Тсс… машина ойлап жатыр!', 'Тсс… машина думает!');
+    if (ph === 'revealed' && c) return c.team ? this.L('Құттықтаймын, «' + c.team + '»!', 'Поздравляю, «' + c.team + '»!') : this.L('№ ' + c.ticket + ' билетті құттықтаймын!', 'Поздравляю билет № ' + c.ticket + '!');
+    if (ph === 'boot' || ph === 'calibrating') return this.L('Машинаны дайындап жатырмын…', 'Готовлю машину времени…');
+    const P = [['Бүгін кім жеңеді?', 'Кто сегодня победит?'], ['Барлығына сәттілік!', 'Удачи всем!'], ['Билеттеріңізді дайындаңыз!', 'Билеты наготове?'], ['Мен ойлаймын, демек жеңемін!', 'Мыслю — значит, выигрываю!'], ['Уақыт машинасы дайын!', 'Машина времени готова!'], ['BrainBoy — ақыл шайқасы!', 'BrainBoy — битва умов!']];
+    const p = P[i % P.length]; return this.L(p[0], p[1]);
+  }
+  mascotPose() {
+    const ph = this.phase(), now = Date.now(), c = ph === 'preview' ? this.state.preview : this.state.session.current;
+    if ((ph === 'spinning' || ph === 'preview') && c) { const tau = now - c.startAt; if (tau < 0) return 'stand'; return tau < c.duration ? 'fly' : 'win'; }
+    return ph === 'revealed' ? 'win' : 'stand';
+  }
+  animMascot(el, pose) {
+    if (!el || !el.animate || el._pose === pose) return; el._pose = pose; if (el._anim) { el._anim.onfinish = null; el._anim.cancel(); }
+    const bob = () => el.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-7px)' }, { transform: 'translateY(0)' }], { duration: 3200, iterations: Infinity, easing: 'ease-in-out' });
+    if (pose === 'fly') el._anim = el.animate([{ transform: 'translate(0,0) rotate(-3deg)' }, { transform: 'translate(8px,-16px) rotate(2deg)' }, { transform: 'translate(0,0) rotate(-3deg)' }], { duration: 900, iterations: Infinity, easing: 'ease-in-out' });
+    else if (pose === 'win') { const a = el.animate([{ transform: 'translateY(0) scale(1)' }, { transform: 'translateY(-46px) scale(1.06)', offset: 0.3 }, { transform: 'translateY(0) scale(1)', offset: 0.6 }, { transform: 'translateY(-14px) scale(1.02)', offset: 0.8 }, { transform: 'translateY(0) scale(1)' }], { duration: 1100, iterations: 3, easing: 'ease-out' }); el._anim = a; a.onfinish = () => { if (el._pose === 'win') el._anim = bob(); }; }
+    else el._anim = bob();
+  }
+  holdStart(e) { if (e && e.preventDefault) e.preventDefault(); if (this._hold) return; const t0 = Date.now(); const step = () => { const p = Math.min(100, (Date.now() - t0) / 12); if (p >= 100) { this._hold = null; this.setState({ holdPct: 0 }); this.confirmYes(); return; } this.setState({ holdPct: p }); this._hold = requestAnimationFrame(step); }; this._hold = requestAnimationFrame(step); }
+  holdEnd() { if (this._hold) { cancelAnimationFrame(this._hold); this._hold = null; } if (this.state.holdPct) this.setState({ holdPct: 0 }); }
+
+  skinVars(el) {
+    if (!el || !window.TM) return; const id = this.state.settings.skin, S = window.TM.SKINS[id] || window.TM.SKINS.classic; if (el._sk === id) return; el._sk = id;
+    const v = { m0: S.metal[0], m1: S.metal[1], m2: S.metal[2], m3: S.metal[3], hi: S.hi, lo: S.lo, ink: S.ring === 'neon' ? S.glow : S.lo, glow: S.glow, glow2: S.glow2, d0: S.dark[0], d1: S.dark[1], paper: S.paper, pink: S.paperInk };
+    Object.keys(v).forEach(k => el.style.setProperty('--sk-' + k, v[k]));
+  }
+  phase() {
+    const { session: s, preview: p } = this.state, now = Date.now();
+    if (p && now < p.startAt + p.duration + 1800) return 'preview';
+    if (s.calib) return 'calibrating';
+    if (!s.calibrated) return 'boot';
+    if (s.current) return now < s.current.startAt + s.current.duration ? 'spinning' : 'revealed';
+    if (this.remaining() === 0) return 'exhausted';
+    return 'ready';
+  }
+  scene() {
+    const ph = this.phase(), s = this.state.session, N = s.tickets;
+    if (ph === 'preview') { const p = this.state.preview; return { kind: 'draw', startAt: p.startAt, duration: p.duration, ticket: p.ticket, team: p.team, N, preview: true }; }
+    if (ph === 'calibrating') return { kind: 'calib', startAt: s.calib.startAt, duration: s.calib.duration, N };
+    if (ph === 'boot') return { kind: 'boot', N };
+    if (ph === 'spinning' || ph === 'revealed') return { kind: 'draw', startAt: s.current.startAt, duration: s.current.duration, ticket: s.current.ticket, team: s.current.team, cd: !!s.current.cd, N };
+    return { kind: 'idle', N };
+  }
+  timing(T) { const R = Math.min(Math.max(T * 0.28, 1100), 3800), stop = T - R, accel = Math.min(T * 0.14, 1800), decel = accel + (stop - accel) * 0.5; return { R, stop, accel, decel }; }
+  L(kk, ru) { const m = this.state.settings.lang; return m === 'kk' ? kk : m === 'ru' ? ru : kk + '\n' + ru; }
+  L1(kk, ru) { const m = this.state.settings.lang; return m === 'kk' ? kk : m === 'ru' ? ru : kk + ' / ' + ru; }
+  statusText(ph) {
+    const s = this.state.session, now = Date.now(), L = (a, b) => this.L(a, b), READY = L('МАШИНА ҰТЫСҚА ДАЙЫН', 'МАШИНА ГОТОВА К РОЗЫГРЫШУ');
+    if (ph === 'boot') return L('МАШИНА КАЛИБРЛЕУДІ КҮТУДЕ', 'МАШИНА ОЖИДАЕТ КАЛИБРОВКИ');
+    if (ph === 'calibrating') { const u = (now - s.calib.startAt) / s.calib.duration; if (u < 0.22) return L('ІСКЕ ҚОСЫЛУДА', 'ИНИЦИАЛИЗАЦИЯ'); if (u < 0.48) return L('ХРОНОМЕХАНИЗМДІ СИНХРОНДАУ', 'СИНХРОНИЗАЦИЯ ХРОНОМЕХАНИЗМА'); if (u < 0.66) return L('КАЛИБРЛЕУ', 'КАЛИБРОВКА'); if (u < 0.86) return L('КАЛИБРЛЕУ АЯҚТАЛДЫ', 'КАЛИБРОВКА ЗАВЕРШЕНА'); return READY; }
+    if (ph === 'ready') return READY;
+    if (ph === 'exhausted') return this.isTeams() ? L('БАРЛЫҚ КОМАНДАЛАР ОЙНАТЫЛДЫ', 'ВСЕ КОМАНДЫ РАЗЫГРАНЫ') : L('БАРЛЫҚ БИЛЕТТЕР ОЙНАТЫЛДЫ', 'ВСЕ БИЛЕТЫ РАЗЫГРАНЫ');
+    if (ph === 'revealed') return s.current.team ? L('ЖЕҢІМПАЗ КОМАНДА: «' + s.current.team + '»', 'ПОБЕДИЛА КОМАНДА «' + s.current.team + '»') : L('ҰТЫСТЫ БИЛЕТ № ' + s.current.ticket, 'ВЫИГРЫШНЫЙ БИЛЕТ № ' + s.current.ticket);
+    const pv = ph === 'preview', c = pv ? this.state.preview : s.current, tau = now - c.startAt, T = c.duration, tm = this.timing(T);
+    const P = (a, b) => L((pv ? 'АЛДЫН АЛА ҚАРАУ · ' : '') + a, (pv ? 'ПРЕДПРОСМОТР · ' : '') + b);
+    if (tau < 0 && c.cd) return P('КЕРІ САНАҚ · ' + Math.ceil(-tau / 1000), 'ОБРАТНЫЙ ОТСЧЁТ · ' + Math.ceil(-tau / 1000));
+    if (tau >= T) return c.team ? P('ДЕМО: «' + c.team + '»', 'ДЕМО: «' + c.team + '»') : P('ДЕМО-НӨМІР ' + c.ticket, 'ДЕМО-НОМЕР ' + c.ticket);
+    if (tau < tm.accel) return P('ХРОНОМЕХАНИЗМ ҮДЕУДЕ', 'РАЗГОН ХРОНОМЕХАНИЗМА');
+    if (tau < tm.decel) return P('НӨМІР ІЗДЕЛУДЕ', 'ПОИСК НОМЕРА');
+    if (tau < tm.stop) return P('ТЕЖЕЛУ', 'ТОРМОЖЕНИЕ');
+    return P('НӨМІР АШЫЛУДА', 'РАСКРЫТИЕ НОМЕРА');
+  }
+  primary() { const ph = this.phase(); if (ph === 'boot') this.calibrate(); else if (ph === 'ready') this.start(); else if (ph === 'revealed') { if (this.state.settings.skipNext && this.remaining() > 0) this.start(Object.assign({}, this.state.session, { current: null })); else this.next(); } }
+  start(base) {
+    if (this._busy || this.isAud || (!base && this.phase() !== 'ready')) return; this._busy = true;
+    try {
+      const s = base || this.state.session, S = this.state.settings, now = Date.now(), drawNo = s.history.length + 1, rule = s.allowRepeats ? 'repeat' : 'unique';
+      const duration = Math.round(S.spinSec * 1000), cd = (S.countdown || 0) > 0, startAt = now + 80 + Math.round((S.countdown || 0) * 1000); let entry, cur;
+      if (S.drawTarget === 'teams') {
+        const all = this.visTeams(), won = new Set(s.history.filter(x => x.team).map(x => x.team)), pool = all.filter(n => s.allowRepeats || !won.has(n)); if (!pool.length) return;
+        const team = pool[this.randInt(pool.length)]; entry = { drawNo, team, ticket: null, ts: now, sessionId: s.id, rule, range: all.length, target: 'teams' }; cur = { drawNo, team, ticket: null, startAt, duration, cd };
+      } else {
+        const N = s.tickets; if (!(Number.isInteger(N) && N >= 1)) return;
+        const won = new Set(s.history.filter(x => x.ticket != null).map(x => x.ticket)), pool = []; for (let i = 1; i <= N; i++) if (s.allowRepeats || !won.has(i)) pool.push(i); if (!pool.length) return;
+        const ticket = pool[this.randInt(pool.length)]; entry = { drawNo, ticket, ts: now, sessionId: s.id, rule, range: N }; cur = { drawNo, ticket, startAt, duration, cd };
+      }
+      this.commit({ session: Object.assign({}, s, { history: s.history.concat([entry]), current: cur }), quick: false });
+    } finally { setTimeout(() => { this._busy = false; }, 400); }
+  }
+  next() { if (this.isAud || this.phase() !== 'revealed') return; this.commit({ session: Object.assign({}, this.state.session, { current: null }) }); }
+  calibrate() { if (this.isAud) return; const ph = this.phase(); if (ph === 'calibrating' || ph === 'spinning' || ph === 'preview') return; this.commit({ session: Object.assign({}, this.state.session, { current: null, calib: { startAt: Date.now() + 60, duration: Math.round(this.state.settings.calibSec * 1000) } }), dlg: false }); }
+  preview() { const ph = this.phase(); if (['calibrating', 'spinning', 'preview'].includes(ph)) return; const N = this.state.session.tickets, T = this.visTeams(), team = this.isTeams() && T.length ? T[this.randInt(T.length)] : null; this.commit({ preview: { ticket: team ? null : 1 + this.randInt(N), team, startAt: Date.now() + 80, duration: Math.min(6000, this.state.settings.spinSec * 1000) }, dlg: false }); }
+  setSetting(k, v) { this.commit({ settings: Object.assign({}, this.state.settings, { [k]: v }) }); }
+  ask(title, body, yes, fn, danger) { this.holdEnd(); this.setState({ confirm: { title, body, yes, fn, danger: !!danger } }); }
+  confirmYes() { const c = this.state.confirm; this.setState({ confirm: null }, () => { if (c && c.fn) c.fn(); }); }
+  newSession(n) {
+    const s = this.state.session, N = n || s.tickets; let archive = this.state.archive;
+    if (s.history.length) archive = archive.concat([Object.assign({}, s, { current: null, calib: null })]).slice(-50);
+    this.commit({ session: this.mkSession(N, s.allowRepeats), archive, settings: Object.assign({}, this.state.settings, { tickets: N }), draft: String(N), draftErr: '', hist: false });
+  }
+  applyTickets() {
+    const s = this.state.session, raw = String(this.state.draft).trim(), n = Number(raw), ph = this.phase();
+    if (!/^\d+$/.test(raw) || !Number.isInteger(n) || n < 1 || n > 9999) { this.setState({ draftErr: this.L('1-ден 9999-ға дейін бүтін сан енгізіңіз', 'Введите целое число от 1 до 9999') }); return; }
+    if (['spinning', 'calibrating', 'preview'].includes(ph)) { this.setState({ draftErr: this.L('Анимацияның аяқталуын күтіңіз', 'Дождитесь окончания анимации') }); return; }
+    if (n === s.tickets) { this.setState({ draftErr: '' }); return; }
+    if (s.history.length) { this.ask(this.L('Жаңа сеанс бастау керек пе?', 'Новый сеанс?'), this.L('Ауқым 1 — ' + n + ' болып өзгереді. ' + s.history.length + ' ұтысы бар ағымдағы сеанс мұрағатқа өтеді, жаңа калибрлеу қажет болады.', 'Диапазон изменится на 1 — ' + n + '. Текущий сеанс с ' + s.history.length + ' розыгр. уйдёт в архив, понадобится новая калибровка.'), this.L('Сеанс құру', 'Создать сеанс'), () => this.newSession(n), true); return; }
+    this.commit({ session: Object.assign({}, s, { tickets: n }), settings: Object.assign({}, this.state.settings, { tickets: n }), draftErr: '' });
+  }
+  setRepeats(v) {
+    const s = this.state.session; if (v === s.allowRepeats) return; if (this.phase() === 'spinning') return;
+    const apply = () => this.commit({ session: Object.assign({}, this.state.session, { allowRepeats: v }) });
+    if (s.history.length) this.ask(this.L('Ережені өзгерту керек пе?', 'Изменить правило?'), v ? this.L('Жаңа ереже: «Қайталауға рұқсат». Сақталған нәтижелер өзгермейді.', 'Новое правило: «Повторы разрешены». Сохранённые результаты не изменятся.') : this.L('Жаңа ереже: «Қайталаусыз» — ұтқан нөмірлер алынып тасталады. Сақталған нәтижелер өзгермейді.', 'Новое правило: «Без повторов» — уже выигравшие номера будут исключены. Сохранённые результаты не изменятся.'), this.L('Өзгерту', 'Изменить'), apply); else apply();
+  }
+  exportCSV() {
+    const L1 = (a, b) => this.L1(a, b), rows = [['Сеанс', L1('Ұтыс', 'Розыгрыш'), L1('Билет / Команда', 'Билет / Команда'), L1('Күні', 'Дата'), L1('Уақыты', 'Время'), L1('Ауқым', 'Диапазон'), L1('Ереже', 'Правило')]];
+    this.state.archive.concat([this.state.session]).forEach(s => s.history.forEach(h => { const d = new Date(h.ts); rows.push([s.id, h.drawNo, h.team || h.ticket, d.toLocaleDateString('ru-RU'), d.toLocaleTimeString('ru-RU'), h.team ? String(h.range) : '1–' + (h.range || s.tickets), h.rule === 'repeat' ? L1('қайталауға рұқсат', 'повторы разрешены') : L1('қайталаусыз', 'без повторов')]); }));
+    const csv = '\ufeff' + rows.map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(';')).join('\r\n');
+    this.download(new Blob([csv], { type: 'text/csv;charset=utf-8' }), 'brainboy-history-' + new Date().toISOString().slice(0, 10) + '.csv');
+  }
+  download(blob, name) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+  toggleFs() { try { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {}); else document.exitFullscreen(); } catch (e) {} }
+  openAudience() {
+    if (this.mirror && !this.mirror.win.closed) { this.mirror.win.focus(); return; }
+    let embedded = false; try { embedded = window.top !== window; } catch (e) { embedded = true; }
+    if (!embedded) { try { const u = new URL(location.href); u.searchParams.set('view', 'audience'); window.open(u.toString(), 'bbtm-audience', 'popup=yes,width=1280,height=720'); } catch (e) {} return; }
+    const w = window.open('', '', 'popup=yes,width=1280,height=720'); if (!w) return; this.buildMirror(w);
+  }
+  buildMirror(w) {
+    const abs = p => new URL(p, location.href).toString(), d = w.document;
+    const css = Array.from(document.querySelectorAll('link[rel=stylesheet], style')).map(n => n.tagName === 'LINK' ? '<link rel="stylesheet" href="' + n.href + '">' : n.outerHTML).join('');
+    const asset = (n, f) => { const el = document.querySelector('img[data-asset="' + n + '"]'); return el && el.src ? el.src : abs(f); };
+    d.open(); d.write('<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>BrainBoy Time Machine — экран зрителей</title>' + css + '<style>:root{--font-heading:"Caprasimo", "Nunito", system-ui, sans-serif;--font-body:"Figtree", "Nunito", system-ui, sans-serif}html,body{margin:0;height:100%;overflow:hidden;background:#0b0806}</style></head><body><div style="position:fixed;inset:0;overflow:hidden;font-family:var(--font-body)"><canvas id="cv" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas><div id="ms" style="position:absolute;pointer-events:none;display:none"></div><div id="ov" style="position:absolute;inset:0;pointer-events:none"></div></div></body></html>'); d.close();
+    const ms = d.getElementById('ms'), shadow = 'filter:drop-shadow(0 18px 18px rgba(0,0,0,.55));transition:opacity .3s;position:absolute;max-width:none;';
+    ms.innerHTML = '<img src="' + asset('mascot', 'assets/mascot.png') + '" style="' + shadow + 'left:0;bottom:0;height:100%;width:auto;transform:scaleX(-1)">';
+    d.addEventListener('dblclick', () => { try { if (!d.fullscreenElement) d.documentElement.requestFullscreen(); else d.exitFullscreen(); } catch (e) {} });
+    const machine = new window.TM.Machine(d.getElementById('cv'), null, w);
+    this.mirror = { win: w, machine, ov: d.getElementById('ov'), ms, logo: asset('logo', 'assets/logo.png'), html: '' };
+    w.addEventListener('resize', () => this.updateMirror());
+    this.updateMirror();
+  }
+  updateMirror() {
+    const m = this.mirror; if (!m) return; if (m.win.closed) { m.machine.destroy(); this.mirror = null; return; }
+    const S = this.state.settings, s = this.state.session, ph = this.phase(), VH = this.visHist();
+    this.skinVars(m.ov.parentElement);
+    m.machine.setConfig(Object.assign(this.engineCfg(), { leftInset: this.mascotReserve(S, m.win.innerWidth, m.win.innerHeight) })); m.machine.setScene(this.scene());
+    const dot = this.statusDot(ph), mb = this.mascotBox(S, false, m.win), RI = this.remainingInfo(), rem = RI.text;
+    const lbl = 'font-size:12px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--color-accent-300)', big = 'font-family:var(--font-heading);font-size:40px;line-height:1';
+    const L = (a, b) => this.L(a, b); let o = '<div style="position:absolute;inset:0;white-space:pre-line;zoom:' + S.uiScale + '">';
+    if (S.decor && !S.minimal) o += '<img src="' + m.logo + '" alt="BrainBoy" style="position:absolute;top:20px;left:28px;height:clamp(44px, 6.4vh, 72px);width:auto;filter:drop-shadow(0 4px 14px rgba(0,0,0,.6))">';
+    o += '<div style="position:absolute;top:18px;left:24px;right:24px;display:flex;flex-direction:column;align-items:center;gap:6px">' + (S.showDate !== false ? '<span style="font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent-300);text-shadow:0 1px 6px rgba(0,0,0,.8)">' + this.dateText() + '</span>' : '') + '' + (!S.showStatusBar || (ph === 'revealed' && S.showWinStatus === false) ? '' : '<div style="display:flex;align-items:center;gap:12px;max-width:100%;padding:10px 24px;border-radius:999px;background:color-mix(in srgb, var(--color-neutral-900) 72%, transparent);border:1px solid color-mix(in srgb, var(--color-bg) 16%, transparent);color:var(--color-bg);font-family:var(--font-heading);font-size:clamp(14px, 1.6vw, 22px);letter-spacing:0.06em;text-align:center"><span style="flex:none;width:12px;height:12px;border-radius:50%;background:' + dot + ';box-shadow:0 0 14px ' + dot + '"></span><span>' + this.statusText(ph) + '</span></div>') + '</div>';
+    { const z = S.uiScale || 1, ms = m.ms, px = v => (v * z) + 'px'; ms.style.display = mb.showMascot ? 'block' : 'none'; if (mb.showMascot) Object.assign(ms.style, { left: px(mb.mascotLeft), bottom: px(mb.mascotBottom), width: px(mb.mascotW), height: px(mb.mascotH) }); }
+    if (S.showDrawNo) o += '<div style="position:absolute;left:32px;bottom:30px;display:flex;flex-direction:column;gap:2px;color:var(--color-bg)"><span style="' + lbl + '">' + L('Ұтыс', 'Розыгрыш') + '</span><span style="' + big + '">№ ' + (s.current ? s.current.drawNo : s.history.length + 1) + '</span></div>';
+    if (S.showRemaining) o += '<div style="position:absolute;right:32px;bottom:30px;display:flex;flex-direction:column;align-items:flex-end;gap:2px;color:var(--color-bg)"><span style="' + lbl + '">' + RI.label + '</span><span style="' + big + '">' + rem + '</span></div>';
+    if (S.audienceHistory && VH.length) o += '<div style="position:absolute;left:32px;top:120px;display:flex;flex-direction:column;gap:8px;max-width:180px"><span style="font-size:12px;font-weight:800;letter-spacing:0.24em;text-transform:uppercase;color:var(--sk-glow);text-shadow:0 1px 6px rgba(0,0,0,.8)">' + L('Жеңімпаздар', 'Победители') + '</span><div style="display:flex;flex-wrap:wrap;gap:6px">' + VH.slice(-8).reverse().map(x => '<span style="display:inline-flex;align-items:center;justify-content:center;min-width:46px;padding:5px 14px;font-family:var(--font-heading);font-size:18px;line-height:1.1;color:var(--sk-pink);background:radial-gradient(circle at 0 50%, transparent 6px, var(--sk-paper) 6.5px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 6px, var(--sk-paper) 6.5px) right / 51% 100% no-repeat;filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))">' + (x.team || x.ticket) + '</span>').join('') + '</div></div>';
+    o += '</div>';
+    if (o !== m.html) { m.html = o; m.ov.innerHTML = o; }
+  }
+
+  onKey(e) {
+    const t = e.target, tag = t && t.tagName, inter = ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(tag) || (t && t.isContentEditable);
+    if (e.key === 'Escape') { if (this.state.confirm) this.setState({ confirm: null }); else if (this.state.dlg || this.state.quick || this.state.hist) this.setState({ dlg: false, quick: false, hist: false }); else if (this.state.pub && !this.isAud) this.setState({ pub: false }); return; }
+    if (this.state.confirm) { if (e.key === 'Enter' && !this.state.confirm.danger) { e.preventDefault(); this.confirmYes(); } return; }
+    if (inter || this.state.dlg) return;
+    if (e.code === 'Space') { e.preventDefault(); if (!this.isAud) this.primary(); return; }
+    if (this.isAud || e.ctrlKey || e.metaKey || e.altKey) return;
+    const k = e.key.toLowerCase();
+    if (k === 'f' || k === 'а') this.toggleFs(); else if (k === 'n' || k === 'т') this.next(); else if (k === 'q' || k === 'й') this.setState({ quick: !this.state.quick }); else if (k === 'h' || k === 'р') this.setState({ hist: !this.state.hist }); else if (k === 'p' || k === 'з') this.setState({ pub: !this.state.pub, quick: false, hist: false }); else if (k === 's' || k === 'ы') this.setState({ dlg: true });
+  }
+
+  mascotBox(S, showChrome, win) {
+    const wv = win || window, W = wv.innerWidth, H = wv.innerHeight, z = S.uiScale || 1, host = showChrome && S.hostPanel;
+    const ins = Math.min(host ? 290 * z : this.mascotReserve(S, W, H), W * 0.3), cx = ins + (W - ins) / 2, R = Math.min(H * 0.35, (W - ins) * 0.245);
+    const right = cx - 1.7 * R, leftMin = 16, availW = right - leftMin;
+    const bottom = ((showChrome ? 112 : 30) + (S.showDrawNo ? 78 : 0)) * z, topLimit = (host ? 400 : 110) * z;
+    const hgt = Math.min(H * 0.42, 460, H - bottom - topLimit, availW / 0.586);
+    if (S.mascot === false || hgt < 120) return { showMascot: false, mascotLeft: 0, mascotBottom: 0, mascotH: 0, mascotW: 0, mFlyS: 0, mFlyL: 0, mFlyB: 0, mWinS: 0, mWinL: 0, mWinB: 0 };
+    const w = hgt * 0.586, left = Math.max(leftMin, leftMin + (availW - w) / 2), q = v => Math.round(v / z), winS = Math.min(w * 1.15, hgt * 0.62);
+    return { showMascot: true, mascotLeft: q(left), mascotBottom: q(bottom), mascotH: q(hgt), mascotW: q(w), mFlyS: q(w * 1.3), mFlyL: q(-w * 0.08), mFlyB: q(hgt * 0.22), mWinS: q(winS), mWinL: q((w - winS) / 2), mWinB: q(hgt * 0.28) };
+  }
+  renderVals() {
+    const S = this.state.settings, s = this.state.session, ph = this.phase(), C = Component, pub = this.state.pub, L = (a, b) => this.L(a, b), L1 = (a, b) => this.L1(a, b);
+    const ON = L('ҚОСУЛЫ', 'ВКЛ'), OFF = L('ӨШІРУЛІ', 'ВЫКЛ');
+    const seg = (key, label, hint, invert) => { const v = invert ? !S[key] : !!S[key]; return { label, hint: hint || '', name: 'tg-' + key, opts: [{ label: ON, checked: v, pick: () => this.setSetting(key, invert ? false : true) }, { label: OFF, checked: !v, pick: () => this.setSetting(key, invert ? true : false) }] }; };
+    const choice = (key, label, hint, opts, sfx) => ({ label, hint: hint || '', name: 'ch-' + key + (sfx || ''), opts: opts.map(([val, l]) => ({ label: l, checked: S[key] === val, pick: () => this.setSetting(key, val) })) });
+    const fmt = (v, d) => String(Number(v).toFixed(d)).replace('.', ',');
+    const slider = (key, label, min, max, step, disp) => ({ label, min, max, step, value: S[key], display: disp(S[key]), onInput: e => this.setSetting(key, Number(e.target.value)) });
+    const T = S.spinSec * 1000, tm = this.timing(T), sec = ms => fmt(ms / 1000, 1) + ' с';
+    const RI = this.remainingInfo();
+    const hist = this.visHist(), last = hist.slice(-8).reverse();
+    const fmtDT = ts => { const d = new Date(ts); return d.toLocaleDateString('ru-RU') + ' ' + d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); };
+    const drawNo = s.current ? s.current.drawNo : hist.length + 1;
+    const showChrome = !pub && !this.isAud;
+    const ruleLabel = s.allowRepeats ? L('Қайталауға рұқсат', 'Повторы разрешены') : L('Қайталаусыз', 'Без повторов');
+    const langOpts = [['kk', 'ҚАЗ'], ['ru', 'РУС'], ['both', 'ҚАЗ + РУС']];
+    const SKK = { classic: 'Графит, қола, жез, кәріптас жарығы', cyber: 'Қара, суық көк, көгілдір сақиналар', golden: 'Қара мен алтын, жұмсақ жарқырау', steel: 'Болат, күміс, суық ақ жарық', neon: 'Күлгін, көк, таңқурай түсті' };
+    const MKK = { dial: ['Механикалық циферблат', 'Айналмалы барабандардағы цифрлар'], balls: ['Лотерея шарлары', 'Шарлар барабаннан ұшып шығып, нөмірді құрайды'], calendar: ['Жыртпалы күнтізбе', 'Парақтар аударылып, нөмірге тоқтайды'], pins: ['Лотерея кеглилері', 'Кеглилер науаға түсіп, бекітіледі'], flip: ['Электромеханикалық табло', 'Flip-панельдер нөмірге дейін ауысады'], holo: ['Голографиялық нөмір', 'Жарық цифрлары орталықта пайда болады'] };
+    const tx = {
+      draw: L('Ұтыс', 'Розыгрыш'), winners: L('Жеңімпаздар', 'Победители'), hostPanel: L('Жүргізуші панелі', 'Панель ведущего'), tickets: L('Билеттер', 'Билеты'), rule: L('Ереже', 'Правило'), done: L('Өткізілді', 'Проведено'), time: L('Уақыт', 'Время'), lastTickets: L('Соңғы билеттер', 'Последние билеты'),
+      tQuick: L1('Жылдам баптаулар', 'Быстрые настройки') + ' (Q)', tSettings: L1('Машина баптаулары', 'Настройки машины') + ' (S)', tHist: L1('Тарих', 'История') + ' (H)', tAud: L1('Көрермен терезесін ашу', 'Открыть окно зрителей'), tPub: L1('Осы терезеде көрермен режимі', 'Режим зрителей в этом окне') + ' (P, Esc)', tFs: L1('Толық экран', 'Полный экран') + ' (F)',
+      quick: L('Жылдам баптаулар', 'Быстрые настройки'), collapse: L('Жию', 'Свернуть'), ticketCount: L('Билеттер саны (нөмірлеу 1 — N)', 'Количество билетов (нумерация 1 — N)'), apply: L('Қолдану', 'Применить'), recal: L('Қайта калибрлеу', 'Повторить калибровку'),
+      histTitle: L('Ұтыс тарихы', 'История розыгрышей'), close: L('Жабу', 'Закрыть'), exportCsv: L('CSV экспорттау', 'Экспорт CSV'), newSession: L('Жаңа сеанс', 'Новый сеанс'), clear: L('Деректерді тазалау', 'Очистить данные'), thWhen: L('Күні мен уақыты', 'Дата и время'), noDraws: L('Бұл сеанста әлі ұтыс болған жоқ.', 'В этом сеансе ещё не было розыгрышей.'), pastSessions: L('Өткен сеанстар', 'Прошлые сеансы'),
+      settings: L('Машина баптаулары', 'Настройки машины'), drawTime: L('Ұтыс уақыты:', 'Время розыгрыша:'), timeSplit: L('Уақытты бөлу', 'Распределение времени'),
+      repeats: L('Жеңімпаздардың қайталануы', 'Повторы победителей'), repeatsHint: L('Тыйым салынса, ұтқан нөмір сеанс соңына дейін алынып тасталады', 'При запрете выигравший номер исключается до конца сеанса'), curSession: L('Ағымдағы сеанс', 'Текущий сеанс'), started: L('Басталды', 'Начат'), range: L('Ауқым', 'Диапазон'), draws: L('Ұтыстар', 'Розыгрышей'), available: L('Қолжетімді билеттер', 'Доступно билетов'),
+      fair: L('Нөмір «Іске қосу» басылған сәтте бір рет crypto.getRandomValues() арқылы мәндерді іріктеу әдісімен (модуль бойынша ығыссыз) таңдалады — тек қолжетімді билеттер арасынан. Нәтиже бірден тарихқа сақталады; анимация, скин және көрсету тәсілі таңдауға әсер етпейді. Әділдік сондай-ақ ұтыс өткізілетін құрылғы мен қолданба көшірмесіне деген сенімге байланысты.', 'Номер выбирается один раз в момент нажатия «Запустить» через crypto.getRandomValues() с отбраковкой значений (без смещения по модулю) — только среди доступных билетов. Результат сразу сохраняется в историю; анимация, скин и способ отображения на выбор не влияют. Честность также зависит от доверия к устройству и копии приложения, на которых проводится розыгрыш.'),
+      preview: L('Режимді алдын ала қарау', 'Предпросмотр режима'), previewHint: L('Демо-нөмір, тарихқа жазылмайды', 'Демонстрационный номер, в историю не записывается'),
+      hMech: L('Механизмді тыңдау', 'Прослушать механизм'), hFan: L('Фанфараны тыңдау', 'Прослушать фанфары'), hChime: L('Сигналды тыңдау', 'Прослушать сигнал'),
+      fs: L('Толық экран режимі', 'Полноэкранный режим'), pub: L('Осы терезеде көрермен режимі', 'Режим зрителей в этом окне'), aud: L('Көрермен терезесін ашу', 'Открыть окно зрителей'), expSet: L('Баптауларды экспорттау', 'Экспорт настроек'), impSet: L('Баптауларды импорттау', 'Импорт настроек'), resetSet: L('Баптауларды қалпына келтіру', 'Сбросить настройки'),
+      keys: L('Пернелер: Бос орын — іске қосу / келесі ұтыс, Enter — растау, Esc — панельдерді жабу немесе көрермен режимінен шығу, F — толық экран, N — келесі ұтыс, Q — жылдам баптаулар, H — тарих, P — көрермен режимі. Көрермен терезесі осы тереземен үндестіріледі; онда екі рет басу толық экранды қосады.', 'Клавиши: Пробел — запуск / следующий розыгрыш, Enter — подтверждение, Esc — закрыть панели или выйти из режима зрителей, F — полный экран, N — следующий розыгрыш, Q — быстрые настройки, H — история, P — режим зрителей. Окно зрителей синхронизируется с этим окном; двойной клик в нём включает полный экран.'),
+      teamPh: L1('Жаңа команданың атауы', 'Название новой команды'), add: L('Қосу', 'Добавить'), del: L1('Жою', 'Удалить'), resetTeams: L('Бастапқы тізімді қайтару', 'Вернуть исходный список'),
+      music: L('Музыка', 'Музыка'), musUpload: L('Өз MP3 жүктеу', 'Загрузить свой MP3'), soundOn: L('Дыбысты қосу', 'Включить звук'), musRemove: L('Өз тректі алып тастау', 'Убрать свой трек'),
+      cancel: L('Болдырмау', 'Отмена'), hold: L('басып ұстап тұрыңыз', 'удерживайте')
+    };
+    return {
+      mHover: !!this.state.mHover, mPhrase: this.mascotPhrase(), mEnter: () => { if (!this.state.mHover) this.setState({ mHover: true, mPi: (this.state.mPi + 1) % 6 }); }, mLeave: () => this.setState({ mHover: false }),
+      confirmDanger: !!(this.state.confirm && this.state.confirm.danger), confirmSafe: !(this.state.confirm && this.state.confirm.danger), holdPct: Math.round(this.state.holdPct), holdStart: e => this.holdStart(e), holdEnd: () => this.holdEnd(), holdKey: e => { if ((e.key === 'Enter' || e.key === ' ') && !e.repeat) { e.preventDefault(); this.holdStart(); } }, noCtx: e => e.preventDefault(),
+      ruleToggles: [choice('drawTarget', L('Не ойнатылады', 'Что разыгрываем'), L('Билет нөмірі немесе сақинадағы команда', 'Номер билета или команда с кольца'), [['tickets', L('Билеттер', 'Билеты')], ['teams', L('Командалар', 'Команды')]])],
+      skinToggles: [seg('autoHoliday', L('Мерекелік скинді автоматты қосу', 'Праздничный скин в день праздника'), L('Тек мереке күні: 31.12, 1.01, 7.01, 14.02, 8.03, 21–23.03, 1.05, 9.05, 31.10, 16.12, 25.12', 'Только в сам день: 31.12, 1.01, 7.01, 14.02, 8.03, 21–23.03, 1.05, 9.05, 31.10, 16.12, 25.12'))],
+      tx, canvasRef: this.canvasRef, musFileRef: this.musFileRef, ...this.musVals(S, seg, slider, L), rootRef: this.rootRef, showStatus: !!S.showStatusBar && !(ph === 'revealed' && S.showWinStatus === false),
+      primaryOp: ['boot', 'ready', 'revealed'].includes(ph) ? 1 : 0.55, lampOp: ['boot', 'ready', 'revealed'].includes(ph) ? 1 : 0.3, recalOp: ['boot', 'calibrating', 'spinning', 'preview'].includes(ph) ? 0.5 : 1, dateText: this.dateText(), showDate: S.showDate !== false,
+      teamToggles: [seg('teamsRing', L('Командалар атауы бар сақина', 'Кольцо с названиями команд'), L('Машинаның сыртқы айналмалы сақинасында', 'На внешнем вращающемся кольце машины'))],
+      teamRows: (S.teams || []).map((t, i) => ({ no: i + 1, name: t.n, op: t.on ? 1 : 0.5, toggleLabel: t.on ? L('Жасыру', 'Скрыть') : L('Көрсету', 'Показать'), toggle: () => this.setSetting('teams', S.teams.map((x, j) => j === i ? { n: x.n, on: !x.on } : x)), del: () => this.setSetting('teams', S.teams.filter((x, j) => j !== i)) })),
+      teamCountText: (() => { const on = (S.teams || []).filter(t => t.on).length, all = (S.teams || []).length; return L('Сақинада: ' + on + ' / ' + all, 'На кольце: ' + on + ' из ' + all); })(),
+      teamDraft: this.state.teamDraft, onTeamDraft: e => this.setState({ teamDraft: e.target.value }), onTeamKey: e => { if (e.key === 'Enter') { e.preventDefault(); this.addTeam(); } }, addTeam: () => this.addTeam(),
+      askResetTeams: () => this.ask(L('Тізімді қайтару керек пе?', 'Вернуть исходный список?'), L('Командалар тізімі бастапқы 27 командаға оралады.', 'Список команд вернётся к исходным 27 командам.'), L('Қайтару', 'Вернуть'), () => this.setSetting('teams', C.DEF.teams), true), fileRef: this.fileRef,
+      uiScale: S.uiScale,
+      rootDbl: () => { if (this.isAud || pub) this.toggleFs(); },
+      chrome: showChrome,
+      showBrand: S.decor && !S.minimal, ...this.mascotBox(S, showChrome),
+      statusText: this.statusText(ph), statusDot: this.statusDot(ph),
+      showDrawNo: S.showDrawNo, drawNo,
+      countersBottom: showChrome ? 112 : 30, statusTop: showChrome ? 78 : 18,
+      showRemaining: S.showRemaining, remainingLabel: RI.label, remainingText: RI.text,
+      showAudHistory: !showChrome && S.audienceHistory && hist.length > 0,
+      lastWinners: last.map(h => ({ ticket: h.team || h.ticket })),
+      showHostPanel: S.hostPanel, sessionId: s.id, ticketsN: s.tickets, ruleLabel, drawsDone: hist.length, spinLabel: fmt(S.spinSec, 0) + ' с',
+      hasWinners: hist.length > 0, noWinners: hist.length === 0,
+      sessionStarted: fmtDT(s.createdAt), sinceText: L(fmtDT(s.createdAt) + ' бастап', 'с ' + fmtDT(s.createdAt)),
+      primary: () => this.primary(), primaryLabel: this.primaryLabelText(ph), primaryDisabled: !['boot', 'ready', 'revealed'].includes(ph),
+      recalibrate: () => this.calibrate(), recalDisabled: ['boot', 'calibrating', 'spinning', 'preview'].includes(ph),
+      toggleQuick: () => this.setState({ quick: !this.state.quick, hist: false }), quickOpen: this.state.quick,
+      openSettings: () => this.setState({ dlg: true, quick: false }), closeSettings: () => this.setState({ dlg: false }), dlgOpen: this.state.dlg && showChrome,
+      dlgBackdrop: e => { if (e.target === e.currentTarget) this.setState({ dlg: false }); },
+      toggleHist: () => this.setState({ hist: !this.state.hist, quick: false }), histOpen: this.state.hist,
+      openAudience: () => this.openAudience(), togglePub: () => this.setState({ pub: !this.state.pub, quick: false, hist: false, dlg: false }), toggleFs: () => this.toggleFs(),
+      draft: this.state.draft, draftErr: this.state.draftErr,
+      onDraft: e => this.setState({ draft: e.target.value, draftErr: '' }), onDraftKey: e => { if (e.key === 'Enter') { e.preventDefault(); this.applyTickets(); } },
+      applyTickets: () => this.applyTickets(),
+      quickToggles: [seg('sound', L('Дыбыс', 'Звук'), L('Жалпы дыбыстық сүйемелдеу', 'Общее звуковое сопровождение')), seg('confetti', 'Конфетти', L('Жеңімпаз шыққанда', 'При появлении победителя')), seg('fanfare', L('Фанфаралар', 'Фанфары'), (S.sound || !S.fanfare) ? L('Жеңімпаз әуені', 'Мелодия победителя') : L('Дыбыс өшірулі — фанфаралар естілмейді', 'Звук выключен — фанфары не прозвучат')), seg('skipNext', L('Бірден іске қосу', 'Сразу «Запустить»'), L('Келесі ұтысқа дайындықсыз', 'Без этапа подготовки')), seg('music', L('Музыка', 'Музыка'), L('Скинге сай фондық әуен', 'Фоновая мелодия скина')), choice('lang', L('Тіл', 'Язык'), L('Жазулар тілі', 'Язык надписей'), langOpts, '-q')],
+      histRows: hist.slice().reverse().map(h => ({ no: h.drawNo, ticket: h.team || h.ticket, when: fmtDT(h.ts), rule: h.rule === 'repeat' ? L('қайталаумен', 'повторы') : L('қайталаусыз', 'без повторов') })),
+      hasArchive: this.state.archive.length > 0,
+      archiveRows: this.state.archive.slice().reverse().map(a => ({ id: a.id, when: new Date(a.createdAt).toLocaleDateString('ru-RU'), range: a.tickets, countText: L(a.history.length + ' ұтыс', a.history.length + ' розыгр.'), tickets: a.history.map(h => h.team || h.ticket).join(', ') })),
+      exportCSV: () => this.exportCSV(),
+      askNewSession: () => this.ask(L('Жаңа сеанс бастау керек пе?', 'Начать новый сеанс?'), L('Ағымдағы тарих мұрағатқа өтеді, қолжетімді билеттер тізімі жаңарады, калибрлеу қажет болады.', 'Текущая история уйдёт в архив, список доступных билетов обновится, понадобится калибровка.'), L('Жаңа сеанс', 'Новый сеанс'), () => this.newSession(), true),
+      askClear: () => this.ask(L('Барлық деректерді тазалау керек пе?', 'Очистить все данные?'), L('Ағымдағы сеанс тарихы мен өткен сеанстар мұрағаты жойылады. Бұл әрекетті қайтару мүмкін емес.', 'Будут удалены история текущего сеанса и архив прошлых сеансов. Действие необратимо.'), L('Тазалау', 'Очистить'), () => this.commit({ archive: [], session: this.mkSession(s.tickets, s.allowRepeats), hist: false }), true),
+      tabs: [['time', L('Уақыт және анимация', 'Время и анимация')], ['rules', L('Ережелер', 'Правила')], ['skins', L('Безендіру', 'Скины')], ['modes', L('Билеттер', 'Билеты')], ['sound', L('Дыбыс', 'Звук')], ['teams', L('Командалар', 'Команды')], ['ui', 'Интерфейс']].map(([id, label]) => ({ label, checked: this.state.tab === id, pick: () => this.setState({ tab: id }) })),
+      tabTime: this.state.tab === 'time', tabRules: this.state.tab === 'rules', tabSkins: this.state.tab === 'skins', tabModes: this.state.tab === 'modes', tabSound: this.state.tab === 'sound', tabUI: this.state.tab === 'ui', tabTeams: this.state.tab === 'teams',
+      spinPresets: [5, 8, 12, 20].map(v => ({ label: v + ' с', cls: S.spinSec === v ? 'btn btn-primary' : 'btn btn-secondary', pick: () => this.setSetting('spinSec', v) })),
+      timeSliders: [slider('spinSec', L('Рандомайзердің айналу уақыты', 'Время вращения рандомайзера'), 3, 30, 1, v => v + ' с'), slider('calibSec', L('Калибрлеу ұзақтығы', 'Продолжительность калибровки'), 3, 30, 1, v => v + ' с'), slider('intensity', L('Айналу қарқыны', 'Интенсивность вращения'), 0.5, 1.6, 0.1, v => '×' + fmt(v, 1)), slider('digitSpeed', L('Нөмірлердің ауысу жылдамдығы', 'Скорость смены номеров'), 0.5, 2, 0.1, v => '×' + fmt(v, 1))],
+      timingText: L('Үдеу ' + sec(tm.accel) + ' · айналу ' + sec(tm.decel - tm.accel) + ' · тежелу ' + sec(tm.stop - tm.decel) + ' · ашылу ' + sec(tm.R) + ' = ' + sec(T), 'Разгон ' + sec(tm.accel) + ' · вращение ' + sec(tm.decel - tm.accel) + ' · торможение ' + sec(tm.stop - tm.decel) + ' · раскрытие ' + sec(tm.R) + ' = ' + sec(T)),
+      timeToggles: [choice('fx', L('Визуалды эффектілер саны', 'Количество визуальных эффектов'), '', [[0, L('Аз', 'Мало')], [1, L('Қалыпты', 'Норма')], [2, L('Көп', 'Много')]]), seg('lowGfx', L('Жеңілдетілген графика', 'Упрощённый режим графики')), seg('flashes', L('Жарық жарқылдары', 'Световые вспышки')), choice('countdown', L('Кері санақ 3-2-1', 'Обратный отсчёт 3-2-1'), L('Іске қосар алдында, нөмір батырма басылғанда таңдалады', 'Перед стартом; номер выбирается в момент нажатия'), [[0, OFF], [3, '3 с'], [5, '5 с']]), seg('skipNext', L('Келесі ұтысқа дайындықсыз', 'Без подготовки к следующему розыгрышу'), L('Нөмір ашылғаннан кейін бірден «Іске қосу»', 'После раскрытия номера сразу «Запустить»'))],
+      repeatOpts: [{ label: L('Рұқсат', 'Разрешены'), checked: s.allowRepeats, pick: () => this.setRepeats(true) }, { label: L('Тыйым', 'Запрещены'), checked: !s.allowRepeats, pick: () => this.setRepeats(false) }],
+      skinGroups: [['color', L('Түс палитралары', 'Цветовые темы')], ['season', L('Жыл мезгілдері', 'Времена года')], ['holiday', L('Мерекелік', 'Праздничные')]].map(([gid, title]) => ({ title, cards: C.SKINS.filter(k => (k.group || 'color') === gid).map(k => ({ name: k.kname && k.kname !== k.name ? L(k.kname, k.name) : k.name, desc: L(k.kdesc || SKK[k.id], k.desc), c0: k.sw[0], c1: k.sw[1], c2: k.sw[2], c3: k.sw[3], outline: S.skin === k.id ? '3px solid var(--color-accent)' : '3px solid transparent', pick: () => this.setSetting('skin', k.id) })) })),
+      modeCards: C.MODES.map((m, i) => ({ kicker: L((i + 1) + '-режим', 'Режим ' + (i + 1)), name: L(MKK[m.id][0], m.name), desc: L(MKK[m.id][1], m.desc), outline: S.mode === m.id ? '3px solid var(--color-accent)' : '3px solid transparent', pick: () => this.setSetting('mode', m.id) })),
+      preview: () => this.preview(), previewDisabled: ['calibrating', 'spinning', 'preview'].includes(ph),
+      soundToggles: [seg('sound', L('Дыбыс', 'Звук'), L('Жалпы қосқыш — басымдыққа ие', 'Общий переключатель — имеет приоритет')), seg('fanfare', L('Фанфаралар', 'Фанфары'), L('Механизм дыбыстарынан тәуелсіз', 'Независимо от звуков механизма')), choice('soundSet', L('Дыбыстық безендіру', 'Звуковое оформление'), '', [['brass', L('Жез', 'Латунь')], ['electro', 'Электро'], ['box', L('Музыкалық қорап', 'Шкатулка')]]), seg('muteTicks', L('Механизмнің тықылы', 'Тиканье механизма'), '', true), seg('muteMotor', L('Мотордың гуілі', 'Гул мотора'), '', true), seg('muteImpacts', L('Бекіту соққылары', 'Удары фиксации'), '', true), seg('muteChimes', L('Калибрлеу сигналдары', 'Сигналы калибровки'), '', true)],
+      soundSliders: [slider('vol', L('Жалпы дыбыс деңгейі', 'Общая громкость'), 0, 1, 0.05, v => Math.round(v * 100) + '%'), slider('volMech', L('Механизм дыбысының деңгейі', 'Громкость механизма'), 0, 1, 0.05, v => Math.round(v * 100) + '%'), slider('volFan', L('Фанфара дыбысының деңгейі', 'Громкость фанфар'), 0, 1, 0.05, v => Math.round(v * 100) + '%')],
+      hearMech: () => { if (this.audio) this.audio.previewMech(); }, hearFanfare: () => { if (this.audio) { this.audio.unlock(); this.audio.fanfare(true); } }, hearChime: () => { if (this.audio) { this.audio.unlock(); this.audio.chime(true); } },
+      uiToggles: [choice('lang', L('Тіл', 'Язык'), L('Қазақша, орысша немесе екеуі бірге (қазақша жоғарыда)', 'Казахский, русский или оба сразу (казахский сверху)'), langOpts), seg('showDate', L('Ағымдағы күн', 'Текущая дата'), L('Экранның жоғарғы жағында', 'Вверху экрана')), seg('showStatusBar', L('Жоғарғы күй жолағы', 'Верхняя плашка этапов'), L('Калибрлеу, үдеу, тежелу және т.б.', 'Калибровка, разгон, торможение и т.д.')), seg('showWinStatus', L('«Ұтысты билет №» жазуы', 'Надпись «Выигрышный билет №»'), L('Нөмір ашылғаннан кейін жоғарыда', 'Сверху после раскрытия номера')), seg('hostPanel', L('Жүргізуші панелі', 'Панель ведущего'), L('Сол жақтағы сеанс шолуы', 'Сводка сеанса слева')), seg('showDrawNo', L('Ағымдағы ұтыс нөмірі', 'Номер текущего розыгрыша')), seg('showRemaining', L('Қалған билеттер есептегіші', 'Счётчик оставшихся билетов')), seg('mascot', L('BrainBoy маскоты', 'Маскот BrainBoy'), L('Машинаның сол жағындағы кейіпкер', 'Персонаж слева от машины')), seg('decor', L('Сәндік жазулар', 'Декоративные надписи'), L('Гравюралар мен аспап жазулары', 'Гравировки и подписи приборов')), seg('minimal', L('Минималистік сахна режимі', 'Минималистичный сценический режим'), L('Тісті доңғалақсыз, сақинасыз және фонсыз', 'Без шестерён, колец и фона')), seg('audienceHistory', L('Көрермен экранындағы тарих', 'История на экране зрителей'), L('Тек көрермен режимінде', 'Только в режиме зрителей'))],
+      uiSliders: [slider('uiScale', L('Интерфейс масштабы', 'Масштаб интерфейса'), 0.8, 1.4, 0.05, v => Math.round(v * 100) + '%'), slider('numScale', L('Қорытынды нөмір өлшемі', 'Размер итогового номера'), 0.7, 1.5, 0.05, v => Math.round(v * 100) + '%')],
+      exportSettings: () => this.download(new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' }), 'brainboy-settings.json'),
+      pickImport: () => { if (this.fileRef.current) this.fileRef.current.click(); },
+      onImport: e => { const f = e.target.files && e.target.files[0]; if (!f) return; f.text().then(txt => { try { const o = JSON.parse(txt), clean = {}; Object.keys(C.DEF).forEach(k => { if (o && k in o && typeof o[k] === typeof C.DEF[k]) clean[k] = o[k]; }); delete clean.tickets; if (clean.teams && !(Array.isArray(clean.teams) && clean.teams.every(t => t && typeof t.n === 'string'))) delete clean.teams; this.commit({ settings: Object.assign({}, this.state.settings, clean) }); } catch (err) {} }); e.target.value = ''; },
+      askResetSettings: () => this.ask(L('Баптауларды қалпына келтіру керек пе?', 'Сбросить настройки?'), L('Барлық параметрлер әдепкі мәндерге оралады. Тарих пен сеанс өзгермейді.', 'Все параметры вернутся к значениям по умолчанию. История и сеанс не изменятся.'), L('Қалпына келтіру', 'Сбросить'), () => this.commit({ settings: Object.assign({}, C.DEF, { tickets: s.tickets, lang: S.lang, teams: S.teams, autoHolidayDay: S.autoHolidayDay }) }), true),
+      confirmOpen: !!this.state.confirm, confirmTitle: this.state.confirm ? this.state.confirm.title : '', confirmBody: this.state.confirm ? this.state.confirm.body : '', confirmYesLabel: this.state.confirm ? this.state.confirm.yes : '',
+      confirmYes: () => this.confirmYes(), confirmNo: () => this.setState({ confirm: null })
+    };
+  }
+}
+</script>
+</body>
+</html>
