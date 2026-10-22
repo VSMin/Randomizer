@@ -573,6 +573,21 @@
                 <input type="range" min="{{ s.min }}" max="{{ s.max }}" step="{{ s.step }}" value="{{ s.value }}" onChange="{{ s.onInput }}" style="grid-column:1 / -1;width:100%">
               </div>
             </sc-for>
+            <sc-if value="{{ pinAvail }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:24px;background:var(--color-surface)">
+              <span class="card-kicker" style="color:var(--color-accent-700);white-space:pre-line">{{ tPinSec }}</span>
+              <span style="font-size:13px;color:var(--color-neutral-700);white-space:pre-line;text-wrap:pretty">{{ tPinHint }}</span>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
+                <div class="field" style="width:200px"><label><span style="white-space:pre-line">{{ tPinNew }}</span></label><input class="input" type="password" inputmode="numeric" autocomplete="new-password" maxlength="12" value="{{ pinNew }}" onChange="{{ onPinNew }}"></div>
+                <button class="btn btn-primary" onClick="{{ savePin }}"><span style="white-space:pre-line">{{ tPinSave }}</span></button>
+                <sc-if value="{{ pinIsSet }}" hint-placeholder-val="{{ false }}">
+                  <button class="btn btn-secondary" onClick="{{ lockNow }}"><span style="white-space:pre-line">{{ tPinLock }}</span></button>
+                  <button class="btn btn-ghost" onClick="{{ askRemovePin }}"><span style="white-space:pre-line">{{ tPinDel }}</span></button>
+                </sc-if>
+              </div>
+              <span style="font-size:13px;font-weight:600;color:var(--color-accent-800);white-space:pre-line">{{ pinStatus }}</span>
+            </div>
+            </sc-if>
             <div style="display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:24px;background:var(--color-surface)">
               <span class="card-kicker" style="color:var(--color-accent-700);white-space:pre-line">{{ tUpdTitle }}</span>
               <span style="font-size:13px;color:var(--color-neutral-700);white-space:pre-line;text-wrap:pretty">{{ tUpdHint }}</span>
@@ -621,6 +636,23 @@
     </div>
   </sc-if>
 
+  <sc-if value="{{ pinOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="dialog-backdrop" style="z-index:32">
+      <div class="dialog" style="background:var(--color-bg);width:min(380px, 100%)">
+        <div class="dialog-title"><span style="white-space:pre-line">{{ tPinTitle }}</span></div>
+        <div class="dialog-body" style="display:flex;flex-direction:column;gap:10px">
+          <span style="white-space:pre-line">{{ tPinBody }}</span>
+          <input class="input" type="password" inputmode="numeric" autocomplete="off" maxlength="12" value="{{ pinInput }}" onChange="{{ onPinInput }}" onKeyDown="{{ onPinKey }}" ref="{{ pinRef }}" style="font-size:22px;letter-spacing:0.4em;text-align:center">
+          <sc-if value="{{ pinErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;font-weight:700;color:var(--color-accent-800);white-space:pre-line">{{ pinErr }}</span></sc-if>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" onClick="{{ pinCancel }}"><span style="white-space:pre-line">{{ tx.cancel }}</span></button>
+          <button class="btn btn-primary" onClick="{{ pinSubmit }}"><span style="white-space:pre-line">{{ tPinOk }} · Enter</span></button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
   <sc-if value="{{ confirmOpen }}" hint-placeholder-val="{{ false }}">
     <div class="dialog-backdrop" style="z-index:30">
       <div class="dialog" style="background:var(--color-bg)">
@@ -639,7 +671,7 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   static DEF = { tickets: 150, sound: true, confetti: true, fanfare: true, spinSec: 8, calibSec: 12, intensity: 1.5, fx: 2, lowGfx: false, flashes: true, digitSpeed: 2, skin: 'autumn', mode: 'holo', vol: 0.8, volMech: 0.7, volFan: 0.85, soundSet: 'brass', muteTicks: false, muteMotor: false, muteImpacts: false, muteChimes: false, uiScale: 1, numScale: 0.9, decor: true, showDrawNo: false, showRemaining: false, minimal: false, hostPanel: true, audienceHistory: true, mascot: true, lang: 'ru', mascotAttr: true, updateUrl: 'https://vsmin.github.io/Randomizer/', teamsBase: null, customSkins: [], skipNext: true, showStatusBar: false, drawTarget: 'tickets', countdown: 0, autoHoliday: true, autoHolidayDay: '', autoSeason: true, autoSeasonKey: '', autoHolSkin: '', music: false, volMus: 0.6, duckMusic: true, showDate: true, showWinStatus: false, teamsRing: true, teams: [{"n":"Как тебе такое Илон Маск?","on":true},{"n":"108 кг ярости","on":true},{"n":"АСК","on":true},{"n":"Mighty Minds","on":true},{"n":"Mozgoclue","on":true},{"n":"Baursak lives matter","on":true},{"n":"The killers","on":true},{"n":"Маша, думай, а не пей","on":true},{"n":"Double belly buster","on":true},{"n":"Вечно молодой","on":true},{"n":"Михаил Светлов","on":true},{"n":"The best from the west","on":true},{"n":"Давайте есть пчел","on":true},{"n":"Без изысков","on":true},{"n":"Йогини","on":true},{"n":"Миндальная связь","on":true},{"n":"Скрытый потанцевал","on":true},{"n":"Активные-Позитивные","on":true},{"n":"Поцелуй всадницу","on":true},{"n":"Snatch","on":true},{"n":"Разношерстные","on":false},{"n":"Блондинки в загоне","on":false},{"n":"Чурбачки","on":false},{"n":"50/50","on":false},{"n":"Кукушечка","on":false},{"n":"Синева","on":false},{"n":"Merci Ky-Ky","on":false}] };
-  static BUILD = 2026102203;
+  static BUILD = 2026102204;
   static K = { s: 'bbtm.v2.settings', ses: 'bbtm.v2.session', ar: 'bbtm.v2.archive' };
   static SKINS = [
     { id: 'brand', name: 'BrainBoy', desc: 'Фирменные жёлтый, чёрный и красный, летящие знаки вопроса', kdesc: 'Фирмалық сары, қара және қызыл, ұшқан сұрақ белгілері', sw: ['#000000', '#f5c02c', '#d80018', '#ffdf5e'] },
@@ -733,7 +765,7 @@ class Component extends DCLogic {
     window.removeEventListener('pointerdown', this._unlock); window.removeEventListener('keydown', this._unlock); window.removeEventListener('keydown', this._key); window.removeEventListener('mouseup', this._blur); window.removeEventListener('storage', this._st); window.removeEventListener('resize', this._rs); document.removeEventListener('fullscreenchange', this._fs);
     if (this.bc) this.bc.close();
   }
-  componentDidUpdate() { this.syncEngine(); this.syncAttr(); if (this.mirror && this._mh !== this.state.mHover) { this._mh = this.state.mHover; this.updateMirror(); } }
+  componentDidUpdate() { if (this.state.pinAsk && this.pinRef.current && document.activeElement !== this.pinRef.current) { try { this.pinRef.current.focus(); } catch (e) {} } this.syncEngine(); this.syncAttr(); if (this.mirror && this._mh !== this.state.mHover) { this._mh = this.state.mHover; this.updateMirror(); } }
   attrSvg() { const S = this.state.settings; if (S.mascotAttr === false || !window.BBMascot) return ''; const c = this.customSkin(); return window.BBMascot.svg(c ? c.base : S.skin); }
   sparkle(root) {
     const hv = !!this.state.mHover; (root || document).querySelectorAll('[data-spark]').forEach(el => {
@@ -800,6 +832,28 @@ class Component extends DCLogic {
     const d = new Date(), KK = ['қаңтар', 'ақпан', 'наурыз', 'сәуір', 'мамыр', 'маусым', 'шілде', 'тамыз', 'қыркүйек', 'қазан', 'қараша', 'желтоқсан'], RU = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
     return this.L1(d.getDate() + ' ' + KK[d.getMonth()] + ' ' + d.getFullYear() + ' ж.', d.getDate() + ' ' + RU[d.getMonth()] + ' ' + d.getFullYear() + ' г.').replace(' / ', ' · ');
   }
+  pinRef = React.createRef();
+  pinHash() { try { return localStorage.getItem('bbtm.pin') || ''; } catch (e) { return ''; } }
+  pinUnlocked() { try { return sessionStorage.getItem('bbtm.unl') === this.pinHash(); } catch (e) { return !!this._unl; } }
+  locked() { return !this.isFileMode() && !this.isAud && !!this.pinHash() && !this.pinUnlocked() && this.state.tour < 0; }
+  async hashPin(p) { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('bbtm-pin:' + p)); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); }
+  gate(fn) { if (this.locked()) { this._pinThen = fn; this.setState({ pinAsk: true, pinInput: '', pinErr: '' }); } else fn(); }
+  async pinSubmit() {
+    const L = (a, c) => this.L(a, c), v = String(this.state.pinInput || '').trim(); if (!v) return;
+    const hsh = await this.hashPin(v);
+    if (hsh !== this.pinHash()) { this.setState({ pinErr: L('PIN қате', 'Неверный PIN'), pinInput: '' }); return; }
+    try { sessionStorage.setItem('bbtm.unl', hsh); } catch (e) { this._unl = true; }
+    const fn = this._pinThen; this._pinThen = null; this.setState({ pinAsk: false, pinInput: '', pinErr: '' }); if (fn) fn();
+  }
+  pinCancel() { this._pinThen = null; this.setState({ pinAsk: false, pinInput: '', pinErr: '', quick: false, dlg: false, hist: false }); }
+  async savePin() {
+    const L = (a, c) => this.L(a, c), v = String(this.state.pinNew || '').trim();
+    if (!/^\d{4,12}$/.test(v)) { this.setState({ pinMsg: L('PIN — 4-тен 12-ге дейін сан', 'PIN — от 4 до 12 цифр') }); return; }
+    const hsh = await this.hashPin(v); try { localStorage.setItem('bbtm.pin', hsh); sessionStorage.setItem('bbtm.unl', hsh); } catch (e) {}
+    this.setState({ pinNew: '', pinMsg: L('PIN сақталды', 'PIN сохранён') });
+  }
+  removePin() { try { localStorage.removeItem('bbtm.pin'); sessionStorage.removeItem('bbtm.unl'); } catch (e) {} this.setState({ pinMsg: this.L('PIN жойылды', 'PIN удалён') }); }
+  lockNow() { try { sessionStorage.removeItem('bbtm.unl'); } catch (e) {} this._unl = false; this.setState({ dlg: false, quick: false, hist: false, pinMsg: '' }); }
   isFileMode() { return location.protocol === 'file:'; }
   updBase() {
     let b = String(this.state.settings.updateUrl || (this.isFileMode() ? Component.DEF.updateUrl : '') || '').trim();
@@ -1349,11 +1403,11 @@ class Component extends DCLogic {
       hasWinners: hist.length > 0, noWinners: hist.length === 0,
       sessionStarted: fmtDT(s.createdAt), sinceText: L(fmtDT(s.createdAt) + ' бастап', 'с ' + fmtDT(s.createdAt)),
       primary: () => this.primary(), primaryLabel: this.primaryLabelText(ph), primaryDisabled: !['ready', 'revealed'].includes(ph) || this.revealLock() > 0,
-      recalibrate: () => this.calibrate(), recalDisabled: ['calibrating', 'spinning', 'preview'].includes(ph),
-      toggleQuick: () => this.setState({ quick: !this.state.quick, hist: false }), quickOpen: this.state.quick,
-      openSettings: () => this.setState({ dlg: true, quick: false }), closeSettings: () => this.setState({ dlg: false }), dlgOpen: this.state.dlg && showChrome,
+      recalibrate: () => { if (this.state.session.history.length) this.gate(() => this.calibrate()); else this.calibrate(); }, recalDisabled: ['calibrating', 'spinning', 'preview'].includes(ph),
+      toggleQuick: () => this.setState({ quick: !this.state.quick, hist: false }), quickOpen: this.state.quick && !this.locked(),
+      openSettings: () => this.setState({ dlg: true, quick: false }), closeSettings: () => this.setState({ dlg: false }), dlgOpen: this.state.dlg && showChrome && !this.locked(),
       dlgBackdrop: e => { if (e.target === e.currentTarget) this.setState({ dlg: false }); },
-      toggleHist: () => this.setState({ hist: !this.state.hist, quick: false, help: false }), histOpen: this.state.hist,
+      toggleHist: () => this.setState({ hist: !this.state.hist, quick: false, help: false }), histOpen: this.state.hist && !this.locked(),
       openAudience: () => this.openAudience(), togglePub: () => this.setState({ pub: !this.state.pub, quick: false, hist: false, dlg: false }), toggleFs: () => this.toggleFs(),
       draft: this.state.draft, draftErr: this.state.draftErr,
       onDraft: e => this.setState({ draft: e.target.value, draftErr: '' }), onDraftKey: e => { if (e.key === 'Enter') { e.preventDefault(); this.applyTickets(); } },
@@ -1373,6 +1427,16 @@ class Component extends DCLogic {
       timingText: L('Үдеу ' + sec(tm.accel) + ' · айналу ' + sec(tm.decel - tm.accel) + ' · тежелу ' + sec(tm.stop - tm.decel) + ' · ашылу ' + sec(tm.R) + ' = ' + sec(T), 'Разгон ' + sec(tm.accel) + ' · вращение ' + sec(tm.decel - tm.accel) + ' · торможение ' + sec(tm.stop - tm.decel) + ' · раскрытие ' + sec(tm.R) + ' = ' + sec(T)),
       timeToggles: [choice('fx', L('Визуалды эффектілер саны', 'Количество визуальных эффектов'), L('Фондағы бөлшектер, айналу кезіндегі ұшқындар, жеңіс кезіндегі конфетти мен отшашу, жарқырау, балықтар/карталар/жылқылар саны', 'Частицы на фоне, искры при вращении, конфетти и салют при победе, свечение, количество рыбок/карт/лошадей'), [[0, L('Аз', 'Мало')], [1, L('Қалыпты', 'Норма')], [2, L('Көп', 'Много')]]), seg('lowGfx', L('Жеңілдетілген графика', 'Упрощённый режим графики')), seg('flashes', L('Жарық жарқылдары', 'Световые вспышки')), choice('countdown', L('Кері санақ 3-2-1', 'Обратный отсчёт 3-2-1'), L('Іске қосар алдында, нөмір батырма басылғанда таңдалады', 'Перед стартом; номер выбирается в момент нажатия'), [[0, OFF], [3, '3 с'], [5, '5 с']]), seg('skipNext', L('Келесі ұтысқа дайындықсыз', 'Без подготовки к следующему розыгрышу'), L('Нөмір ашылғаннан кейін бірден «Іске қосу»', 'После раскрытия номера сразу «Запустить»'))],
       repeatOpts: [{ label: L('Рұқсат', 'Разрешены'), checked: s.allowRepeats, pick: () => this.setRepeats(true) }, { label: L('Тыйым', 'Запрещены'), checked: !s.allowRepeats, pick: () => this.setRepeats(false) }],
+      pinAvail: !this.isFileMode(), pinIsSet: !!this.pinHash(),
+      pinOpen: !!(this.state.pinAsk || (this.locked() && (this.state.quick || this.state.dlg || this.state.hist))), pinInput: this.state.pinInput || '', pinErr: this.state.pinErr || '', pinRef: this.pinRef,
+      onPinInput: e => this.setState({ pinInput: e.target.value.replace(/\D/g, ''), pinErr: '' }), onPinKey: e => { if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); this.pinSubmit(); } else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); this.pinCancel(); } },
+      pinSubmit: () => this.pinSubmit(), pinCancel: () => this.pinCancel(),
+      pinNew: this.state.pinNew || '', onPinNew: e => this.setState({ pinNew: e.target.value.replace(/\D/g, ''), pinMsg: '' }), savePin: () => this.savePin(), lockNow: () => this.lockNow(),
+      askRemovePin: () => this.ask(L('PIN жою керек пе?', 'Удалить PIN?'), L('Баптаулар мен тарих PIN-сіз ашылады.', 'Настройки и история будут открываться без PIN.'), L('Жою', 'Удалить'), () => this.removePin(), true),
+      pinStatus: this.state.pinMsg || (this.pinHash() ? L('PIN орнатылған. Ол осы браузерде ғана әрекет етеді.', 'PIN установлен. Действует только в этом браузере.') : L('PIN орнатылмаған', 'PIN не установлен')),
+      tPinTitle: L('PIN-кодты енгізіңіз', 'Введите PIN-код'), tPinBody: L('Баптаулар мен тарих жүргізушінің PIN-кодымен қорғалған.', 'Настройки и история защищены PIN-кодом ведущего.'), tPinOk: L('Ашу', 'Открыть'),
+      tPinSec: L('Жүргізуші PIN-коды', 'PIN-код ведущего'), tPinNew: L('Жаңа PIN (4–12 сан)', 'Новый PIN (4–12 цифр)'), tPinSave: L('PIN сақтау', 'Сохранить PIN'), tPinLock: L('Қазір құлыптау', 'Заблокировать сейчас'), tPinDel: L('PIN жою', 'Удалить PIN'),
+      tPinHint: L('Тек онлайн нұсқада. PIN-сіз жылдам баптаулар, машина баптаулары, тарих, жаңа сеанс және қайта калибрлеу ашылмайды. «Іске қосу» әдеттегідей жұмыс істейді. Құлып қойындыны жапқанда немесе «Қазір құлыптау» басқанда қайта қосылады.', 'Только в онлайн-версии. Без PIN не откроются быстрые настройки, настройки машины, история, новый сеанс и повторная калибровка. «Запустить» работает как обычно. Блокировка снова включается, когда вкладка закрыта, или по кнопке «Заблокировать сейчас».'),
       updBanner: !!(this.state.upd && !this.state.updHide && !pub && !this.isAud), updBannerText: L('Жаңа нұсқа бар', 'Доступна новая версия'), updBtn: this.isFileMode() ? L('Офлайн-файлды жаңарту', 'Обновить офлайн-файл') : L('Жаңарту', 'Обновить'),
       applyUpd: () => this.applyUpd(), hideUpd: () => this.setState({ updHide: true }), checkUpd: () => this.checkUpd(true), saveOffline: () => this.saveOffline(), reloadApp: () => location.reload(),
       updHas: !!this.state.upd, updBusy: !!this.state.updBusy, updSaved: !!this.state.updSaved,
