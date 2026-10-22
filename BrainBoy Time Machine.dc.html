@@ -12,10 +12,11 @@
 <link rel="stylesheet" href="_ds/organic-52d09a5a-5972-4992-b67d-8469bdc33b54/styles.css">
 <script src="_ds/organic-52d09a5a-5972-4992-b67d-8469bdc33b54/_ds_bundle.js"></script>
 <script src="tm-engine.js"></script>
+<script src="tm-mascot.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap">
 <style>:root{--font-heading:"Caprasimo", 'Nunito', system-ui, sans-serif;--font-body:"Figtree", 'Nunito', system-ui, sans-serif}html,body{margin:0;height:100%;overflow:hidden;background:#0b0806}a{color:var(--color-accent)}a:hover{color:var(--color-accent-600)}input[type=range]{accent-color:var(--color-accent)}:root{--sk-m0:#5c3d18;--sk-m1:#e6bd72;--sk-m2:#7d5524;--sk-m3:#f8e2a6;--sk-hi:#ffe8b0;--sk-lo:#1d1107;--sk-ink:#1d1107;--sk-glow:#ffae42;--sk-glow2:#ff7b2e;--sk-d0:#3b2711;--sk-d1:#140d06;--sk-paper:#f2e7cf;--sk-pink:#2b1c0c}</style>
 </helmet>
-<div style="display:none"><img data-asset="logo" src="assets/logo.png" alt=""><img data-asset="mascot" src="assets/mascot.png" alt=""></div>
+<div style="display:none"><img data-asset="logo" src="assets/logo.png" alt=""><img data-asset="mascot" src="assets/mascot.png" alt=""><img data-asset="thumb" src="assets/mascot-thumb.png" alt=""></div>
 <div ref="{{ rootRef }}" onDoubleClick="{{ rootDbl }}" style="position:fixed;inset:0;overflow:hidden;background:var(--color-neutral-900);font-family:var(--font-body);color:var(--color-text)">
   <canvas ref="{{ canvasRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
   <div style="position:absolute;inset:0;pointer-events:none;zoom:{{ uiScale }}">
@@ -41,7 +42,12 @@
             <span style="margin-left:10px;width:14px;height:14px;border-radius:50%;background:var(--sk-paper)"></span>
           </div>
         </sc-if>
-        <img src="assets/mascot.png" alt="BrainBoy" onMouseEnter="{{ mEnter }}" onMouseLeave="{{ mLeave }}" onClick="{{ mEnter }}" style="position:absolute;left:0;bottom:0;height:100%;width:auto;max-width:none;pointer-events:auto;cursor:pointer;transform-origin:50% 100%;transform:scaleX(-1);filter:drop-shadow(0 18px 18px rgba(0,0,0,.55));transition:transform .45s cubic-bezier(.34,1.56,.64,1), filter .3s" style-hover="transform:scaleX(-1) translateY(-12px) rotate(-5deg) scale(1.07);filter:drop-shadow(0 0 22px var(--sk-glow)) drop-shadow(0 26px 22px rgba(0,0,0,.5))">
+        <div onMouseEnter="{{ mEnter }}" onMouseLeave="{{ mLeave }}" onClick="{{ mEnter }}" style="position:absolute;inset:0;pointer-events:auto;cursor:pointer;filter:drop-shadow(0 18px 18px rgba(0,0,0,.55));transition:filter .3s" style-hover="filter:drop-shadow(0 0 22px var(--sk-glow)) drop-shadow(0 26px 22px rgba(0,0,0,.5))">
+          <img src="assets/mascot.png" alt="BrainBoy" style="position:absolute;left:0;bottom:0;height:100%;width:auto;max-width:none;transform:scaleX(-1);opacity:{{ mStdOp }};transition:opacity .18s">
+          <img src="assets/mascot-thumb.png" alt="" style="position:absolute;left:0;bottom:0;height:100%;width:auto;max-width:none;transform:scaleX(-1);opacity:{{ mThumbOp }};transition:opacity .18s">
+          <span data-spark="1" style="position:absolute;left:43%;top:45.5%;width:26%;aspect-ratio:1;margin:-13% 0 0 -13%;z-index:3;pointer-events:none;opacity:{{ mThumbOp }};filter:drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px var(--sk-glow))"><svg viewBox="-50 -50 100 100" style="width:100%;height:100%;overflow:visible"><path d="M0,-50 C4,-8 8,-4 50,0 C8,4 4,8 0,50 C-4,8 -8,4 -50,0 C-8,-4 -4,-8 0,-50 Z" fill="#ffffff"></path><circle r="9" fill="#ffffff"></circle></svg></span>
+          <div data-mattr="1" style="position:absolute;inset:0;transform:scaleX(-1);pointer-events:none"></div>
+        </div>
       </div>
     </sc-if>
     <sc-if value="{{ showDrawNo }}" hint-placeholder-val="{{ true }}">
@@ -69,6 +75,13 @@
     </sc-if>
 
     <sc-if value="{{ chrome }}" hint-placeholder-val="{{ true }}">
+      <sc-if value="{{ updBanner }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 20px;border-radius:999px;background:var(--color-surface);color:var(--color-text);box-shadow:var(--shadow-lg);max-width:calc(100% - 48px)">
+          <span style="font-size:14px;font-weight:700;white-space:pre-line">{{ updBannerText }}</span>
+          <button class="btn btn-primary" onClick="{{ applyUpd }}" style="padding:8px 18px"><span style="white-space:pre-line">{{ updBtn }}</span></button>
+          <button class="btn btn-ghost" onClick="{{ hideUpd }}" style="padding:8px 12px" aria-label="Закрыть">✕</button>
+        </div>
+      </sc-if>
 
       <sc-if value="{{ showHostPanel }}" hint-placeholder-val="{{ true }}">
         <div data-tour="host" style="position:absolute;left:28px;top:112px;width:272px;max-height:calc(100vh - 112px - 120px);display:flex;flex-direction:column;pointer-events:auto;padding:4px;border-radius:28px;background:linear-gradient(180deg, var(--sk-m3) 0%, var(--sk-m1) 20%, var(--sk-m2) 55%, var(--sk-m0) 90%, var(--sk-m2) 100%);box-shadow:0 16px 34px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.5)">
@@ -152,7 +165,7 @@
           <span style="flex:none;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--sk-hi), var(--sk-m0) 75%);box-shadow:0 1px 1px rgba(0,0,0,.5)"></span>
           <div style="display:flex;align-items:center;gap:12px;padding:6px 6px 6px 14px;border-radius:999px;background:linear-gradient(180deg, var(--sk-d1), var(--sk-d0));box-shadow:inset 0 3px 10px rgba(0,0,0,.8), 0 1px 0 rgba(255,255,255,.35)">
             <span style="flex:none;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #ffffff, var(--sk-glow) 45%, var(--sk-glow2));box-shadow:0 0 12px var(--sk-glow);opacity:{{ lampOp }}"></span>
-            <button data-tour="primary" disabled="{{ primaryDisabled }}" onClick="{{ primary }}" onPointerDown="{{ primaryDown }}" onPointerUp="{{ calUp }}" onPointerLeave="{{ calLeave }}" onPointerCancel="{{ calLeave }}" onKeyDown="{{ primaryKey }}" onKeyUp="{{ calUp }}" onContextMenu="{{ noCtx }}" style="all:unset;position:relative;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;box-sizing:border-box;cursor:pointer;min-width:min(340px, 32vw);padding:15px clamp(22px, 3vw, 42px);border-radius:999px;text-align:center;font-family:var(--font-heading);font-size:clamp(16px, 1.7vw, 22px);line-height:1.15;letter-spacing:0.06em;color:var(--sk-lo);background:radial-gradient(130% 160% at 50% 0%, #ffffff 0%, var(--sk-glow) 30%, var(--sk-glow2) 100%);box-shadow:0 0 26px color-mix(in srgb, var(--sk-glow) 70%, transparent), inset 0 2px 0 rgba(255,255,255,.75), inset 0 -5px 10px rgba(0,0,0,.3);text-shadow:0 1px 0 rgba(255,255,255,.5);opacity:{{ primaryOp }}" style-hover="filter:brightness(1.08) saturate(1.1)" style-active="transform:translateY(2px);box-shadow:inset 0 3px 10px rgba(0,0,0,.45)" style-focus="outline:2px solid var(--sk-hi);outline-offset:3px"><span style="position:absolute;left:0;top:0;bottom:0;width:{{ calPctP }}%;background:rgba(0,0,0,.3);pointer-events:none"></span><span style="position:relative;white-space:pre-line">{{ primaryLabel }}</span></button>
+            <button data-tour="primary" disabled="{{ primaryDisabled }}" onClick="{{ primary }}" onPointerDown="{{ primaryDown }}" onPointerUp="{{ calUp }}" onPointerLeave="{{ calLeave }}" onPointerCancel="{{ calLeave }}" onKeyDown="{{ primaryKey }}" onKeyUp="{{ calUp }}" onContextMenu="{{ noCtx }}" style="all:unset;position:relative;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;box-sizing:border-box;cursor:pointer;width:min(440px, 36vw);min-height:56px;display:grid;place-items:center;padding:12px clamp(16px, 2vw, 28px);border-radius:999px;text-align:center;font-family:var(--font-heading);font-size:clamp(16px, 1.7vw, 22px);line-height:1.15;letter-spacing:0.06em;color:var(--sk-lo);background:radial-gradient(130% 160% at 50% 0%, #ffffff 0%, var(--sk-glow) 30%, var(--sk-glow2) 100%);box-shadow:0 0 26px color-mix(in srgb, var(--sk-glow) 70%, transparent), inset 0 2px 0 rgba(255,255,255,.75), inset 0 -5px 10px rgba(0,0,0,.3);text-shadow:0 1px 0 rgba(255,255,255,.5);opacity:{{ primaryOp }}" style-hover="filter:brightness(1.08) saturate(1.1)" style-active="transform:translateY(2px);box-shadow:inset 0 3px 10px rgba(0,0,0,.45)" style-focus="outline:2px solid var(--sk-hi);outline-offset:3px"><span style="position:absolute;left:0;top:0;bottom:0;width:{{ calPctP }}%;background:rgba(0,0,0,.3);pointer-events:none"></span><span style="position:relative;white-space:pre-line">{{ primaryLabel }}</span></button>
           </div>
           <button data-tour="recal" title="{{ tx.holdHint1 }}" disabled="{{ recalDisabled }}" onPointerDown="{{ recalDown }}" onPointerUp="{{ calUp }}" onPointerLeave="{{ calLeave }}" onPointerCancel="{{ calLeave }}" onKeyDown="{{ recalKey }}" onKeyUp="{{ calUp }}" onContextMenu="{{ noCtx }}" style="all:unset;position:relative;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;color:var(--sk-ink);background:radial-gradient(circle at 35% 28%, var(--sk-m3) 0%, var(--sk-m1) 40%, var(--sk-m2) 72%, var(--sk-m0) 100%);font-size:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;line-height:1.2;box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 4px rgba(0,0,0,.4), 0 2px 5px rgba(0,0,0,.45);opacity:{{ recalOp }}" style-hover="box-shadow:0 0 0 2px var(--sk-glow), 0 0 16px var(--sk-glow), inset 0 1px 0 rgba(255,255,255,.6)" style-active="transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.55)" style-focus="outline:2px solid var(--sk-glow);outline-offset:2px">
             <span style="position:absolute;left:0;top:0;bottom:0;width:{{ calPctR }}%;background:rgba(0,0,0,.35);pointer-events:none"></span><svg width="16" height="16" viewBox="0 0 24 24" style="position:relative;flex:none;fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path><path d="M16 16h5v5"></path></svg>
@@ -186,7 +199,7 @@
       </sc-if>
 
       <sc-if value="{{ histOpen }}" hint-placeholder-val="{{ false }}">
-        <div style="position:absolute;top:0;right:0;bottom:0;width:min(560px, 100%);background:var(--color-bg);box-shadow:var(--shadow-lg);pointer-events:auto;overflow:auto;padding:28px;display:flex;flex-direction:column;gap:18px;border-radius:28px 0 0 28px">
+        <div data-tour="histPanel" style="position:absolute;top:0;right:0;bottom:0;width:min(560px, 100%);background:var(--color-bg);box-shadow:var(--shadow-lg);pointer-events:auto;overflow:auto;padding:28px;display:flex;flex-direction:column;gap:18px;border-radius:28px 0 0 28px">
           <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px">
             <h3 style="margin:0"><span style="white-space:pre-line">{{ tx.histTitle }}</span></h3>
             <button class="btn btn-secondary" onClick="{{ toggleHist }}"><span style="white-space:pre-line">{{ tx.close }}</span></button>
@@ -222,6 +235,7 @@
                 <div class="card" style="gap:4px">
                   <div class="card-meta"><span><span style="white-space:pre-line">#{{ a.id }}</span></span><span><span style="white-space:pre-line">{{ a.when }}</span></span><span><span style="white-space:pre-line">1 — {{ a.range }}</span></span><span><span style="white-space:pre-line">{{ a.countText }}</span></span></div>
                   <div style="font-size:14px;font-weight:700"><span style="white-space:pre-line">{{ a.tickets }}</span></div>
+                  <div style="display:flex;margin-top:6px"><button class="btn btn-secondary" disabled="{{ resumeDisabled }}" onClick="{{ a.resume }}"><span style="white-space:pre-line">{{ tx.resume }}</span></button></div>
                 </div>
               </sc-for>
             </div>
@@ -240,7 +254,7 @@
           <button class="btn btn-secondary" onClick="{{ closeSettings }}"><span style="white-space:pre-line">{{ tx.close }}</span></button>
         </div>
         <div data-tour="tabs" class="seg" style="flex:none;align-self:flex-start;flex-wrap:wrap">
-          <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="6"><label class="seg-opt"><input type="radio" name="tabs" checked="{{ tb.checked }}" onChange="{{ tb.pick }}"><span style="white-space:pre-line">{{ tb.label }}</span></label></sc-for>
+          <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="6"><label class="seg-opt" data-tour="tab-{{ tb.id }}"><input type="radio" name="tabs" checked="{{ tb.checked }}" onChange="{{ tb.pick }}"><span style="white-space:pre-line">{{ tb.label }}</span></label></sc-for>
         </div>
 
         <sc-if value="{{ tabTime }}" hint-placeholder-val="{{ true }}">
@@ -323,6 +337,102 @@
                 </div>
               </div>
             </sc-for>
+            <div style="display:flex">
+              <button class="btn btn-secondary" onClick="{{ toggleMore }}"><span style="white-space:pre-line">{{ moreLabel }}</span></button>
+            </div>
+            <sc-if value="{{ moreOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <span class="card-kicker" style="color:var(--color-accent-700)"><span style="white-space:pre-line">{{ tMore }}</span></span>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:12px">
+                  <sc-for list="{{ moreCards }}" as="k" hint-placeholder-count="0">
+                  <div style="display:flex;flex-direction:column;gap:6px">
+                    <button onClick="{{ k.pick }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:24px;background:var(--color-surface);outline:{{ k.outline }};outline-offset:2px">
+                      <div style="display:flex;gap:6px">
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c0 }}"></span>
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c1 }}"></span>
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c2 }}"></span>
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c3 }}"></span>
+                      </div>
+                      <span style="font-family:var(--font-heading);font-size:17px"><span style="white-space:pre-line">{{ k.name }}</span></span>
+                      <span style="font-size:12px;color:var(--color-neutral-700)"><span style="white-space:pre-line">{{ k.desc }}</span></span>
+                    </button>
+                    
+                  </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <span class="card-kicker" style="color:var(--color-accent-700)"><span style="white-space:pre-line">{{ tCustom }}</span></span>
+              <sc-if value="{{ hasCustom }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:12px">
+                  <sc-for list="{{ customCards }}" as="k" hint-placeholder-count="0">
+                  <div style="display:flex;flex-direction:column;gap:6px">
+                    <button onClick="{{ k.pick }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:24px;background:var(--color-surface);outline:{{ k.outline }};outline-offset:2px">
+                      <div style="display:flex;gap:6px">
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c0 }}"></span>
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c1 }}"></span>
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c2 }}"></span>
+                        <span style="flex:1;height:40px;border-radius:999px;background:{{ k.c3 }}"></span>
+                      </div>
+                      <span style="font-family:var(--font-heading);font-size:17px"><span style="white-space:pre-line">{{ k.name }}</span></span>
+                      
+                    </button>
+                    <button class="btn btn-ghost" onClick="{{ k.edit }}" style="align-self:flex-start;padding:6px 14px"><span style="white-space:pre-line">{{ tEdit }}</span></button>
+                  </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ edClosed }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px">
+                  <button class="btn btn-primary" onClick="{{ newSkin }}"><span style="white-space:pre-line">{{ tNewSkin }}</span></button>
+                  <span style="font-size:13px;color:var(--color-neutral-700);white-space:pre-line">{{ tNewHint }}</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ edOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:18px;padding:20px;border-radius:28px;background:var(--color-surface);box-shadow:var(--shadow-sm)">
+                  <span style="font-family:var(--font-heading);font-size:22px;white-space:pre-line">{{ edTitle }}</span>
+                  <div class="field" style="max-width:420px"><label><span style="white-space:pre-line">{{ tName }}</span></label><input class="input" value="{{ edName }}" onChange="{{ onEdName }}" maxlength="40"></div>
+                  <sc-for list="{{ edFields }}" as="f" hint-placeholder-count="0">
+                    <div style="display:flex;flex-direction:column;gap:8px">
+                      <span style="font-size:14px;font-weight:600;white-space:pre-line">{{ f.label }}</span>
+                      <span style="font-size:12px;color:var(--color-neutral-700);white-space:pre-line">{{ f.hint }}</span>
+                      <div style="display:flex;flex-wrap:wrap;gap:6px">
+                        <sc-for list="{{ f.chips }}" as="c" hint-placeholder-count="0">
+                          <button onClick="{{ c.pick }}" style="all:unset;box-sizing:border-box;cursor:pointer;font-family:var(--font-body);font-size:14px;font-weight:600;line-height:1.2;padding:8px 14px;border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};border:2px solid {{ c.bd }}">{{ c.l }}</button>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-for>
+                  <div style="display:flex;flex-wrap:wrap;gap:24px">
+                    <div style="display:flex;flex-direction:column;gap:8px">
+                      <span style="font-size:14px;font-weight:600;white-space:pre-line">{{ tBgColors }}</span>
+                      <div style="display:flex;gap:8px"><input type="color" value="{{ edBg0 }}" onChange="{{ onEdBg0 }}" style="width:52px;height:40px;padding:0;border:none;border-radius:999px;background:none;cursor:pointer"><input type="color" value="{{ edBg1 }}" onChange="{{ onEdBg1 }}" style="width:52px;height:40px;padding:0;border:none;border-radius:999px;background:none;cursor:pointer"><input type="color" value="{{ edBg2 }}" onChange="{{ onEdBg2 }}" style="width:52px;height:40px;padding:0;border:none;border-radius:999px;background:none;cursor:pointer"></div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:8px">
+                      <span style="font-size:14px;font-weight:600;white-space:pre-line">{{ tGlow }}</span>
+                      <div style="display:flex;gap:8px"><input type="color" value="{{ edGlow }}" onChange="{{ onEdGlow }}" style="width:52px;height:40px;padding:0;border:none;border-radius:999px;background:none;cursor:pointer"><input type="color" value="{{ edGlow2 }}" onChange="{{ onEdGlow2 }}" style="width:52px;height:40px;padding:0;border:none;border-radius:999px;background:none;cursor:pointer"></div>
+                    </div>
+                    <div style="flex:1 1 220px;display:grid;grid-template-columns:1fr auto;gap:8px;align-content:start">
+                      <span style="font-size:14px;font-weight:600;white-space:pre-line">{{ tDensity }}</span>
+                      <span style="font-family:var(--font-heading);font-size:16px;color:var(--color-accent-700)">{{ edDensityText }}</span>
+                      <input type="range" min="0.3" max="2.5" step="0.1" value="{{ edDensity }}" onChange="{{ onEdDensity }}" style="grid-column:1 / -1;width:100%">
+                    </div>
+                  </div>
+                  <sc-if value="{{ edErr }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-size:14px;font-weight:700;color:var(--color-accent-800)">{{ edErr }}</span>
+                  </sc-if>
+                  <div style="display:flex;flex-wrap:wrap;gap:10px">
+                    <button class="btn btn-primary" onClick="{{ edSave }}"><span style="white-space:pre-line">{{ tSave }}</span></button>
+                    <sc-if value="{{ edIsExisting }}" hint-placeholder-val="{{ false }}">
+                      <button class="btn btn-secondary" onClick="{{ edClone }}"><span style="white-space:pre-line">{{ tClone }}</span></button>
+                      <button class="btn btn-ghost" onClick="{{ edDelete }}"><span style="white-space:pre-line">{{ tDel }}</span></button>
+                    </sc-if>
+                    <button class="btn btn-ghost" onClick="{{ edCancel }}"><span style="white-space:pre-line">{{ tCancel }}</span></button>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
           </div>
         </sc-if>
 
@@ -415,9 +525,16 @@
             <span style="font-size:13px;color:var(--color-neutral-700);white-space:pre-line">{{ teamCountText }}</span>
             <div style="display:flex;flex-direction:column;gap:6px">
               <sc-for list="{{ teamRows }}" as="tm" hint-placeholder-count="8">
-                <div style="display:flex;align-items:center;gap:10px;padding:4px 6px 4px 16px;border-radius:999px;background:var(--color-surface);opacity:{{ tm.op }}">
+                <div draggable="true" onDragStart="{{ tm.dragStart }}" onDragOver="{{ tm.dragOver }}" onDrop="{{ tm.drop }}" onDragEnd="{{ teamDragEnd }}" style="display:flex;align-items:center;gap:10px;padding:4px 6px 4px 8px;border-radius:999px;background:var(--color-surface);opacity:{{ tm.op }};box-shadow:{{ tm.dropShadow }}">
+                  <span title="{{ tx.dragTeam }}" style="flex:none;display:grid;place-items:center;width:22px;height:32px;cursor:grab;color:var(--color-neutral-600)"><svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="9" cy="6" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="18" r="1"></circle><circle cx="15" cy="6" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="18" r="1"></circle></svg></span>
                   <span style="width:26px;flex:none;font-weight:700;color:var(--color-neutral-700)">{{ tm.no }}</span>
                   <span style="flex:1;min-width:0;font-weight:600">{{ tm.name }}</span>
+                  <button class="btn btn-icon btn-ghost" title="{{ tx.moveUp }}" disabled="{{ tm.first }}" onClick="{{ tm.up }}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="m18 15-6-6-6 6"></path></svg>
+                  </button>
+                  <button class="btn btn-icon btn-ghost" title="{{ tx.moveDown }}" disabled="{{ tm.last }}" onClick="{{ tm.down }}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="m6 9 6 6 6-6"></path></svg>
+                  </button>
                   <button class="btn btn-ghost" onClick="{{ tm.toggle }}" style="padding:6px 12px"><span style="white-space:pre-line">{{ tm.toggleLabel }}</span></button>
                   <button class="btn btn-icon btn-ghost" title="{{ tx.del }}" onClick="{{ tm.del }}">
                     <svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
@@ -425,7 +542,14 @@
                 </div>
               </sc-for>
             </div>
-            <div style="display:flex"><button class="btn btn-secondary" onClick="{{ askResetTeams }}"><span style="white-space:pre-line">{{ tx.resetTeams }}</span></button></div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <button class="btn btn-secondary" onClick="{{ askSaveTeams }}"><span style="white-space:pre-line">{{ tx.saveTeams }}</span></button>
+                <button class="btn btn-secondary" onClick="{{ askResetTeams }}"><span style="white-space:pre-line">{{ tx.resetTeams }}</span></button>
+                <sc-if value="{{ teamsHasBase }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost" onClick="{{ askFactoryTeams }}"><span style="white-space:pre-line">{{ tx.factoryTeams }}</span></button></sc-if>
+              </div>
+              <span style="font-size:13px;color:var(--color-neutral-700);white-space:pre-line">{{ teamsBaseInfo }}</span>
+            </div>
           </div>
         </sc-if>
 
@@ -449,6 +573,18 @@
                 <input type="range" min="{{ s.min }}" max="{{ s.max }}" step="{{ s.step }}" value="{{ s.value }}" onChange="{{ s.onInput }}" style="grid-column:1 / -1;width:100%">
               </div>
             </sc-for>
+            <div style="display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:24px;background:var(--color-surface)">
+              <span class="card-kicker" style="color:var(--color-accent-700);white-space:pre-line">{{ tUpdTitle }}</span>
+              <span style="font-size:13px;color:var(--color-neutral-700);white-space:pre-line;text-wrap:pretty">{{ tUpdHint }}</span>
+              <div class="field" style="max-width:520px"><label><span style="white-space:pre-line">{{ tUpdUrl }}</span></label><input class="input" value="{{ updUrlVal }}" placeholder="{{ updUrlPh }}" onChange="{{ onUpdUrl }}"></div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                <button class="btn btn-primary" onClick="{{ checkUpd }}" disabled="{{ updBusy }}"><span style="white-space:pre-line">{{ tUpdCheck }}</span></button>
+                <sc-if value="{{ updHas }}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{ applyUpd }}" disabled="{{ updBusy }}"><span style="white-space:pre-line">{{ updBtn }}</span></button></sc-if>
+                <button class="btn btn-secondary" onClick="{{ saveOffline }}" disabled="{{ updBusy }}"><span style="white-space:pre-line">{{ tUpdOffline }}</span></button>
+                <sc-if value="{{ updSaved }}" hint-placeholder-val="{{ false }}"><button class="btn btn-secondary" onClick="{{ reloadApp }}"><span style="white-space:pre-line">{{ tUpdReload }}</span></button></sc-if>
+              </div>
+              <span style="font-size:13px;font-weight:600;color:var(--color-accent-800);white-space:pre-line">{{ updStatus }}</span>
+            </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
               <button class="btn btn-secondary" onClick="{{ exportSettings }}"><span style="white-space:pre-line">{{ tx.expSet }}</span></button>
               <button class="btn btn-secondary" onClick="{{ pickImport }}"><span style="white-space:pre-line">{{ tx.impSet }}</span></button>
@@ -465,9 +601,9 @@
   <sc-if value="{{ tourOn }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ tourBlock }}" onDoubleClick="{{ tourBlock }}" style="position:fixed;inset:0;z-index:40">
       <sc-if value="{{ spotOn }}" hint-placeholder-val="{{ false }}">
-        <div style="position:fixed;left:{{ spotL }}px;top:{{ spotT }}px;width:{{ spotW }}px;height:{{ spotH }}px;border-radius:{{ spotR }}px;box-shadow:0 0 0 3px var(--sk-glow), 0 0 28px var(--sk-glow), 0 0 0 9999px rgba(0,0,0,.66);pointer-events:none;transition:left .3s ease, top .3s ease, width .3s ease, height .3s ease"></div>
+        <div style="position:fixed;opacity:{{ tourCardOp }};transition:opacity .18s ease;left:{{ spotL }}px;top:{{ spotT }}px;width:{{ spotW }}px;height:{{ spotH }}px;border-radius:{{ spotR }}px;box-shadow:0 0 0 3px var(--sk-glow), 0 0 28px var(--sk-glow), 0 0 0 9999px rgba(0,0,0,.66);pointer-events:none"></div>
       </sc-if>
-      <sc-if value="{{ spotOff }}" hint-placeholder-val="{{ true }}">
+      <sc-if value="{{ dimOn }}" hint-placeholder-val="{{ true }}">
         <div style="position:fixed;inset:0;background:rgba(0,0,0,.66)"></div>
       </sc-if>
       <div class="card elev-lg" style="position:fixed;left:{{ cardL }}px;top:{{ cardTop }};bottom:{{ cardBottom }};width:{{ cardW }}px;box-sizing:border-box;background:var(--color-bg);gap:12px;padding:22px;opacity:{{ tourCardOp }};transition:opacity .18s ease">
@@ -502,7 +638,8 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  static DEF = { tickets: 150, sound: true, confetti: true, fanfare: true, spinSec: 8, calibSec: 8, intensity: 1, fx: 1, lowGfx: false, flashes: true, digitSpeed: 1, skin: 'classic', mode: 'dial', vol: 0.8, volMech: 0.7, volFan: 0.85, soundSet: 'brass', muteTicks: false, muteMotor: false, muteImpacts: false, muteChimes: false, uiScale: 1, numScale: 1, decor: true, showDrawNo: true, showRemaining: true, minimal: false, hostPanel: true, audienceHistory: false, mascot: true, lang: 'both', skipNext: false, showStatusBar: false, drawTarget: 'tickets', countdown: 0, autoHoliday: true, autoHolidayDay: '', autoSeason: true, autoSeasonKey: '', autoHolSkin: '', music: true, volMus: 0.5, duckMusic: true, showDate: true, showWinStatus: true, teamsRing: true, teams: [{"n":"The killers","on":true},{"n":"АСК","on":true},{"n":"Mighty Minds","on":true},{"n":"108 кг ярости","on":true},{"n":"Миндальная связь","on":true},{"n":"Как тебе такое Илон Маск?","on":true},{"n":"Mozgoclue","on":true},{"n":"Double belly buster","on":true},{"n":"Маша, думай, а не пей","on":true},{"n":"Baursak lives matter","on":true},{"n":"Михаил Светлов","on":true},{"n":"The best from the west","on":true},{"n":"Давайте есть пчел","on":true},{"n":"Вечно молодой","on":true},{"n":"Без изысков","on":true},{"n":"Разношерстные","on":true},{"n":"Скрытый потанцевал","on":true},{"n":"Поцелуй всадницу","on":true},{"n":"Активные-Позитивные","on":true},{"n":"Snatch","on":true},{"n":"Йогини","on":true},{"n":"Блондинки в загоне","on":true},{"n":"Чурбачки","on":true},{"n":"50/50","on":true},{"n":"Кукушечка","on":true},{"n":"Синева","on":true},{"n":"Merci Ky-Ky","on":true}] };
+  static DEF = { tickets: 150, sound: true, confetti: true, fanfare: true, spinSec: 8, calibSec: 12, intensity: 1.5, fx: 2, lowGfx: false, flashes: true, digitSpeed: 2, skin: 'autumn', mode: 'holo', vol: 0.8, volMech: 0.7, volFan: 0.85, soundSet: 'brass', muteTicks: false, muteMotor: false, muteImpacts: false, muteChimes: false, uiScale: 1, numScale: 0.9, decor: true, showDrawNo: false, showRemaining: false, minimal: false, hostPanel: true, audienceHistory: true, mascot: true, lang: 'ru', mascotAttr: true, updateUrl: 'https://vsmin.github.io/Randomizer/', teamsBase: null, customSkins: [], skipNext: true, showStatusBar: false, drawTarget: 'tickets', countdown: 0, autoHoliday: true, autoHolidayDay: '', autoSeason: true, autoSeasonKey: '', autoHolSkin: '', music: false, volMus: 0.6, duckMusic: true, showDate: true, showWinStatus: false, teamsRing: true, teams: [{"n":"Как тебе такое Илон Маск?","on":true},{"n":"108 кг ярости","on":true},{"n":"АСК","on":true},{"n":"Mighty Minds","on":true},{"n":"Mozgoclue","on":true},{"n":"Baursak lives matter","on":true},{"n":"The killers","on":true},{"n":"Маша, думай, а не пей","on":true},{"n":"Double belly buster","on":true},{"n":"Вечно молодой","on":true},{"n":"Михаил Светлов","on":true},{"n":"The best from the west","on":true},{"n":"Давайте есть пчел","on":true},{"n":"Без изысков","on":true},{"n":"Йогини","on":true},{"n":"Миндальная связь","on":true},{"n":"Скрытый потанцевал","on":true},{"n":"Активные-Позитивные","on":true},{"n":"Поцелуй всадницу","on":true},{"n":"Snatch","on":true},{"n":"Разношерстные","on":false},{"n":"Блондинки в загоне","on":false},{"n":"Чурбачки","on":false},{"n":"50/50","on":false},{"n":"Кукушечка","on":false},{"n":"Синева","on":false},{"n":"Merci Ky-Ky","on":false}] };
+  static BUILD = 2026102203;
   static K = { s: 'bbtm.v2.settings', ses: 'bbtm.v2.session', ar: 'bbtm.v2.archive' };
   static SKINS = [
     { id: 'brand', name: 'BrainBoy', desc: 'Фирменные жёлтый, чёрный и красный, летящие знаки вопроса', kdesc: 'Фирмалық сары, қара және қызыл, ұшқан сұрақ белгілері', sw: ['#000000', '#f5c02c', '#d80018', '#ffdf5e'] },
@@ -523,6 +660,21 @@ class Component extends DCLogic {
     { id: 'winter', group: 'season', name: 'Зима', kname: 'Қыс', desc: 'Иней, серебро и тихий снегопад', kdesc: 'Қырау, күміс және ақырын жауған қар', sw: ['#101c30', '#c8cce8', '#bfe6ff', '#d6c8ff'] },
     { id: 'spring', group: 'season', name: 'Весна', kname: 'Көктем', desc: 'Цветущие ветви, ромашки, зелень', kdesc: 'Гүлдеген бұтақтар, түймедақтар, жасыл шөп', sw: ['#163a1e', '#c4dc8a', '#b8f070', '#ff9ec8'] },
     { id: 'summer', group: 'season', name: 'Лето', kname: 'Жаз', desc: 'Солнце, море и бабочки', kdesc: 'Күн, теңіз және көбелектер', sw: ['#0a4a78', '#e8c07a', '#ffd23a', '#ff7a3a'] },
+    { id: 'republic', group: 'more', name: 'День Республики', kname: 'Республика күні', desc: 'Голубой и золото, степной орнамент, искры', kdesc: 'Көгілдір мен алтын, дала өрнегі, ұшқындар', sw: null },
+    { id: 'easter', group: 'holiday', name: 'Пасха', kname: 'Пасха', desc: 'Лаванда и золото, расписные яйца', kdesc: 'Лаванда мен алтын, боялған жұмыртқалар', sw: null },
+    { id: 'constitution', group: 'hidden', name: 'День Конституции', kname: 'Конституция күні', desc: 'Строгий синий и серебро', kdesc: 'Қатаң көк пен күміс', sw: null },
+    { id: 'capital', group: 'more', name: 'День столицы', kname: 'Астана күні', desc: 'Вечерняя Астана: сумерки, огни, фейерверк', kdesc: 'Кешкі Астана: ымырт, шамдар, отшашу', sw: null },
+    { id: 'kurban', group: 'more', name: 'Курбан-айт', kname: 'Құрбан айт', desc: 'Мягкое золото и изумруд, полумесяц', kdesc: 'Жұмсақ алтын мен зүмірет, жарты ай', sw: null },
+    { id: 'space', group: 'more', name: 'Космос', kname: 'Ғарыш', desc: 'Звёзды, туманности, кометы', kdesc: 'Жұлдыздар, тұмандықтар, құйрықты жұлдыздар', sw: null },
+    { id: 'yurt', group: 'more', name: 'Казахская степь', kname: 'Қазақ даласы', desc: 'Юрта и шанырак, охра и войлок', kdesc: 'Киіз үй мен шаңырақ, охра мен киіз', sw: null },
+    { id: 'cinema', group: 'more', name: 'Кино', kname: 'Кино', desc: 'Красная дорожка, золото, прожекторы', kdesc: 'Қызыл кілем, алтын, прожекторлар', sw: null },
+    { id: 'casino', group: 'more', name: 'Казино', kname: 'Казино', desc: 'Зелёное сукно, золото, падающие фишки', kdesc: 'Жасыл шұға, алтын, құлаған фишкалар', sw: null },
+    { id: 'ocean', group: 'more', name: 'Подводный мир', kname: 'Су асты әлемі', desc: 'Глубокий синий, пузырьки', kdesc: 'Терең көк, көпіршіктер', sw: null },
+    { id: 'synth80', group: 'more', name: 'Ретро-80-е', kname: '80-жылдар ретро', desc: 'Синтвейв: неоновая сетка и закат', kdesc: 'Синтвейв: неон тор және күн батуы', sw: null },
+    { id: 'magic', group: 'more', name: 'Магия', kname: 'Сиқыр', desc: 'Тёмное дерево, свечи, искры', kdesc: 'Қою ағаш, шамдар, ұшқындар', sw: null },
+    { id: 'chess', group: 'more', name: 'Шахматы', kname: 'Шахмат', desc: 'Чёрно-белая клетка, фигуры', kdesc: 'Ақ-қара шаршы, фигуралар', sw: null },
+    { id: 'bday', group: 'more', name: 'День рождения BrainBoy', kname: 'BrainBoy туған күні', desc: 'Фирменные цвета и воздушные шары', kdesc: 'Фирмалық түстер мен әуе шарлары', sw: null },
+    { id: 'grandfinal', group: 'more', name: 'Гранд-финал', kname: 'Гранд-финал', desc: 'Тёмный бархат и золото', kdesc: 'Қою барқыт пен алтын', sw: null },
     { id: 'autumn', group: 'season', name: 'Осень', kname: 'Күз', desc: 'Медь, золотые деревья, листопад', kdesc: 'Мыс, алтын ағаштар, жапырақ түсуі', sw: ['#2a1406', '#d88a54', '#ff9a2a', '#ffcf4a'] }
   ];
   static MODES = [
@@ -538,6 +690,7 @@ class Component extends DCLogic {
   rootRef = React.createRef();
   musFileRef = React.createRef();
   mascotRef = React.createRef();
+  mAttrRef = React.createRef();
   musUrls = {};
   fileRef = React.createRef();
   state = this.initState();
@@ -547,10 +700,13 @@ class Component extends DCLogic {
   randInt(n) { const lim = 4294967296 - (4294967296 % n), a = new Uint32Array(1); let x; do { crypto.getRandomValues(a); x = a[0]; } while (x >= lim); return x % n; }
   mkSession(tickets, allowRepeats) { return { id: this.uid(), createdAt: Date.now(), tickets, allowRepeats: !!allowRepeats, history: [], current: null, calibrated: false, calib: null }; }
   initState() {
-    const C = Component, st = this.lj(C.K.s, {}), settings = Object.assign({}, C.DEF, st && typeof st === 'object' ? st : {}); if (!settings.cdOffV1) { settings.countdown = 0; settings.cdOffV1 = true; }
+    const C = Component, st = this.lj(C.K.s, {}), settings = Object.assign({}, C.DEF, st && typeof st === 'object' ? st : {}); if (!settings.defSyncV2) { ['sound','confetti','fanfare','spinSec','calibSec','intensity','fx','lowGfx','flashes','digitSpeed','skin','mode','vol','volMech','volFan','soundSet','muteTicks','muteMotor','muteImpacts','muteChimes','uiScale','numScale','decor','showDrawNo','showRemaining','minimal','hostPanel','audienceHistory','mascot','lang','mascotAttr','skipNext','showStatusBar','drawTarget','countdown','autoHoliday','autoSeason','music','volMus','duckMusic','showDate','showWinStatus','teamsRing'].forEach(k => { settings[k] = C.DEF[k]; }); settings.defSyncV2 = true; }
+    if (!settings.teamsBaseV2) { settings.teamsBase = C.DEF.teams.map(t => Object.assign({}, t)); settings.teamsBaseV2 = true; }
+    if (!settings.defSyncV1) { Object.assign(settings, { calibSec: 10, intensity: 1.3, fx: 2, digitSpeed: 1.5, mode: 'holo', numScale: 0.9, showDrawNo: false, showRemaining: false, lang: 'ru', skipNext: true, countdown: 0, showWinStatus: false, showDate: true, teamsRing: true }); settings.defSyncV1 = true; }
+    if (!settings.cdOffV1) { settings.countdown = 0; settings.cdOffV1 = true; }
     let session = this.lj(C.K.ses, null); if (!session || !session.id || !Array.isArray(session.history)) session = this.mkSession(settings.tickets, false);
     const archive = this.lj(C.K.ar, []);
-    return { settings, session, archive: Array.isArray(archive) ? archive : [], quick: false, dlg: false, tab: 'time', hist: false, help: false, tour: -1, tourRect: null, calSrc: '', calPct: 0, calHint: '', pub: this.isAud, confirm: null, preview: null, draft: String(session.tickets), draftErr: '', teamDraft: '', customMus: {}, musPreview: 0, holdPct: 0, mHover: false, mPi: 0, fs: false, tick: 0 };
+    return { settings, session, archive: Array.isArray(archive) ? archive : [], quick: false, dlg: false, tab: 'time', hist: false, help: false, tour: -1, tourRect: null, calSrc: '', calPct: 0, calHint: '', teamOver: -1, moreSkins: false, edit: null, editErr: '', pub: this.isAud, confirm: null, preview: null, draft: String(session.tickets), draftErr: '', teamDraft: '', customMus: {}, musPreview: 0, holdPct: 0, mHover: false, mPi: 0, fs: false, tick: 0 };
   }
 
   componentDidMount() {
@@ -568,21 +724,32 @@ class Component extends DCLogic {
     this._st = ev => { if (this.isAud && ev.key && ev.key.indexOf('bbtm.v2') === 0) this.setState(this.initState()); }; window.addEventListener('storage', this._st);
     if (this.isAud && this.bc) this.bc.postMessage({ hello: 1 });
     this._iv = setInterval(() => this.poll(), 200);
+    if (!this.isAud) this._updT = setTimeout(() => this.checkUpd(false), 2500);
+    if (window.TM && window.TM.bgTick) this._bgStop = window.TM.bgTick(() => { if (!document.hidden) return; const t = performance.now(); if (t - (this._bgP || 0) < 180) return; this._bgP = t; this.poll(); }, 250); else setTimeout(() => { if (window.TM && window.TM.bgTick && !this._bgStop) this._bgStop = window.TM.bgTick(() => { if (!document.hidden) return; const t = performance.now(); if (t - (this._bgP || 0) < 180) return; this._bgP = t; this.poll(); }, 250); }, 800);
     this._rs = () => { this.forceUpdate(); this.measureTour(); }; window.addEventListener('resize', this._rs);
   }
   componentWillUnmount() {
-    clearTimeout(this._bt); clearTimeout(this._tt); clearTimeout(this._tm); clearTimeout(this._chT); if (this._ch) cancelAnimationFrame(this._ch); window.removeEventListener('keyup', this._ku); clearInterval(this._iv); if (this.audio) this.audio.setMusic(null); if (this.machine) this.machine.destroy(); if (this.mirror) { this.mirror.machine.destroy(); this.mirror = null; }
+    clearTimeout(this._bt); clearTimeout(this._tt); clearTimeout(this._tm); clearTimeout(this._chT); if (this._ch) cancelAnimationFrame(this._ch); window.removeEventListener('keyup', this._ku); clearInterval(this._iv); if (this._bgStop) this._bgStop(); clearTimeout(this._updT); if (this.audio) this.audio.setMusic(null); if (this.machine) this.machine.destroy(); if (this.mirror) { this.mirror.machine.destroy(); this.mirror = null; }
     window.removeEventListener('pointerdown', this._unlock); window.removeEventListener('keydown', this._unlock); window.removeEventListener('keydown', this._key); window.removeEventListener('mouseup', this._blur); window.removeEventListener('storage', this._st); window.removeEventListener('resize', this._rs); document.removeEventListener('fullscreenchange', this._fs);
     if (this.bc) this.bc.close();
   }
-  componentDidUpdate() { this.syncEngine(); }
+  componentDidUpdate() { this.syncEngine(); this.syncAttr(); if (this.mirror && this._mh !== this.state.mHover) { this._mh = this.state.mHover; this.updateMirror(); } }
+  attrSvg() { const S = this.state.settings; if (S.mascotAttr === false || !window.BBMascot) return ''; const c = this.customSkin(); return window.BBMascot.svg(c ? c.base : S.skin); }
+  sparkle(root) {
+    const hv = !!this.state.mHover; (root || document).querySelectorAll('[data-spark]').forEach(el => {
+      if (hv && !el._a && el.animate) el._a = el.animate([{ transform: 'scale(.2) rotate(0deg)', opacity: 0 }, { transform: 'scale(1.15) rotate(45deg)', opacity: 1, offset: 0.35 }, { transform: 'scale(.75) rotate(90deg)', opacity: 0.85, offset: 0.7 }, { transform: 'scale(.2) rotate(135deg)', opacity: 0 }], { duration: 1300, iterations: Infinity, easing: 'ease-in-out', delay: 120 });
+      else if (!hv && el._a) { el._a.cancel(); el._a = null; }
+    });
+  }
+  syncAttr() { this.sparkle(); if (this.mirror && this.mirror.ms) this.sparkle(this.mirror.ms); const s = this.attrSvg(); document.querySelectorAll('[data-mattr]').forEach(el => { if (el._s !== s || el.innerHTML.length !== s.length) { el._s = s; el.innerHTML = s; } }); const m = this.mirror; if (m && m.attr && m.attr._s !== s) { m.attr._s = s; m.attr.innerHTML = s; } }
 
   poll() {
+    try { this.syncAttr(); } catch (e) {}
     this.updateMirror(); this.syncMusic();
     const now = Date.now(), s = this.state.session, p = this.state.preview;
     if (!this.isAud && s.calib && now >= s.calib.startAt + s.calib.duration) { this.commit({ session: Object.assign({}, s, { calib: null, calibrated: true }) }); return; }
     if (p && now >= p.startAt + p.duration + 1800) { this.commit({ preview: null }); return; }
-    const ph = this.phase();
+    const ph = this.phase(); { const lk = this.revealLock() > 0; if (lk !== this._lk) { this._lk = lk; this.forceUpdate(); } }
     if (ph !== this._lastPh || ph === 'calibrating' || ph === 'spinning' || ph === 'preview') { this._lastPh = ph; this.setState({ tick: now }); }
   }
   broadcast() { if (this.isAud || !this.bc) return; try { this.bc.postMessage({ settings: this.state.settings, session: this.state.session, preview: this.state.preview }); } catch (e) {} }
@@ -591,7 +758,7 @@ class Component extends DCLogic {
     if (!this.isAud) { try { localStorage.setItem(C.K.s, JSON.stringify(next.settings)); localStorage.setItem(C.K.ses, JSON.stringify(next.session)); localStorage.setItem(C.K.ar, JSON.stringify(next.archive)); } catch (e) {} try { if (this.bc) this.bc.postMessage({ settings: next.settings, session: next.session, preview: next.preview }); } catch (e) {} }
     this.setState(p);
   }
-  static MUS_T = { classic: ['Механикалық шкатулка вальсі', 'Вальс механической шкатулки'], cyber: ['Синт-арпеджио', 'Синт-арпеджио'], golden: ['Свинг-джаз', 'Свинг-джаз'], steel: ['Индустриалды ырғақ', 'Индустриальный ритм'], neon: ['Синтвейв', 'Синтвейв'], brand: ['Викторина әуені', 'Мелодия викторины'], newyear: ['Jingle Bells (Дж. Пирпонт, 1857)'], christmas: ['Тыныш түн (Ф. Грубер, 1818)', 'Тихая ночь (Ф. Грубер, 1818)'], halloween: ['Тау патшасының үңгірінде (Э. Григ, 1875)', 'В пещере горного короля (Э. Григ, 1875)'], nauryz: ['Домбыра мен сыбызғы', 'Домбра и сыбызгы'], may1: ['Көктемгі марш', 'Весенний марш'], victory: ['Салтанатты марш', 'Торжественный марш'], valentine: ['Романтикалық баллада', 'Романтическая баллада'], march8: ['Көктем вальсі', 'Весенний вальс'], independence: ['Дала әнұраны', 'Степной гимн'], winter: ['Қысқы челеста', 'Зимняя челеста'], spring: ['Көктемгі пиццикато', 'Весеннее пиццикато'], summer: ['Босса-нова', 'Босса-нова'], autumn: ['Күзгі гитара', 'Осенняя гитара'] };
+  static MUS_T = { classic: ['Механикалық шкатулка вальсі', 'Вальс механической шкатулки'], cyber: ['Синт-арпеджио', 'Синт-арпеджио'], golden: ['Свинг-джаз', 'Свинг-джаз'], steel: ['Индустриалды ырғақ', 'Индустриальный ритм'], neon: ['Синтвейв', 'Синтвейв'], brand: ['Викторина әуені', 'Мелодия викторины'], newyear: ['Jingle Bells (Дж. Пирпонт, 1857)'], christmas: ['Тыныш түн (Ф. Грубер, 1818)', 'Тихая ночь (Ф. Грубер, 1818)'], halloween: ['Тау патшасының үңгірінде (Э. Григ, 1875)', 'В пещере горного короля (Э. Григ, 1875)'], nauryz: ['Домбыра мен сыбызғы', 'Домбра и сыбызгы'], may1: ['Көктемгі марш', 'Весенний марш'], victory: ['Салтанатты марш', 'Торжественный марш'], valentine: ['Романтикалық баллада', 'Романтическая баллада'], march8: ['Көктем вальсі', 'Весенний вальс'], independence: ['Дала әнұраны', 'Степной гимн'], winter: ['Қысқы челеста', 'Зимняя челеста'], spring: ['Көктемгі пиццикато', 'Весеннее пиццикато'], summer: ['Босса-нова', 'Босса-нова'], autumn: ['Күзгі гитара', 'Осенняя гитара'], republic: ['Дала маршы', 'Степной марш'], easter: ['Көктемгі пиццикато', 'Весеннее пиццикато'], capital: ['Кешкі Астана', 'Вечерняя Астана'], kurban: ['Шығыс әуені', 'Восточная мелодия'], space: ['Ғарыштық эмбиент', 'Космический эмбиент'], yurt: ['Дала домбырасы', 'Степная домбра'], cinema: ['Голливуд фанфарасы', 'Голливудские фанфары'], casino: ['Вегас свингі', 'Свинг Вегаса'], ocean: ['Су асты эмбиенті', 'Подводный эмбиент'], synth80: ['Ретро-синтвейв', 'Ретро-синтвейв'], magic: ['Сиқырлы челеста', 'Волшебная челеста'], chess: ['Шахмат вальсі', 'Шахматный вальс'], bday: ['Туған күн әуені', 'Мелодия дня рождения'], grandfinal: ['Гранд-финал маршы', 'Марш гранд-финала'] };
   idb() { if (!this._db) this._db = new Promise((res, rej) => { try { const r = indexedDB.open('bbtm-music', 1); r.onupgradeneeded = () => r.result.createObjectStore('tracks'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); } catch (e) { rej(e); } }); return this._db; }
   idbDo(mode, fn) { return this.idb().then(db => new Promise((res, rej) => { const tx = db.transaction('tracks', mode), q = fn(tx.objectStore('tracks')); tx.oncomplete = () => res(q && q.result); tx.onerror = () => rej(tx.error); })); }
   loadMus() { this.idbDo('readonly', st => st.getAll()).then(list => { const cm = {}; (list || []).forEach(r => { if (r && r.skin && r.blob) { this.musUrls[r.skin] = URL.createObjectURL(r.blob); cm[r.skin] = r.name; } }); this.setState({ customMus: cm }); }).catch(() => {}); }
@@ -602,11 +769,11 @@ class Component extends DCLogic {
     const pv = this.state.musPreview > now, wait = ph === 'boot' || ph === 'ready' || (ph === 'revealed' && c && now > c.startAt + c.duration + 4500);
     const on = S.sound && (pv || (S.music !== false && wait));
     if (this.audio.cfg.music !== on) this.audio.setConfig({ music: on });
-    this.audio.setMusic(on ? S.skin : null, on ? (this.musUrls[S.skin] || null) : null);
+    this.audio.setMusic(on ? this.musKey() : null, on ? (this.musUrls[S.skin] || null) : null);
     if (this.state.musPreview && !pv) this.setState({ musPreview: 0 });
   }
   musVals(S, seg, slider, L) {
-    const C = Component, sk = C.SKINS.find(k => k.id === S.skin) || C.SKINS[0], T = C.MUS_T[S.skin] || C.MUS_T.classic, cm = this.state.customMus[S.skin];
+    const C = Component, sk = this.allSkins().find(k => k.id === S.skin) || C.SKINS[0], T = C.MUS_T[this.musKey()] || C.MUS_T.classic, cm = this.state.customMus[S.skin];
     const nm = sk.kname && sk.kname !== sk.name ? L(sk.kname, sk.name) : sk.name;
     return {
       musToggles: [seg('music', L('Фондық музыка', 'Фоновая музыка'), L('Машина іске қосуды күткенде және жеңімпаз жарияланғаннан кейін ойнайды', 'Играет, пока машина ждёт запуска, и после объявления победителя')), seg('duckMusic', L('Эффектілер кезінде бәсеңдету', 'Приглушать под эффекты'), L('Механизм мен фанфаралар музыкадан қаттырақ', 'Механизм и фанфары громче музыки'))],
@@ -625,26 +792,60 @@ class Component extends DCLogic {
     };
   }
   plaque() {
-    const G = { brand: ['ЗИЯТКЕРЛІК ШАЙҚАС', 'ИНТЕЛЛЕКТУАЛЬНАЯ БИТВА'], newyear: ['ЖАҢА ЖЫЛЫҢЫЗБЕН!', 'С НОВЫМ ГОДОМ!'], valentine: ['ҒАШЫҚТАР КҮНІМЕН!', 'С ДНЁМ ВЛЮБЛЁННЫХ!'], march8: ['8 НАУРЫЗ МЕРЕКЕСІМЕН!', 'С 8 МАРТА!'], nauryz: ['НАУРЫЗ ҚҰТТЫ БОЛСЫН!', 'С ПРАЗДНИКОМ НАУРЫЗ!'], may1: ['БІРЛІК КҮНІМЕН!', 'С ДНЁМ ЕДИНСТВА!'], victory: ['ЖЕҢІС КҮНІМЕН!', 'С ДНЁМ ПОБЕДЫ!'], halloween: ['HAPPY HALLOWEEN!'], independence: ['ТӘУЕЛСІЗДІК КҮНІМЕН!', 'С ДНЁМ НЕЗАВИСИМОСТИ!'], christmas: ['РОЖДЕСТВО МЕРЕКЕСІМЕН!', 'С РОЖДЕСТВОМ!'], winter: ['ҚЫСҚЫ ҰТЫС', 'ЗИМНИЙ РОЗЫГРЫШ'], spring: ['КӨКТЕМГІ ҰТЫС', 'ВЕСЕННИЙ РОЗЫГРЫШ'], summer: ['ЖАЗҒЫ ҰТЫС', 'ЛЕТНИЙ РОЗЫГРЫШ'], autumn: ['КҮЗГІ ҰТЫС', 'ОСЕННИЙ РОЗЫГРЫШ'] };
+    const G = { brand: ['ЗИЯТКЕРЛІК ШАЙҚАС', 'ИНТЕЛЛЕКТУАЛЬНАЯ БИТВА'], newyear: ['ЖАҢА ЖЫЛЫҢЫЗБЕН!', 'С НОВЫМ ГОДОМ!'], valentine: ['ҒАШЫҚТАР КҮНІМЕН!', 'С ДНЁМ ВЛЮБЛЁННЫХ!'], march8: ['8 НАУРЫЗ МЕРЕКЕСІМЕН!', 'С 8 МАРТА!'], nauryz: ['НАУРЫЗ ҚҰТТЫ БОЛСЫН!', 'С ПРАЗДНИКОМ НАУРЫЗ!'], may1: ['БІРЛІК КҮНІМЕН!', 'С ДНЁМ ЕДИНСТВА!'], victory: ['ЖЕҢІС КҮНІМЕН!', 'С ДНЁМ ПОБЕДЫ!'], halloween: ['HAPPY HALLOWEEN!'], independence: ['ТӘУЕЛСІЗДІК КҮНІМЕН!', 'С ДНЁМ НЕЗАВИСИМОСТИ!'], christmas: ['РОЖДЕСТВО МЕРЕКЕСІМЕН!', 'С РОЖДЕСТВОМ!'], winter: ['ҚЫСҚЫ ҰТЫС', 'ЗИМНИЙ РОЗЫГРЫШ'], spring: ['КӨКТЕМГІ ҰТЫС', 'ВЕСЕННИЙ РОЗЫГРЫШ'], summer: ['ЖАЗҒЫ ҰТЫС', 'ЛЕТНИЙ РОЗЫГРЫШ'], autumn: ['КҮЗГІ ҰТЫС', 'ОСЕННИЙ РОЗЫГРЫШ'], republic: ['РЕСПУБЛИКА КҮНІМЕН!', 'С ДНЁМ РЕСПУБЛИКИ!'], easter: ['ПАСХА МЕРЕКЕСІМЕН!', 'СО СВЕТЛОЙ ПАСХОЙ!'], capital: ['АСТАНА КҮНІМЕН!', 'С ДНЁМ СТОЛИЦЫ!'], kurban: ['ҚҰРБАН АЙТ ҚАБЫЛ БОЛСЫН!', 'С ПРАЗДНИКОМ КУРБАН-АЙТ!'], space: ['ҒАРЫШТЫҚ ҰТЫС', 'КОСМИЧЕСКИЙ РОЗЫГРЫШ'], yurt: ['ДАЛА ҰТЫСЫ', 'СТЕПНОЙ РОЗЫГРЫШ'], cinema: ['ЖҮЛДЕЛЕР ТҮНІ', 'НОЧЬ НАГРАД'], casino: ['ҮЛКЕН ҰТЫС', 'БОЛЬШАЯ ИГРА'], ocean: ['ТЕРЕҢДЕГІ ҰТЫС', 'РОЗЫГРЫШ НА ГЛУБИНЕ'], synth80: ['80-ЖЫЛДАР ҰТЫСЫ', 'РОЗЫГРЫШ 80-Х'], magic: ['СИҚЫРЛЫ ҰТЫС', 'ВОЛШЕБНЫЙ РОЗЫГРЫШ'], chess: ['ШАХ ПЕН МАТ', 'ШАХ И МАТ'], bday: ['ТУҒАН КҮНІҢМЕН, BRAINBOY!', 'С ДНЁМ РОЖДЕНИЯ, BRAINBOY!'], grandfinal: ['ГРАНД-ФИНАЛ', 'ГРАНД-ФИНАЛ'] };
+    const cs = this.customSkin(); if (cs) return String(cs.name).toUpperCase();
     const g = G[this.state.settings.skin]; if (!g) return 'BRAINBOY · TIME MACHINE'; return g.length === 1 ? g[0] : this.L(g[0], g[1]);
   }
   dateText() {
     const d = new Date(), KK = ['қаңтар', 'ақпан', 'наурыз', 'сәуір', 'мамыр', 'маусым', 'шілде', 'тамыз', 'қыркүйек', 'қазан', 'қараша', 'желтоқсан'], RU = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
     return this.L1(d.getDate() + ' ' + KK[d.getMonth()] + ' ' + d.getFullYear() + ' ж.', d.getDate() + ' ' + RU[d.getMonth()] + ' ' + d.getFullYear() + ' г.').replace(' / ', ' · ');
   }
+  isFileMode() { return location.protocol === 'file:'; }
+  updBase() {
+    let b = String(this.state.settings.updateUrl || (this.isFileMode() ? Component.DEF.updateUrl : '') || '').trim();
+    if (b) { if (!/^https?:\/\//i.test(b)) b = 'https://' + b; b = b.split(/[?#]/)[0]; if (/\.html?$/i.test(b)) b = b.replace(/[^/]*$/, ''); if (!b.endsWith('/')) b += '/'; return b; }
+    if (/^https?:$/.test(location.protocol)) { let emb = false; try { emb = window.top !== window; } catch (e) { emb = true; } if (!emb) return location.href.split(/[?#]/)[0].replace(/[^/]*$/, ''); }
+    return '';
+  }
+  checkUpd(manual) {
+    const b = this.updBase(), L = (a, c) => this.L(a, c);
+    if (!b) { if (manual) this.setState({ updMsg: L('Алдымен сайт мекенжайын енгізіңіз', 'Сначала укажите адрес сайта') }); return; }
+    this.setState({ updBusy: true, updMsg: '' });
+    fetch(b + 'version.json?t=' + Date.now(), { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(v => {
+      const nb = +v.build || 0, newer = nb > Component.BUILD;
+      this.setState({ updBusy: false, upd: newer ? v : null, updHide: false, updMsg: newer ? L('Жаңа нұсқа бар: ' + (v.date || nb), 'Доступна новая версия от ' + (v.date || nb)) : L('Соңғы нұсқа орнатылған', 'Установлена последняя версия') });
+    }).catch(() => this.setState({ updBusy: false, updMsg: manual ? L('Тексеру мүмкін болмады: интернет жоқ немесе мекенжай қате', 'Не удалось проверить: нет интернета или неверный адрес') : '' }));
+  }
+  fsDb(mode, fn) { return new Promise((res, rej) => { const rq = indexedDB.open('bbtm-fs', 1); rq.onupgradeneeded = () => rq.result.createObjectStore('h'); rq.onerror = () => rej(rq.error); rq.onsuccess = () => { const tx = rq.result.transaction('h', mode), st = tx.objectStore('h'), r = fn(st); tx.oncomplete = () => res(r && r.result); tx.onerror = () => rej(tx.error); }; }); }
+  async saveOffline() {
+    const b = this.updBase(), L = (a, c) => this.L(a, c), name = 'BrainBoy Time Machine (офлайн).html';
+    if (!b) { this.setState({ updMsg: L('Алдымен сайт мекенжайын енгізіңіз', 'Сначала укажите адрес сайта') }); return; }
+    let hnd = null;
+    if (window.showSaveFilePicker) {
+      try { hnd = await this.fsDb('readonly', st => st.get('offline')); if (hnd) { const p = await hnd.requestPermission({ mode: 'readwrite' }); if (p !== 'granted') hnd = null; } } catch (e) { hnd = null; }
+      if (!hnd) { try { hnd = await window.showSaveFilePicker({ suggestedName: name, types: [{ description: 'HTML', accept: { 'text/html': ['.html'] } }] }); try { await this.fsDb('readwrite', st => st.put(hnd, 'offline')); } catch (e) {} } catch (e) { if (e && e.name === 'AbortError') return; hnd = null; } }
+    }
+    this.setState({ updBusy: true, updMsg: L('Жүктелуде…', 'Загрузка…') });
+    let blob; try { const r = await fetch(b + encodeURIComponent(name) + '?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) throw new Error(r.status); blob = await r.blob(); } catch (e) { this.setState({ updBusy: false, updMsg: L('Жаңа нұсқаны жүктеу мүмкін болмады', 'Не удалось загрузить новую версию') }); return; }
+    if (hnd) { try { const w = await hnd.createWritable(); await w.write(blob); await w.close(); this.setState({ updBusy: false, upd: null, updSaved: this.isFileMode(), updMsg: L('Офлайн-файл жаңартылды: ' + hnd.name, 'Офлайн-файл обновлён: ' + hnd.name) }); return; } catch (e) {} }
+    this.download(blob, name); this.setState({ updBusy: false, updMsg: L('Файл жүктелді — ескі офлайн-файлды осымен ауыстырыңыз', 'Файл скачан — замените им старый офлайн-файл') });
+  }
+  applyUpd() { if (this.isFileMode()) this.saveOffline(); else location.reload(); }
+  teamsBase() { const B = this.state.settings.teamsBase; return Array.isArray(B) && B.length ? B : Component.DEF.teams; }
+  moveTeam(from, to) { const T = (this.state.settings.teams || []).slice(); if (to < 0 || to >= T.length || from === to) return; const [x] = T.splice(from, 1); T.splice(to, 0, x); this.setSetting('teams', T); }
   addTeam() {
     const n = String(this.state.teamDraft || '').trim().slice(0, 48), T = this.state.settings.teams || [];
     if (!n) return; if (T.some(t => t.n.toLowerCase() === n.toLowerCase())) { this.setState({ teamDraft: '' }); return; }
     this.setSetting('teams', T.concat([{ n, on: true }])); this.setState({ teamDraft: '' });
   }
-  engineCfg() { const S = this.state.settings; return { skin: S.skin, mode: S.mode, intensity: S.intensity, fx: S.fx, lowGfx: S.lowGfx, flashes: S.flashes, digitSpeed: S.digitSpeed, confetti: S.confetti, numScale: S.numScale, decor: S.decor && !S.minimal, minimal: S.minimal, teamsRing: !!S.teamsRing || S.drawTarget === 'teams', teams: (S.teamsRing || S.drawTarget === 'teams') ? this.visTeams() : [], drawTarget: S.drawTarget, plaque: this.plaque(), leftInset: (S.hostPanel && !this.state.pub && !this.isAud) ? 290 * S.uiScale : this.mascotReserve(S, window.innerWidth, window.innerHeight) }; }
+  engineCfg() { const S = this.state.settings; return { skin: (this.regCustom(), S.skin), skinKey: this.skinKey(), mode: S.mode, intensity: S.intensity, fx: S.fx, lowGfx: S.lowGfx, flashes: S.flashes, digitSpeed: S.digitSpeed, confetti: S.confetti, numScale: S.numScale, decor: S.decor && !S.minimal, minimal: S.minimal, teamsRing: !!S.teamsRing || S.drawTarget === 'teams', teams: (S.teamsRing || S.drawTarget === 'teams') ? this.visTeams() : [], drawTarget: S.drawTarget, plaque: this.plaque(), leftInset: (S.hostPanel && !this.state.pub && !this.isAud) ? 290 * S.uiScale : this.mascotReserve(S, window.innerWidth, window.innerHeight) }; }
   statusDot(ph) { return { boot: 'var(--color-neutral-500)', calibrating: 'var(--color-accent-400)', ready: 'var(--color-accent-2-400)', spinning: 'var(--color-accent)', preview: 'var(--color-accent-300)', revealed: 'var(--color-accent-300)', exhausted: 'var(--color-neutral-400)' }[ph]; }
   syncEngine() {
     this.skinVars(this.rootRef.current);
     this.updateMirror();
     if (!this.machine) return; const S = this.state.settings;
     this.machine.setConfig(this.engineCfg());
-    this.audio.setConfig({ volMus: S.volMus, duckMusic: S.duckMusic !== false, sound: this.isAud ? false : S.sound, fanfare: S.fanfare, vol: S.vol, volMech: S.volMech, volFan: S.volFan, set: S.soundSet, mute: { ticks: S.muteTicks, motor: S.muteMotor, impacts: S.muteImpacts, chimes: S.muteChimes } });
+    this.audio.setConfig({ volMus: S.volMus, duckMusic: S.duckMusic !== false, sound: this.isAud ? false : S.sound, fanfare: S.fanfare, vol: S.vol, volMech: S.volMech, volFan: S.volFan, set: (this.customSkin() && this.customSkin().soundSet) || S.soundSet, mute: { ticks: S.muteTicks, motor: S.muteMotor, impacts: S.muteImpacts, chimes: S.muteChimes } });
     this.machine.setScene(this.scene()); this.syncMusic();
   }
 
@@ -660,12 +861,18 @@ class Component extends DCLogic {
   primaryLabelText(ph) {
     const L = (a, b) => this.L(a, b), T = this.isTeams();
     if (ph === 'revealed' && this.state.settings.skipNext && this.remaining() > 0) ph = 'ready';
-    return { boot: L('КАЛИБРЛЕУ: 2 С БАСЫП ТҰРЫҢЫЗ', 'КАЛИБРОВКА: УДЕРЖИВАЙТЕ 2 С'), calibrating: L('КАЛИБРЛЕУ…', 'КАЛИБРОВКА…'), ready: L('ІСКЕ ҚОСУ', 'ЗАПУСТИТЬ'), spinning: L('ҰТЫС ЖҮРУДЕ…', 'ИДЁТ РОЗЫГРЫШ…'), preview: L('АЛДЫН АЛА ҚАРАУ…', 'ПРЕДПРОСМОТР…'), revealed: L('КЕЛЕСІ ҰТЫС', 'СЛЕДУЮЩИЙ РОЗЫГРЫШ'), exhausted: T ? L('КОМАНДАЛАР ТАУСЫЛДЫ', 'КОМАНДЫ ЗАКОНЧИЛИСЬ') : L('БИЛЕТТЕР ТАУСЫЛДЫ', 'БИЛЕТЫ ЗАКОНЧИЛИСЬ') }[ph];
+    return { boot: L('ІСКЕ ҚОСУ', 'ЗАПУСТИТЬ'), calibrating: L('КАЛИБРЛЕУ…', 'КАЛИБРОВКА…'), ready: L('ІСКЕ ҚОСУ', 'ЗАПУСТИТЬ'), spinning: L('ҰТЫС ЖҮРУДЕ…', 'ИДЁТ РОЗЫГРЫШ…'), preview: L('АЛДЫН АЛА ҚАРАУ…', 'ПРЕДПРОСМОТР…'), revealed: L('КЕЛЕСІ ҰТЫС', 'СЛЕДУЮЩИЙ РОЗЫГРЫШ'), exhausted: T ? L('КОМАНДАЛАР ТАУСЫЛДЫ', 'КОМАНДЫ ЗАКОНЧИЛИСЬ') : L('БИЛЕТТЕР ТАУСЫЛДЫ', 'БИЛЕТЫ ЗАКОНЧИЛИСЬ') }[ph];
   }
-  static HOL = { '12-31': 'newyear', '01-01': 'newyear', '01-07': 'christmas', '12-25': 'christmas', '02-14': 'valentine', '03-08': 'march8', '03-21': 'nauryz', '03-22': 'nauryz', '03-23': 'nauryz', '05-01': 'may1', '05-09': 'victory', '10-31': 'halloween', '12-16': 'independence' };
+  static HOL = { '12-31': 'newyear', '01-01': 'newyear', '01-07': 'christmas', '12-25': 'christmas', '02-14': 'valentine', '03-08': 'march8', '03-21': 'nauryz', '03-22': 'nauryz', '03-23': 'nauryz', '05-01': 'may1', '05-09': 'victory', '10-31': 'halloween', '12-16': 'independence', '10-25': 'republic', '07-06': 'capital' };
+  isEaster(d) {
+    const y = d.getFullYear(), same = e => e.getMonth() === d.getMonth() && e.getDate() === d.getDate();
+    const a = y % 19, b = Math.floor(y / 100), c = y % 100, dd = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25), gg = Math.floor((b - f + 1) / 3), hh = (19 * a + b - dd - gg + 15) % 30, i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - hh - k) % 7, m = Math.floor((a + 11 * hh + 22 * l) / 451), mo = Math.floor((hh + l - 7 * m + 114) / 31), da = ((hh + l - 7 * m + 114) % 31) + 1;
+    const oa = y % 4, ob = y % 7, oc = y % 19, od = (19 * oc + 15) % 30, oe = (2 * oa + 4 * ob - od + 34) % 7, om = Math.floor((od + oe + 114) / 31), oday = ((od + oe + 114) % 31) + 1;
+    return same(new Date(y, mo - 1, da)) || same(new Date(y, om - 1, oday + 13));
+  }
   autoSkin() {
     const S = this.state.settings; if (this.isAud) return null;
-    const d = new Date(), m = d.getMonth() + 1, md = String(m).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'), hol = Component.HOL[md];
+    const d = new Date(), m = d.getMonth() + 1, md = String(m).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'), hol = Component.HOL[md] || (this.isEaster(d) ? 'easter' : null);
     if (hol && S.autoHoliday !== false) return hol;
     if (S.autoSeason === false) return null;
     return m === 12 || m <= 2 ? 'winter' : m <= 5 ? 'spring' : m <= 8 ? 'summer' : 'autumn';
@@ -695,8 +902,77 @@ class Component extends DCLogic {
   holdStart(e) { if (e && e.preventDefault) e.preventDefault(); if (this._hold) return; const t0 = Date.now(); const step = () => { const p = Math.min(100, (Date.now() - t0) / 12); if (p >= 100) { this._hold = null; this.setState({ holdPct: 0 }); this.confirmYes(); return; } this.setState({ holdPct: p }); this._hold = requestAnimationFrame(step); }; this._hold = requestAnimationFrame(step); }
   holdEnd() { if (this._hold) { cancelAnimationFrame(this._hold); this._hold = null; } if (this.state.holdPct) this.setState({ holdPct: 0 }); }
 
+  customSkin(id) { id = id || this.state.settings.skin; return (this.state.settings.customSkins || []).find(c => c.id === id) || null; }
+  skinKey() { const c = this.customSkin(); return c ? JSON.stringify(c) : ''; }
+  musKey() { const c = this.customSkin(); return c ? (c.music || 'classic') : this.state.settings.skin; }
+  buildCustom(cs) {
+    const T = window.TM.SKINS, base = T[cs.base] || T.classic, met = T[cs.metal] || base;
+    return Object.assign({}, base, { bg: cs.bg.slice(), bgStyle: cs.bgStyle, metal: met.metal, dark: met.dark, hi: met.hi, lo: met.lo, glow: cs.glow, glow2: cs.glow2, holo: cs.glow, amb: cs.amb || null, ambMotion: cs.ambMotion || null, ambDensity: cs.ambDensity || 1 });
+  }
+  regCustom() {
+    if (!window.TM) return; const list = this.state.settings.customSkins || [], key = JSON.stringify(list); if (key === this._regKey) return; this._regKey = key;
+    list.forEach(cs => { try { window.TM.SKINS[cs.id] = this.buildCustom(cs); } catch (e) {} });
+  }
+  allSkins() { return Component.SKINS.concat((this.state.settings.customSkins || []).map(c => ({ id: c.id, group: 'custom', name: c.name, kname: c.name, desc: '', kdesc: '', custom: c }))); }
+  skinSw(k) { const T = window.TM && window.TM.SKINS[k.id]; if (k.sw) return k.sw; if (!T) return ['#333', '#666', '#999', '#ccc']; return [T.bg[1], T.metal[1], T.glow, T.glow2]; }
+  draftFrom(id) {
+    const c = this.customSkin(id); if (c) return Object.assign({}, c, { bg: c.bg.slice() });
+    const T = (window.TM && window.TM.SKINS[id]) || {}, M = (window.TM && window.TM.MUSIC) || {};
+    return { base: id, bgStyle: T.bgStyle || 'stone', bg: (T.bg || ['#2a2019', '#0b0806', '#030202']).slice(), metal: id, glow: T.glow || '#ffae42', glow2: T.glow2 || '#ff7b2e', amb: T.amb || '', ambMotion: T.ambMotion || '', ambDensity: 1, music: M[id] ? id : 'classic', soundSet: this.state.settings.soundSet || 'brass' };
+  }
+  openEditor(fromId, keepId) {
+    const d = this.draftFrom(fromId), src = this.allSkins().find(k => k.id === fromId), nm = src ? (this.state.settings.lang === 'kk' ? (src.kname || src.name) : src.name) : 'Скин';
+    if (keepId) { this.setState({ edit: d, editErr: '' }); return; }
+    delete d.id; let n = nm + ' ' + this.L1('көшірме', 'копия'), i = 2; while (this.nameTaken(n)) n = nm + ' ' + this.L1('көшірме', 'копия') + ' ' + (i++);
+    d.name = n; if (d.base && this.customSkin(d.base)) d.base = this.customSkin(d.base).base; this.setState({ edit: d, editErr: '' });
+  }
+  nameTaken(n, selfId) { const v = String(n).trim().toLowerCase(); return this.allSkins().some(k => k.id !== selfId && [k.name, k.kname].some(x => x && String(x).trim().toLowerCase() === v)); }
+  saveEditor() {
+    const d = this.state.edit; if (!d) return; const name = String(d.name || '').trim();
+    if (!name) { this.setState({ editErr: this.L('Атауын енгізіңіз', 'Введите название') }); return; }
+    if (this.nameTaken(name, d.id)) { this.setState({ editErr: this.L('Мұндай атау бар — басқасын таңдаңыз', 'Такое название уже есть — выберите другое') }); return; }
+    const S = this.state.settings, list = (S.customSkins || []).slice(), id = d.id || 'c' + this.uid().toLowerCase() + Date.now().toString(36), obj = Object.assign({}, d, { id, name });
+    const i = list.findIndex(c => c.id === id); if (i >= 0) list[i] = obj; else list.push(obj);
+    this._regKey = null; this.commit({ settings: Object.assign({}, S, { customSkins: list, skin: id, autoHolSkin: '' }) }); this.setState({ edit: null, editErr: '' });
+  }
+  deleteCustom(id) {
+    const S = this.state.settings, list = (S.customSkins || []).filter(c => c.id !== id); this.removeMus(id);
+    this.commit({ settings: Object.assign({}, S, { customSkins: list, skin: S.skin === id ? 'classic' : S.skin }) }); this.setState({ edit: null, editErr: '' });
+  }
+  editorVals(L) {
+    const d = this.state.edit, C = Component; if (!d) return { edOpen: false, edFields: [], edName: '', edBg0: '#000000', edBg1: '#000000', edBg2: '#000000', edGlow: '#000000', edGlow2: '#000000', edDensity: 1, edDensityText: '', edIsExisting: false, edErr: '', edTitle: '' };
+    const up = p => this.setState({ edit: Object.assign({}, this.state.edit, p), editErr: '' }), L1 = (a, b) => this.L1(a, b);
+    const chip = (key, v, l) => { const SEL = String(d[key] || '') === String(v); return { l, bg: SEL ? 'var(--color-accent)' : '#ffffff', fg: SEL ? '#ffffff' : 'var(--color-text)', bd: SEL ? 'var(--color-accent)' : 'var(--color-neutral-300)', pick: () => up({ [key]: v }) }; };
+    const BG = [['stone', 'Тас', 'Камень'], ['grid', 'Тор', 'Сетка'], ['rays', 'Сәулелер', 'Лучи'], ['plates', 'Болат тақталар', 'Стальные плиты'], ['stars', 'Жұлдыздар', 'Звёзды'], ['comic', 'Комикс', 'Комикс'], ['winter', 'Қысқы түн', 'Зимняя ночь'], ['hearts', 'Жүректер', 'Сердца'], ['floral', 'Гүлдер', 'Цветы'], ['ornament', 'Өрнек', 'Орнамент'], ['spring', 'Көктемгі аспан', 'Весеннее небо'], ['victory', 'Салют', 'Салют'], ['halloween', 'Хэллоуин', 'Хэллоуин'], ['steppe', 'Дала', 'Степь'], ['xmas', 'Рождество', 'Рождество'], ['meadow', 'Шалғын', 'Луг'], ['summer', 'Теңіз', 'Море'], ['autumn', 'Күзгі орман', 'Осенний лес'], ['city', 'Түнгі қала', 'Ночной город'], ['crescent', 'Жарты ай', 'Полумесяц'], ['space', 'Ғарыш', 'Космос'], ['yurt', 'Киіз үй', 'Юрта'], ['cinema', 'Кинозал', 'Кинозал'], ['felt', 'Шұға', 'Сукно'], ['ocean', 'Су асты', 'Под водой'], ['synth', 'Синтвейв', 'Синтвейв'], ['magic', 'Сиқыр', 'Магия'], ['chess', 'Шахмат', 'Шахматы'], ['velvet', 'Барқыт', 'Бархат']];
+    const AMB = [['', 'Жоқ', 'Нет'], ['snow', 'Қар', 'Снег'], ['leaves', 'Жапырақтар', 'Листья'], ['petals', 'Күлтелер', 'Лепестки'], ['blossom', 'Гүлдену', 'Цветение'], ['hearts', 'Жүректер', 'Сердца'], ['balloons', 'Шарлар', 'Шарики'], ['sparkle', 'Ұшқындар', 'Искры'], ['quiz', 'Сұрақ белгілері', 'Знаки вопроса'], ['butterflies', 'Көбелектер', 'Бабочки'], ['bats', 'Жарқанаттар', 'Летучие мыши'], ['comets', 'Құйрықты жұлдыздар', 'Кометы'], ['chips', 'Фишкалар', 'Фишки'], ['bubbles', 'Көпіршіктер', 'Пузырьки'], ['chess', 'Шахмат фигуралары', 'Шахматные фигуры'], ['cards', 'Карта мастілері', 'Карточные масти'], ['notes', 'Ноталар', 'Ноты'], ['confetti', 'Конфетти', 'Конфетти'], ['fireworks', 'Отшашу', 'Фейерверк']];
+    const MOT = [['', 'Скиндегідей', 'Как в основе'], ['fall', 'Түседі', 'Падают'], ['rise', 'Көтеріледі', 'Всплывают'], ['float', 'Қалқиды', 'Парят'], ['drift', 'Бүйірден ұшады', 'Летят вбок'], ['swirl', 'Машинаны айналады', 'Кружат вокруг машины']];
+    const MET = [['classic', 'Жез', 'Латунь'], ['golden', 'Алтын', 'Золото'], ['steel', 'Болат', 'Сталь'], ['cyber', 'Көк металл', 'Синий металл'], ['neon', 'Күлгін', 'Фиолетовый'], ['newyear', 'Мұзды күміс', 'Ледяное серебро'], ['valentine', 'Қызғылт алтын', 'Розовое золото'], ['autumn', 'Мыс', 'Медь'], ['victory', 'Қола', 'Бронза'], ['may1', 'Жасыл қола', 'Зелёная бронза'], ['halloween', 'Қара темір', 'Тёмное железо'], ['brand', 'BrainBoy сары', 'Жёлтый BrainBoy']];
+    if (d.metal && !MET.some(m => m[0] === d.metal)) MET.unshift([d.metal, 'Негіздегідей', 'Как в основе']);
+    const M = (window.TM && window.TM.MUSIC) || {}, mus = C.SKINS.filter(k => M[k.id] && k.group !== 'hidden' && k.id !== 'easter').map(k => { const t = C.MUS_T[k.id] || [k.name]; return [k.id, t[0], t[1] || t[0]]; });
+    const bases = C.SKINS.filter(k => k.group !== 'hidden').map(k => { const SEL = d.base === k.id; return { l: k.kname && k.kname !== k.name ? L1(k.kname, k.name) : k.name, bg: SEL ? 'var(--color-accent)' : '#ffffff', fg: SEL ? '#ffffff' : 'var(--color-text)', bd: SEL ? 'var(--color-accent)' : 'var(--color-neutral-300)', pick: () => { const nd = this.draftFrom(k.id); up(Object.assign(nd, { id: d.id, name: d.name })); } }; });
+    const f = (label, hint, chips) => ({ label, hint, chips });
+    return {
+      edOpen: true, edIsExisting: !!d.id, edErr: this.state.editErr, edTitle: d.id ? L('Скинді өзгерту', 'Изменить скин') : L('Жаңа скин', 'Новый скин'),
+      edName: d.name || '', onEdName: e => up({ name: e.target.value }),
+      edBg0: d.bg[0], edBg1: d.bg[1], edBg2: d.bg[2], onEdBg0: e => up({ bg: [e.target.value, d.bg[1], d.bg[2]] }), onEdBg1: e => up({ bg: [d.bg[0], e.target.value, d.bg[2]] }), onEdBg2: e => up({ bg: [d.bg[0], d.bg[1], e.target.value] }),
+      edGlow: d.glow, edGlow2: d.glow2, onEdGlow: e => up({ glow: e.target.value }), onEdGlow2: e => up({ glow2: e.target.value }),
+      edDensity: d.ambDensity || 1, edDensityText: Math.round((d.ambDensity || 1) * 100) + '%', onEdDensity: e => up({ ambDensity: +e.target.value }),
+      edFields: [
+        f(L('Негіз (клондау)', 'Основа (клонировать)'), L('Таңдалған скиннің барлық баптаулары көшіріледі', 'Скопируются все настройки выбранного скина'), bases),
+        f(L('Фон', 'Фон'), '', BG.map(([v, a, b]) => chip('bgStyle', v, L1(a, b)))),
+        f(L('Механизм металы', 'Металл механизма'), '', MET.map(([v, a, b]) => chip('metal', v, L1(a, b)))),
+        f(L('Элементтер', 'Элементы'), '', AMB.map(([v, a, b]) => chip('amb', v, L1(a, b)))),
+        f(L('Элементтердің қозғалысы', 'Движение элементов'), '', MOT.map(([v, a, b]) => chip('ambMotion', v, L1(a, b)))),
+        f(L('Музыка', 'Музыка'), L('Өз MP3 файлыңызды сақтағаннан кейін «Дыбыс» қойындысында жүктей аласыз', 'Свой MP3 можно загрузить после сохранения во вкладке «Звук»'), mus.map(([v, a, b]) => chip('music', v, L1(a, b)))),
+        f(L('Дыбыстар', 'Звуки'), '', [['brass', 'Жез', 'Латунь'], ['electro', 'Электро', 'Электро'], ['box', 'Музыкалық қорап', 'Шкатулка']].map(([v, a, b]) => chip('soundSet', v, L1(a, b))))
+      ],
+      edSave: () => this.saveEditor(), edCancel: () => this.setState({ edit: null, editErr: '' }),
+      edClone: () => { if (d.id) { const src = Object.assign({}, d); this.openEditor(d.id); } },
+      edDelete: () => this.ask(L('Скинді жою керек пе?', 'Удалить скин?'), L('«' + d.name + '» скині жойылады.', 'Скин «' + d.name + '» будет удалён.'), L('Жою', 'Удалить'), () => this.deleteCustom(d.id), true)
+    };
+  }
   skinVars(el) {
-    if (!el || !window.TM) return; const id = this.state.settings.skin, S = window.TM.SKINS[id] || window.TM.SKINS.classic; if (el._sk === id) return; el._sk = id;
+    if (!el || !window.TM) return; this.regCustom(); const id = this.state.settings.skin, S = window.TM.SKINS[id] || window.TM.SKINS.classic, kk = id + this.skinKey(); if (el._sk === kk) return; el._sk = kk;
     const v = { m0: S.metal[0], m1: S.metal[1], m2: S.metal[2], m3: S.metal[3], hi: S.hi, lo: S.lo, ink: S.ring === 'neon' ? S.glow : S.lo, glow: S.glow, glow2: S.glow2, d0: S.dark[0], d1: S.dark[1], paper: S.paper, pink: S.paperInk };
     Object.keys(v).forEach(k => el.style.setProperty('--sk-' + k, v[k]));
   }
@@ -736,7 +1012,8 @@ class Component extends DCLogic {
     if (tau < tm.stop) return P('ТЕЖЕЛУ', 'ТОРМОЖЕНИЕ');
     return P('НӨМІР АШЫЛУДА', 'РАСКРЫТИЕ НОМЕРА');
   }
-  primary() { const ph = this.phase(); if (ph === 'boot') return; else if (ph === 'ready') this.start(); else if (ph === 'revealed') { if (this.state.settings.skipNext && this.remaining() > 0) this.start(Object.assign({}, this.state.session, { current: null })); else this.next(); } }
+  revealLock() { const c = this.state.session.current; if (!c || this.phase() !== 'revealed') return 0; return Math.max(0, c.startAt + c.duration + 2000 - Date.now()); }
+  primary() { const ph = this.phase(); if (ph === 'boot' || this.revealLock() > 0) return; else if (ph === 'ready') this.start(); else if (ph === 'revealed') { if (this.state.settings.skipNext && this.remaining() > 0) this.start(Object.assign({}, this.state.session, { current: null })); else this.next(); } }
   start(base) {
     if (this._busy || this.isAud || (!base && this.phase() !== 'ready')) return; this._busy = true;
     try {
@@ -775,22 +1052,29 @@ class Component extends DCLogic {
     const L = (a, b) => this.L(a, b), S = this.state.settings;
     return [
       { t: L('Қош келдіңіз!', 'Добро пожаловать!'), d: L('Қысқа оқыту батырмалар мен мәзірді көрсетеді. Оны өткізіп жіберіп, кейін «Анықтама» бөлімінен қайта бастауға болады.', 'Короткое обучение покажет кнопки и меню. Его можно пропустить и позже запустить заново из раздела «Помощь».') },
-      { sel: 'primary', t: L('Басты батырма', 'Главная кнопка'), d: L('Машинаны калибрлеп, жаңа сеанс бастау үшін 2 секунд басып тұрыңыз. Содан кейін — «Іске қосу» және «Келесі ұтыс». Бос орын пернесі де солай жұмыс істейді.', 'Удерживайте 2 секунды, чтобы откалибровать машину и начать новый сеанс. Затем — «Запустить» и «Следующий розыгрыш». Пробел работает так же.') },
-      { sel: 'recal', t: L('Қайта калибрлеу', 'Повторить калибровку'), d: L('2 секунд басып тұрыңыз. Жаңа сеанс басталады, ағымдағы тарих мұрағатқа өтеді.', 'Удерживайте 2 секунды. Начнётся новый сеанс, текущая история уйдёт в архив.') },
+      { sel: 'primary', t: L('Басты батырма', 'Главная кнопка'), d: S.skipNext ? L('Ұтысты іске қосады. Нөмір ашылғаннан кейін батырма бірден келесі ұтысты бастауға дайын. Бос орын пернесі де солай жұмыс істейді.', 'Запускает розыгрыш. После раскрытия номера кнопка сразу готова к следующему запуску. Пробел работает так же.') : L('Ұтысты іске қосады. Нөмір ашылғаннан кейін — «Келесі ұтыс»: машина дайын күйге оралады. Бос орын пернесі де солай жұмыс істейді.', 'Запускает розыгрыш. После раскрытия номера — «Следующий розыгрыш»: машина возвращается в готовность. Пробел работает так же.') },
+      { sel: 'recal', t: L('Калибрлеу', 'Калибровка'), d: L('Машинаны калибрлеп, жаңа сеанс бастау үшін 2 секунд басып тұрыңыз. Ағымдағы тарих мұрағатқа өтеді. Бірінші калибрлеуді басты батырмамен де бастауға болады.', 'Удерживайте 2 секунды, чтобы откалибровать машину и начать новый сеанс. Текущая история уйдёт в архив. Первую калибровку можно запустить и главной кнопкой.') },
       { sel: 'quickPanel', quick: true, t: L('Жылдам баптаулар', 'Быстрые настройки'), d: L('Билеттер саны, дыбыс, конфетти, фанфаралар, музыка және тіл. Жоғарғы панельдегі батырма немесе Q пернесі.', 'Количество билетов, звук, конфетти, фанфары, музыка и язык. Кнопка на верхней панели или клавиша Q.') },
-      { sel: 'tabs', dlg: true, t: L('Машина баптаулары', 'Настройки машины'), d: L('Айналу уақыты, ережелер, скиндер, нөмірді көрсету тәсілі, дыбыс, командалар және интерфейс. S пернесі.', 'Время вращения, правила, скины, способ показа номера, звук, команды и интерфейс. Клавиша S.') },
-      { sel: 'hist', t: L('Тарих', 'История'), d: L('Сеанстағы барлық ұтыстар, өткен сеанстар мұрағаты, CSV экспорты. H пернесі.', 'Все розыгрыши сеанса, архив прошлых сеансов, экспорт CSV. Клавиша H.') },
+      { sel: 'tabs', dlg: 'time', t: L('Машина баптаулары', 'Настройки машины'), d: L('Барлық параметрлер жеті қойындыда. Әрқайсысын қарап шығайық. S пернесі баптауларды кез келген уақытта ашады.', 'Все параметры собраны на семи вкладках. Пройдём по каждой. Клавиша S открывает настройки в любой момент.') },
+      { sel: 'tab-time', dlg: 'time', t: L('Уақыт және анимация', 'Время и анимация'), d: L('Ұтыс (3–30 с) және калибрлеу ұзақтығы, айналу қарқыны, цифрлардың ауысу жылдамдығы, эффектілер саны, жеңілдетілген графика, жарқылдар, кері санақ.', 'Длительность розыгрыша (3–30 с) и калибровки, интенсивность вращения, скорость смены цифр, количество эффектов, упрощённая графика, вспышки, обратный отсчёт.') },
+      { sel: 'tab-rules', dlg: 'rules', t: L('Ережелер', 'Правила'), d: L('Не ойнатылады (билеттер немесе командалар), жеңімпаздардың қайталануы, ағымдағы сеанс туралы мәлімет және жаңа сеанс батырмасы.', 'Что разыгрываем (билеты или команды), повторы победителей, сведения о текущем сеансе и кнопка нового сеанса.') },
+      { sel: 'tab-skins', dlg: 'skins', t: L('Скиндер', 'Скины'), d: L('Түс палитралары, жыл мезгілдері және мерекелік скиндер; маусымдар мен мерекелерді автоматты ауыстыру.', 'Цветовые темы, времена года и праздничные скины; автопереключение сезонов и праздников.') },
+      { sel: 'tab-modes', dlg: 'modes', t: L('Билеттер', 'Билеты'), d: L('Ұтқан нөмірді көрсетудің алты тәсілі және тарихқа жазылмайтын алдын ала қарау.', 'Шесть способов показа выигрышного номера и предпросмотр без записи в историю.') },
+      { sel: 'tab-sound', dlg: 'sound', t: L('Дыбыс', 'Звук'), d: L('Дыбыс деңгейі, дыбыстық безендіру, жекелеген дыбыстарды өшіру, скин музыкасы және өз MP3 файлыңыз.', 'Громкость, звуковое оформление, отключение отдельных звуков, музыка скина и свой MP3.') },
+      { sel: 'tab-teams', dlg: 'teams', t: L('Командалар', 'Команды'), d: L('Сақинадағы командалар тізімі: қосу, жасыру, жою, бастапқы тізімді қайтару.', 'Список команд на кольце: добавить, скрыть, удалить, вернуть исходный.') },
+      { sel: 'tab-ui', dlg: 'ui', t: 'Интерфейс', d: L('Тіл, көрермен терезесі мен режимі, экранда не көрсетілетіні, масштаб, баптауларды экспорттау және импорттау.', 'Язык, окно и режим зрителей, что показывать на экране, масштаб, экспорт и импорт настроек.') },
+      { sel: 'histPanel', hist: true, t: L('Тарих', 'История'), d: L('Сеанстағы барлық ұтыстар, өткен сеанстар мұрағаты, CSV экспорты, жаңа сеанс және деректерді тазалау. H пернесі.', 'Все розыгрыши сеанса, архив прошлых сеансов, экспорт CSV, новый сеанс и очистка данных. Клавиша H.') },
       { sel: 'aud', t: L('Көрермен терезесі', 'Окно зрителей'), d: L('Ашып, проектор экранына апарыңыз: онда тек машина, батырмаларсыз.', 'Откройте и перетащите на экран проектора: там только машина, без кнопок.') },
       { sel: 'pub', t: L('Көрермен режимі', 'Режим зрителей'), d: L('Осы терезедегі батырмаларды жасырады. Шығу — Esc.', 'Скрывает кнопки в этом окне. Выход — Esc.') },
       { sel: 'fs', t: L('Толық экран', 'Полный экран'), d: L('Терезені бүкіл экранға жаяды. F пернесі.', 'Разворачивает окно на весь экран. Клавиша F.') },
       { sel: 'help', t: L('Анықтама', 'Помощь'), d: L('Барлық баптаулардың толық сипаттамасы және осы оқытуды қайталау. F1 пернесі.', 'Полное описание всех настроек и повтор этого обучения. Клавиша F1.') },
       S.hostPanel ? { sel: 'host', t: L('Жүргізуші панелі', 'Панель ведущего'), d: L('Билеттер, қайталау ережесі және соңғы нөмірлер. «Интерфейс» қойындысында өшіріледі.', 'Билеты, правило повторов и последние номера. Отключается во вкладке «Интерфейс».') } : null,
-      { t: L('Бәрі дайын', 'Всё готово'), d: L('Калибрлеуді бастау үшін басты батырманы 2 секунд басып тұрыңыз. Сәттілік!', 'Чтобы начать калибровку, удерживайте главную кнопку 2 секунды. Удачной игры!') }
+      { t: L('Бәрі дайын', 'Всё готово'), d: L('Калибрлеуді бастау үшін «Қайта калибрлеу» батырмасын 2 секунд басып тұрыңыз. Сәттілік!', 'Чтобы начать калибровку, удерживайте кнопку «Повторить калибровку» 2 секунды. Удачной игры!') }
     ].filter(Boolean);
   }
   goTour(i) {
     const st = this.tourSteps(); if (i < 0) i = 0; if (i >= st.length) { this.endTour(); return; } const step = st[i];
-    this.setState({ tour: i, tourHide: true, quick: !!step.quick, dlg: !!step.dlg, tab: step.dlg ? 'time' : this.state.tab, hist: false, help: false, pub: false, confirm: null }, () => { clearTimeout(this._tm); this._tm = setTimeout(() => this.measureTour(), 90); });
+    this.setState({ tour: i, tourHide: true, quick: !!step.quick, dlg: !!step.dlg, tab: step.dlg || this.state.tab, hist: !!step.hist, help: false, pub: false, confirm: null }, () => { clearTimeout(this._tm); this._tm = setTimeout(() => requestAnimationFrame(() => this.measureTour()), 60); });
   }
   measureTour() {
     const i = this.state.tour; if (i < 0) return; const step = this.tourSteps()[i]; if (!step) return;
@@ -804,16 +1088,17 @@ class Component extends DCLogic {
     return [
       sec('Жылдам бастау', 'Быстрый старт', [
         ['1. Билеттер саны', '1. Количество билетов', '«Жылдам баптаулар» терезесін ашып, билеттер санын енгізіңіз де, «Қолдану» батырмасын басыңыз. Нөмірлеу 1-ден басталады.', 'Откройте «Быстрые настройки», введите количество билетов и нажмите «Применить». Нумерация начинается с 1.'],
-        ['2. Калибрлеу', '2. Калибровка', 'Басты батырманы 2 секунд басып тұрыңыз. Калибрлеу әрқашан жаңа сеанс бастайды: алдыңғы тарих мұрағатқа өтеді.', 'Удерживайте главную кнопку 2 секунды. Калибровка всегда начинает новый сеанс: прежняя история уходит в архив.'],
+        ['2. Калибрлеу', '2. Калибровка', '«Қайта калибрлеу» батырмасын 2 секунд басып тұрыңыз. Калибрлеу әрқашан жаңа сеанс бастайды: алдыңғы тарих мұрағатқа өтеді.', 'Удерживайте кнопку «Повторить калибровку» 2 секунды. Калибровка всегда начинает новый сеанс: прежняя история уходит в архив.'],
         ['3. Ұтыс', '3. Розыгрыш', 'Сыйлықты дауыстап жариялап, «Іске қосу» батырмасын немесе Бос орын пернесін басыңыз. Нөмір басу сәтінде таңдалады.', 'Объявите приз голосом и нажмите «Запустить» или Пробел. Номер выбирается в момент нажатия.'],
         ['4. Келесі ұтыс', '4. Следующий розыгрыш', 'Ұтқан нөмір экранда қалады. «Келесі ұтыс» машинаны қайта калибрлеусіз дайын күйге қайтарады.', 'Выигравший номер остаётся на экране. «Следующий розыгрыш» возвращает машину в готовность без новой калибровки.']]),
       sec('Экрандағы батырмалар', 'Кнопки на экране', [
-        ['Басты батырма', 'Главная кнопка', 'Кезекпен: «Калибрлеу» (2 секунд ұстау) → «Іске қосу» → «Келесі ұтыс». Билеттер таусылғанда бұғатталады.', 'По очереди: «Калибровка» (удерживать 2 секунды) → «Запустить» → «Следующий розыгрыш». Блокируется, когда билеты закончились.'],
+        ['Басты батырма', 'Главная кнопка', 'Ұтысты іске қосады; нөмір ашылғаннан кейін — «Келесі ұтыс» (егер «Дайындықсыз» қосылмаса). Сеанс басында бірінші калибрлеуді бастайды (2 секунд ұстау). Билеттер таусылғанда бұғатталады.', 'Запускает розыгрыш; после раскрытия номера — «Следующий розыгрыш» (если не включено «Без подготовки»). В начале сеанса запускает первую калибровку (удерживать 2 секунды). Блокируется, когда билеты закончились.'],
         ['Қайта калибрлеу', 'Повторить калибровку', '2 секунд басып тұрыңыз. Жаңа сеанс басталады, ағымдағы тарих мұрағатқа өтеді.', 'Удерживайте 2 секунды. Начинается новый сеанс, текущая история уходит в архив.'],
         ['Жылдам баптаулар (Q)', 'Быстрые настройки (Q)', 'Билеттер саны, дыбыс, конфетти, фанфаралар, музыка және тіл.', 'Количество билетов, звук, конфетти, фанфары, музыка и язык.'],
         ['Машина баптаулары (S)', 'Настройки машины (S)', 'Барлық параметрлер жеті қойындыда — төменде сипатталған.', 'Все параметры на семи вкладках — описаны ниже.'],
         ['Анықтама (F1)', 'Помощь (F1)', 'Осы бет және интерактивті оқыту.', 'Эта страница и интерактивное обучение.'],
         ['Тарих (H)', 'История (H)', 'Сеанстағы барлық ұтыстар, өткен сеанстар мұрағаты, CSV экспорты, жаңа сеанс және деректерді тазалау.', 'Все розыгрыши сеанса, архив прошлых сеансов, экспорт CSV, новый сеанс и очистка данных.'],
+        ['Сеансты жалғастыру', 'Продолжение сеанса', 'Егер жаңа сеанс кездейсоқ басталса: «Тарих» → «Өткен сеанстар» → «Осы сеансты жалғастыру». Сеанс бұрынғы ұтыстарымен және ережелерімен калибрлеусіз қалпына келеді.', 'Если новый сеанс начат случайно: «История» → «Прошлые сеансы» → «Продолжить этот сеанс». Сеанс восстановится с прежними розыгрышами и правилами, без калибровки.'],
         ['Көрермен терезесі', 'Окно зрителей', 'Проекторға арналған бөлек терезе: батырмаларсыз тек машина. Оны проектор экранына апарып, екі рет басып толық экранға шығарыңыз.', 'Отдельное окно для проектора: только машина, без кнопок. Перетащите его на экран проектора и разверните двойным кликом.'],
         ['Көрермен режимі (P)', 'Режим зрителей (P)', 'Осы терезедегі барлық қызметтік элементтерді жасырады. Шығу — Esc.', 'Скрывает все служебные элементы в этом окне. Выход — Esc.'],
         ['Толық экран (F)', 'Полный экран (F)', 'Терезені бүкіл экранға жаяды.', 'Разворачивает окно на весь экран.'],
@@ -845,12 +1130,17 @@ class Component extends DCLogic {
       sec('Баптаулар: билеттер', 'Настройки: билеты', [
         ['Көрсету тәсілі', 'Способ показа', 'Алты нұсқа: циферблат, шарлар, күнтізбе, кеглилер, табло, голограмма. Жеңімпазды таңдауға әсер етпейді.', 'Шесть вариантов: циферблат, шары, календарь, кегли, табло, голограмма. На выбор победителя не влияет.'],
         ['Алдын ала қарау', 'Предпросмотр', 'Демо-ұтыс; тарихқа жазылмайды.', 'Демонстрационный розыгрыш; в историю не записывается.']]),
+      sec('Баптаулар: қосымша және өз скиндері', 'Настройки: дополнительные и свои скины', [
+        ['Тағы…', 'Ещё…', '«Скиндер» қойындысындағы «Тағы…» батырмасы 14 қосымша скинді ашады: Республика күні (25.10), Астана күні (6.07) — мереке күні автоматты қосылады; Құрбан айт, Ғарыш, Қазақ даласы, Кино, Казино, Су асты әлемі, 80-жылдар, Сиқыр, Шахмат, BrainBoy туған күні, Гранд-финал — қолмен.', 'Кнопка «Ещё…» во вкладке «Скины» открывает 14 дополнительных скинов: День Республики (25.10), День столицы (6.07) включаются сами в день праздника; Курбан-айт, Космос, Казахская степь, Кино, Казино, Подводный мир, Ретро-80-е, Магия, Шахматы, День рождения BrainBoy, Гранд-финал — вручную.'],
+        ['Өз скиніңіз', 'Свой скин', '«Өз скиніңізді жасау» ағымдағы скинді көшіреді. Негізді (клондау), фонды, оның үш түсін, механизм металын, жарық түстерін, элементтерді (қар, жапырақтар, шарлар…), олардың қозғалысын (түседі, көтеріледі, қалқиды, бүйірден ұшады, машинаны айналады) және тығыздығын, музыка мен дыбыстарды таңдаңыз.', '«Создать свой скин» копирует текущий скин. Выберите основу (клонирование), фон и три его цвета, металл механизма, цвета подсветки, элементы (снег, листья, шарики…), их движение (падают, всплывают, парят, летят вбок, кружат вокруг машины) и плотность, музыку и звуки.'],
+        ['Маскот аксессуарлары', 'Аксессуары маскота', 'Әр скинде маскоттың өз заты бар: құлақшын, Аяз ата бөркі, туған күн қалпағы, тәж, каска, қалпақ, бөрік, тақия, сиқыршы қалпағы, скафандр, ту, қызғалдақтар және т.б. Өз скині негізгі скиннің затын алады. Интерфейс қойындысында өшіріледі.', 'У маскота в каждом скине свой атрибут: ушанка, шапка Санты, колпак именинника, корона, каска, калпак, борик, тюбетейка, шляпа волшебника, скафандр, флажок, тюльпаны и др. Свой скин берёт атрибут своей основы. Выключается во вкладке «Интерфейс».'],
+        ['Атауы', 'Название', 'Атауы бірегей болуы керек — бар скиннің атауын қайталауға болмайды. Сақталған скинді «Өзгерту», «Клондау» немесе «Жою» (2 секунд ұстау) мүмкін. Өз MP3 файлын «Дыбыс» қойындысында осы скинге жүктеуге болады.', 'Название должно быть уникальным — повторить имя существующего скина нельзя. Сохранённый скин можно «Изменить», «Клонировать» или «Удалить» (удержанием 2 секунды). Свой MP3 для этого скина загружается во вкладке «Звук».']]),
       sec('Баптаулар: дыбыс', 'Настройки: звук', [
         ['Дыбыс деңгейі', 'Громкость', 'Жалпы, механизм және фанфаралар деңгейі бөлек реттеледі.', 'Общая громкость, громкость механизма и фанфар настраиваются отдельно.'],
         ['Безендіру', 'Оформление', 'Жез, Электро немесе Музыкалық қорап; тықыл, мотор гуілі, соққылар мен сигналдарды бөлек өшіруге болады. Тыңдау батырмалары бар.', 'Латунь, Электро или Шкатулка; тиканье, гул мотора, удары и сигналы можно выключить отдельно. Есть кнопки прослушивания.'],
         ['Музыка', 'Музыка', 'Скин музыкасы, оның дыбыс деңгейі және өз MP3 файлыңызды жүктеу.', 'Музыка скина, её громкость и загрузка своего MP3.']]),
       sec('Баптаулар: командалар', 'Настройки: команды', [
-        ['Командалар тізімі', 'Список команд', 'Сақинадағы командаларды жасыруға, жоюға, жаңасын қосуға немесе бастапқы тізімді қайтаруға болады. Сақинаны толық өшіруге де болады.', 'Команды на кольце можно скрывать, удалять, добавлять или вернуть исходный список. Кольцо можно выключить совсем.']]),
+        ['Командалар тізімі', 'Список команд', 'Сақинадағы командаларды сүйреп немесе ↑↓ көрсеткілерімен жылжытуға (сақинадағы реті де өзгереді), жасыруға, жоюға, жаңасын қосуға немесе бастапқы тізімді қайтаруға болады. Сақинаны толық өшіруге де болады. «Бастапқы тізім ретінде сақтау» ағымдағы тізімді (реті мен жасырылғандарын) есте сақтайды: «Бастапқы тізімді қайтару» енді соған оралады. «Алғашқы 27 команда» әдепкі тізімді қайтарады.', 'Команды на кольце можно перетаскивать или двигать стрелками ↑↓ (порядок на кольце меняется так же), скрывать, удалять, добавлять или вернуть исходный список. Кольцо можно выключить совсем. «Сохранить как исходный список» запоминает текущий список (порядок и скрытые команды): «Вернуть исходный список» будет возвращать к нему. «Самый первый список» возвращает 27 команд по умолчанию.']]),
       sec('Баптаулар: интерфейс', 'Настройки: интерфейс', [
         ['Экран', 'Экран', 'Толық экран, осы терезедегі көрермен режимі және бөлек көрермен терезесі.', 'Полный экран, режим зрителей в этом окне и отдельное окно зрителей.'],
         ['Не көрсетіледі', 'Что показывать', 'Тіл, күн, этаптар жолағы, «Ұтысты билет №» жазуы, жүргізуші панелі, ұтыс нөмірі, қалған билеттер, маскот, сәндік жазулар, минималистік режим, көрермендерге арналған тарих.', 'Язык, дата, плашка этапов, надпись «Выигрышный билет №», панель ведущего, номер розыгрыша, остаток билетов, маскот, декоративные надписи, минималистичный режим, история для зрителей.'],
@@ -872,6 +1162,13 @@ class Component extends DCLogic {
   }
   ask(title, body, yes, fn, danger) { this.holdEnd(); this.setState({ confirm: { title, body, yes, fn, danger: !!danger } }); }
   confirmYes() { const c = this.state.confirm; this.setState({ confirm: null }, () => { if (c && c.fn) c.fn(); }); }
+  resumeSession(id) {
+    if (this.isAud || ['calibrating', 'spinning', 'preview'].includes(this.phase())) return;
+    const a = this.state.archive.find(x => x.id === id); if (!a) return; const s = this.state.session;
+    let archive = this.state.archive.filter(x => x.id !== id); if (s.history.length) archive = archive.concat([Object.assign({}, s, { current: null, calib: null })]).slice(-50);
+    const ses = Object.assign({}, a, { current: null, calib: null, calibrated: true });
+    this.commit({ session: ses, archive, settings: Object.assign({}, this.state.settings, { tickets: a.tickets }), draft: String(a.tickets), draftErr: '', hist: false });
+  }
   newSession(n) {
     const s = this.state.session, N = n || s.tickets; let archive = this.state.archive;
     if (s.history.length) archive = archive.concat([Object.assign({}, s, { current: null, calib: null })]).slice(-50);
@@ -912,10 +1209,11 @@ class Component extends DCLogic {
     };
     d.open(); d.write('<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>BrainBoy Time Machine — экран зрителей</title>' + css + '<style>:root{--font-heading:"Caprasimo", "Nunito", system-ui, sans-serif;--font-body:"Figtree", "Nunito", system-ui, sans-serif}html,body{margin:0;height:100%;overflow:hidden;background:#0b0806}</style></head><body><div style="position:fixed;inset:0;overflow:hidden;font-family:var(--font-body)"><canvas id="cv" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas><div id="ms" style="position:absolute;pointer-events:none;display:none"></div><div id="ov" style="position:absolute;inset:0;pointer-events:none"></div></div></body></html>'); d.close();
     const ms = d.getElementById('ms'), shadow = 'filter:drop-shadow(0 18px 18px rgba(0,0,0,.55));transition:opacity .3s;position:absolute;max-width:none;';
-    ms.innerHTML = '<img src="' + asset('mascot', 'assets/mascot.png') + '" style="' + shadow + 'left:0;bottom:0;height:100%;width:auto;transform:scaleX(-1)">';
+    ms.style.transition = 'filter .3s';
+    ms.innerHTML = '<img data-std="1" src="' + asset('mascot', 'assets/mascot.png') + '" style="' + shadow + 'left:0;bottom:0;height:100%;width:auto;transform:scaleX(-1);transition:opacity .18s"><img data-thumb="1" src="' + asset('thumb', 'assets/mascot-thumb.png') + '" style="' + shadow + 'left:0;bottom:0;height:100%;width:auto;transform:scaleX(-1);opacity:0;transition:opacity .18s"><span data-spark="1" style="position:absolute;left:43%;top:45.5%;width:26%;aspect-ratio:1;margin:-13% 0 0 -13%;z-index:3;pointer-events:none;opacity:0;filter:drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px var(--sk-glow))"><svg viewBox="-50 -50 100 100" style="width:100%;height:100%;overflow:visible"><path d="M0,-50 C4,-8 8,-4 50,0 C8,4 4,8 0,50 C-4,8 -8,4 -50,0 C-8,-4 -4,-8 0,-50 Z" fill="#ffffff"></path><circle r="9" fill="#ffffff"></circle></svg></span><div data-attr="1" style="position:absolute;inset:0;transform:scaleX(-1);pointer-events:none"></div><div data-bub="1" style="position:absolute;left:72%;bottom:74%;z-index:6;display:none;flex-direction:column-reverse;align-items:flex-start;gap:6px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.5))"><span data-ph="1" style="width:max-content;max-width:min(220px, 30vw);padding:12px 18px;border-radius:24px;background:var(--sk-paper);color:var(--sk-pink);font-family:var(--font-heading);font-size:17px;line-height:1.2;white-space:pre-line;text-wrap:balance"></span><span style="margin-left:2px;width:8px;height:8px;border-radius:50%;background:var(--sk-paper)"></span><span style="margin-left:10px;width:14px;height:14px;border-radius:50%;background:var(--sk-paper)"></span></div>';
     d.addEventListener('dblclick', () => { try { if (!d.fullscreenElement) d.documentElement.requestFullscreen(); else d.exitFullscreen(); } catch (e) {} });
     const machine = new window.TM.Machine(d.getElementById('cv'), null, w);
-    this.mirror = { win: w, machine, ov: d.getElementById('ov'), ms, logo: asset('logo', 'assets/logo.png'), html: '' };
+    this.mirror = { win: w, machine, ov: d.getElementById('ov'), ms, attr: ms.querySelector('[data-attr]'), bub: ms.querySelector('[data-bub]'), ph: ms.querySelector('[data-ph]'), logo: asset('logo', 'assets/logo.png'), html: '' };
     w.addEventListener('resize', () => this.updateMirror());
     this.updateMirror();
   }
@@ -929,7 +1227,9 @@ class Component extends DCLogic {
     const L = (a, b) => this.L(a, b); let o = '<div style="position:absolute;inset:0;white-space:pre-line;zoom:' + S.uiScale + '">';
     if (S.decor && !S.minimal) o += '<img src="' + m.logo + '" alt="BrainBoy" style="position:absolute;top:20px;left:28px;height:clamp(44px, 6.4vh, 72px);width:auto;filter:drop-shadow(0 4px 14px rgba(0,0,0,.6))">';
     o += '<div style="position:absolute;top:18px;left:24px;right:24px;display:flex;flex-direction:column;align-items:center;gap:6px">' + (S.showDate !== false ? '<span style="font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent-300);text-shadow:0 1px 6px rgba(0,0,0,.8)">' + this.dateText() + '</span>' : '') + '' + (!S.showStatusBar || (ph === 'revealed' && S.showWinStatus === false) ? '' : '<div style="display:flex;align-items:center;gap:12px;max-width:100%;padding:10px 24px;border-radius:999px;background:color-mix(in srgb, var(--color-neutral-900) 72%, transparent);border:1px solid color-mix(in srgb, var(--color-bg) 16%, transparent);color:var(--color-bg);font-family:var(--font-heading);font-size:clamp(14px, 1.6vw, 22px);letter-spacing:0.06em;text-align:center"><span style="flex:none;width:12px;height:12px;border-radius:50%;background:' + dot + ';box-shadow:0 0 14px ' + dot + '"></span><span>' + this.statusText(ph) + '</span></div>') + '</div>';
-    { const z = S.uiScale || 1, ms = m.ms, px = v => (v * z) + 'px'; ms.style.display = mb.showMascot ? 'block' : 'none'; if (mb.showMascot) Object.assign(ms.style, { left: px(mb.mascotLeft), bottom: px(mb.mascotBottom), width: px(mb.mascotW), height: px(mb.mascotH) }); }
+    { const z = S.uiScale || 1, ms = m.ms, px = v => (v * z) + 'px'; ms.style.display = mb.showMascot ? 'block' : 'none'; if (mb.showMascot) Object.assign(ms.style, { left: px(mb.mascotLeft), bottom: px(mb.mascotBottom), width: px(mb.mascotW), height: px(mb.mascotH) });
+      const hv = !!this.state.mHover; ms.style.filter = hv ? 'drop-shadow(0 0 22px var(--sk-glow))' : ''; const q = s2 => ms.querySelector(s2); q('[data-std]').style.opacity = hv ? 0 : 1; q('[data-thumb]').style.opacity = hv ? 1 : 0; q('[data-spark]').style.opacity = hv ? 1 : 0; this.sparkle(ms);
+      if (m.bub) { m.bub.style.display = hv ? 'flex' : 'none'; if (hv) { const t = this.mascotPhrase(); if (m.ph.textContent !== t) m.ph.textContent = t; } } }
     if (S.showDrawNo) o += '<div style="position:absolute;left:32px;bottom:30px;display:flex;flex-direction:column;gap:2px;color:var(--color-bg)"><span style="' + lbl + '">' + L('Ұтыс', 'Розыгрыш') + '</span><span style="' + big + '">№ ' + (s.current ? s.current.drawNo : s.history.length + 1) + '</span></div>';
     if (S.showRemaining) o += '<div style="position:absolute;right:32px;bottom:30px;display:flex;flex-direction:column;align-items:flex-end;gap:2px;color:var(--color-bg)"><span style="' + lbl + '">' + RI.label + '</span><span style="' + big + '">' + rem + '</span></div>';
     if (S.audienceHistory && VH.length) o += '<div style="position:absolute;left:32px;top:120px;display:flex;flex-direction:column;gap:8px;max-width:180px"><span style="font-size:12px;font-weight:800;letter-spacing:0.24em;text-transform:uppercase;color:var(--sk-glow);text-shadow:0 1px 6px rgba(0,0,0,.8)">' + L('Жеңімпаздар', 'Победители') + '</span><div style="display:flex;flex-wrap:wrap;gap:6px">' + VH.slice(-8).reverse().map(x => '<span style="display:inline-flex;align-items:center;justify-content:center;min-width:46px;padding:5px 14px;font-family:var(--font-heading);font-size:18px;line-height:1.1;color:var(--sk-pink);background:radial-gradient(circle at 0 50%, transparent 6px, var(--sk-paper) 6.5px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 6px, var(--sk-paper) 6.5px) right / 51% 100% no-repeat;filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))">' + (x.team || x.ticket) + '</span>').join('') + '</div></div>';
@@ -944,7 +1244,7 @@ class Component extends DCLogic {
     if (e.key === 'Escape') { if (this.state.confirm) this.setState({ confirm: null }); else if (this.state.dlg || this.state.quick || this.state.hist || this.state.help) this.setState({ dlg: false, quick: false, hist: false, help: false }); else if (this.state.pub && !this.isAud) this.setState({ pub: false }); return; }
     if (this.state.confirm) { if (e.key === 'Enter' && !this.state.confirm.danger) { e.preventDefault(); this.confirmYes(); } return; }
     if (inter || this.state.dlg) return;
-    if (e.code === 'Space') { e.preventDefault(); if (!this.isAud) { if (this.phase() === 'boot') { if (!e.repeat) this.holdCal('p'); } else if (!e.repeat) this.primary(); } return; }
+    if (e.code === 'Space') { e.preventDefault(); if (!this.isAud) { if (this.phase() === 'boot') { if (!e.repeat) this.holdCal('r'); } else if (!e.repeat) this.primary(); } return; }
     if (this.isAud || e.ctrlKey || e.metaKey || e.altKey) return;
     const k = e.key.toLowerCase();
     if (k === 'f' || k === 'а') this.toggleFs(); else if (k === 'n' || k === 'т') this.next(); else if (k === 'q' || k === 'й') this.setState({ quick: !this.state.quick }); else if (k === 'h' || k === 'р') this.setState({ hist: !this.state.hist }); else if (k === 'p' || k === 'з') this.setState({ pub: !this.state.pub, quick: false, hist: false }); else if (k === 's' || k === 'ы') this.setState({ dlg: true });
@@ -960,7 +1260,7 @@ class Component extends DCLogic {
     const w = hgt * 0.586, left = Math.max(leftMin, leftMin + (availW - w) / 2), q = v => Math.round(v / z), winS = Math.min(w * 1.15, hgt * 0.62);
     return { showMascot: true, mascotLeft: q(left), mascotBottom: q(bottom), mascotH: q(hgt), mascotW: q(w), mFlyS: q(w * 1.3), mFlyL: q(-w * 0.08), mFlyB: q(hgt * 0.22), mWinS: q(winS), mWinL: q((w - winS) / 2), mWinB: q(hgt * 0.28) };
   }
-  renderVals() {
+  renderVals() { if (!this._attrT) this._attrT = setTimeout(() => this.syncAttr(), 300);
     const S = this.state.settings, s = this.state.session, ph = this.phase(), C = Component, pub = this.state.pub, L = (a, b) => this.L(a, b), L1 = (a, b) => this.L1(a, b);
     const ON = L('ҚОСУЛЫ', 'ВКЛ'), OFF = L('ӨШІРУЛІ', 'ВЫКЛ');
     const seg = (key, label, hint, invert) => { const v = invert ? !S[key] : !!S[key]; return { label, hint: hint || '', name: 'tg-' + key, opts: [{ label: ON, checked: v, pick: () => this.setSetting(key, invert ? false : true) }, { label: OFF, checked: !v, pick: () => this.setSetting(key, invert ? true : false) }] }; };
@@ -989,9 +1289,9 @@ class Component extends DCLogic {
       hMech: L('Механизмді тыңдау', 'Прослушать механизм'), hFan: L('Фанфараны тыңдау', 'Прослушать фанфары'), hChime: L('Сигналды тыңдау', 'Прослушать сигнал'),
       fs: L('Толық экран режимі', 'Полноэкранный режим'), pub: L('Осы терезеде көрермен режимі', 'Режим зрителей в этом окне'), aud: L('Көрермен терезесін ашу', 'Открыть окно зрителей'), expSet: L('Баптауларды экспорттау', 'Экспорт настроек'), impSet: L('Баптауларды импорттау', 'Импорт настроек'), resetSet: L('Баптауларды қалпына келтіру', 'Сбросить настройки'),
       keys: L('Пернелер: Бос орын — іске қосу / келесі ұтыс, Enter — растау, Esc — панельдерді жабу немесе көрермен режимінен шығу, F — толық экран, N — келесі ұтыс, Q — жылдам баптаулар, H — тарих, P — көрермен режимі. Көрермен терезесі осы тереземен үндестіріледі; онда екі рет басу толық экранды қосады.', 'Клавиши: Пробел — запуск / следующий розыгрыш, Enter — подтверждение, Esc — закрыть панели или выйти из режима зрителей, F — полный экран, N — следующий розыгрыш, Q — быстрые настройки, H — история, P — режим зрителей. Окно зрителей синхронизируется с этим окном; двойной клик в нём включает полный экран.'),
-      teamPh: L1('Жаңа команданың атауы', 'Название новой команды'), add: L('Қосу', 'Добавить'), del: L1('Жою', 'Удалить'), resetTeams: L('Бастапқы тізімді қайтару', 'Вернуть исходный список'),
+      teamPh: L1('Жаңа команданың атауы', 'Название новой команды'), add: L('Қосу', 'Добавить'), del: L1('Жою', 'Удалить'), resetTeams: L('Бастапқы тізімді қайтару', 'Вернуть исходный список'), saveTeams: L('Бастапқы тізім ретінде сақтау', 'Сохранить как исходный список'), factoryTeams: L('Алғашқы 27 команда', 'Самый первый список (27)'),
       music: L('Музыка', 'Музыка'), musUpload: L('Өз MP3 жүктеу', 'Загрузить свой MP3'), soundOn: L('Дыбысты қосу', 'Включить звук'), musRemove: L('Өз тректі алып тастау', 'Убрать свой трек'),
-      cancel: L('Болдырмау', 'Отмена'), hold: L('басып ұстап тұрыңыз', 'удерживайте'),
+      cancel: L('Болдырмау', 'Отмена'), resume: L('Осы сеансты жалғастыру', 'Продолжить этот сеанс'), hold: L('басып ұстап тұрыңыз', 'удерживайте'), moveUp: L1('Жоғары', 'Выше'), moveDown: L1('Төмен', 'Ниже'), dragTeam: L1('Ретін өзгерту үшін сүйреңіз', 'Перетащите, чтобы изменить порядок'),
       holdHint: L('2 секунд басып тұрыңыз', 'Удерживайте 2 секунды'), holdHint1: L1('2 секунд басып тұрыңыз — жаңа сеанс басталады', 'Удерживайте 2 секунды — начнётся новый сеанс'), tHelp: L1('Анықтама', 'Помощь') + ' (F1)', helpTitle: L('Анықтама', 'Помощь'), tourStart: L('Интерактивті оқыту', 'Интерактивное обучение'), back: L('Артқа', 'Назад')
     };
     const tsteps = this.tourSteps(), ti = this.state.tour, tst = ti >= 0 ? tsteps[Math.min(ti, tsteps.length - 1)] : null, tr = this.state.tourRect, VW = window.innerWidth, VH = window.innerHeight, cw = Math.min(400, VW - 32);
@@ -1004,27 +1304,37 @@ class Component extends DCLogic {
     return {
       calPctP: cs === 'p' ? cp : 0, calPctR: cs === 'r' ? cp : 0, calPctS: cs === 's' ? cp : 0,
       recalLabelR: hint === 'r' ? tx.holdHint : tx.recal, recalLabelS: hint === 's' ? tx.holdHint : tx.recal,
-      primaryDown: () => { if (this.phase() === 'boot') this.holdCal('p'); }, recalDown: () => this.holdCal('r'), recalDownS: () => this.holdCal('s'),
+      primaryDown: () => {}, recalDown: () => this.holdCal('r'), recalDownS: () => this.holdCal('s'),
       calUp: () => this.calEnd(true), calLeave: () => this.calEnd(false),
-      primaryKey: e => { if (this.phase() === 'boot' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); if (!e.repeat) this.holdCal('p'); } },
+      primaryKey: () => {},
       recalKey: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!e.repeat) this.holdCal('r'); } }, recalKeyS: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!e.repeat) this.holdCal('s'); } },
       helpOpen: !!this.state.help && showChrome, toggleHelp: () => this.setState({ help: !this.state.help, hist: false, quick: false }), helpSections: this.helpSections(L), startTour: () => this.goTour(0),
       tourOn: !!tst && showChrome, tourTitle: tst ? tst.t : '', tourText: tst ? tst.d : '', tourCount: (ti + 1) + ' / ' + tsteps.length,
       spotOn: !!tr, spotOff: !tr, spotL: tr ? Math.round(tr.l - 8) : 0, spotT: tr ? Math.round(tr.t - 8) : 0, spotW: tr ? Math.round(tr.w + 16) : 0, spotH: tr ? Math.round(tr.h + 16) : 0, spotR: tr ? Math.round(Math.min(32, (tr.h + 16) / 2)) : 0,
       cardL: Math.round(cardL), cardTop, cardBottom, cardW: cw,
-      tourCardOp: this.state.tourHide ? 0 : 1, tourHasBack: ti > 0, tourBack: () => this.goTour(ti - 1), tourNext: () => this.goTour(ti + 1), tourSkip: () => this.endTour(), tourBlock: e => e.stopPropagation(),
+      tourCardOp: this.state.tourHide ? 0 : 1, dimOn: !tr || !!this.state.tourHide, tourHasBack: ti > 0, tourBack: () => this.goTour(ti - 1), tourNext: () => this.goTour(ti + 1), tourSkip: () => this.endTour(), tourBlock: e => e.stopPropagation(),
       tourNextLabel: ti >= tsteps.length - 1 ? L('Дайын', 'Готово') : L('Келесі', 'Далее'), tourSkipLabel: L('Оқытуды өткізу', 'Пропустить обучение'),
-      mHover: !!this.state.mHover, mPhrase: this.mascotPhrase(), mEnter: () => { if (!this.state.mHover) this.setState({ mHover: true, mPi: (this.state.mPi + 1) % 6 }); }, mLeave: () => this.setState({ mHover: false }),
+      mHover: !!this.state.mHover, mStdOp: this.state.mHover ? 0 : 1, mThumbOp: this.state.mHover ? 1 : 0, mPhrase: this.mascotPhrase(), mEnter: () => { if (!this.state.mHover) this.setState({ mHover: true, mPi: (this.state.mPi + 1) % 6 }); }, mLeave: () => this.setState({ mHover: false }),
       confirmDanger: !!(this.state.confirm && this.state.confirm.danger), confirmSafe: !(this.state.confirm && this.state.confirm.danger), holdPct: Math.round(this.state.holdPct), holdStart: e => this.holdStart(e), holdEnd: () => this.holdEnd(), holdKey: e => { if ((e.key === 'Enter' || e.key === ' ') && !e.repeat) { e.preventDefault(); this.holdStart(); } }, noCtx: e => e.preventDefault(),
       ruleToggles: [choice('drawTarget', L('Не ойнатылады', 'Что разыгрываем'), L('Билет нөмірі немесе сақинадағы команда', 'Номер билета или команда с кольца'), [['tickets', L('Билеттер', 'Билеты')], ['teams', L('Командалар', 'Команды')]])],
-      skinToggles: [seg('autoSeason', L('Маусымдарды ауыстыру', 'Переключение сезонов'), L('ҚОСУЛЫ — бет ашылғанда және әр калибрлеуде ағымдағы маусым скині қосылады (қыс, көктем, жаз, күз). ӨШІРУЛІ — таңдалған түсті скин өзгеріссіз қалады.', 'ВКЛ — при открытии и каждой калибровке включается скин текущего сезона (зима, весна, лето, осень). ВЫКЛ — выбранный цветовой скин остаётся без изменений.')), seg('autoHoliday', L('Мерекелік скинді автоматты қосу', 'Праздничный скин в день праздника'), L('Тек мереке күні: 31.12, 1.01, 7.01, 14.02, 8.03, 21–23.03, 1.05, 9.05, 31.10, 16.12, 25.12', 'Только в сам день: 31.12, 1.01, 7.01, 14.02, 8.03, 21–23.03, 1.05, 9.05, 31.10, 16.12, 25.12'))],
+      skinToggles: [seg('autoSeason', L('Маусымдарды ауыстыру', 'Переключение сезонов'), L('ҚОСУЛЫ — бет ашылғанда және әр калибрлеуде ағымдағы маусым скині қосылады (қыс, көктем, жаз, күз). ӨШІРУЛІ — таңдалған түсті скин өзгеріссіз қалады.', 'ВКЛ — при открытии и каждой калибровке включается скин текущего сезона (зима, весна, лето, осень). ВЫКЛ — выбранный цветовой скин остаётся без изменений.')), seg('autoHoliday', L('Мерекелік скинді автоматты қосу', 'Праздничный скин в день праздника'), L('Тек мереке күні: 31.12, 1.01, 7.01, 14.02, 8.03, 21–23.03, 1.05, 9.05, 6.07, 25.10, Пасха, 31.10, 16.12, 25.12', 'Только в сам день: 31.12, 1.01, 7.01, 14.02, 8.03, 21–23.03, 1.05, 9.05, 6.07, 25.10, Пасха, 31.10, 16.12, 25.12'))],
       tx, canvasRef: this.canvasRef, musFileRef: this.musFileRef, ...this.musVals(S, seg, slider, L), rootRef: this.rootRef, showStatus: !!S.showStatusBar && !(ph === 'revealed' && S.showWinStatus === false),
       primaryOp: ['boot', 'ready', 'revealed'].includes(ph) ? 1 : 0.55, lampOp: ['boot', 'ready', 'revealed'].includes(ph) ? 1 : 0.3, recalOp: ['boot', 'calibrating', 'spinning', 'preview'].includes(ph) ? 0.5 : 1, dateText: this.dateText(), showDate: S.showDate !== false,
       teamToggles: [seg('teamsRing', L('Командалар атауы бар сақина', 'Кольцо с названиями команд'), L('Машинаның сыртқы айналмалы сақинасында', 'На внешнем вращающемся кольце машины'))],
-      teamRows: (S.teams || []).map((t, i) => ({ no: i + 1, name: t.n, op: t.on ? 1 : 0.5, toggleLabel: t.on ? L('Жасыру', 'Скрыть') : L('Көрсету', 'Показать'), toggle: () => this.setSetting('teams', S.teams.map((x, j) => j === i ? { n: x.n, on: !x.on } : x)), del: () => this.setSetting('teams', S.teams.filter((x, j) => j !== i)) })),
+      teamRows: (S.teams || []).map((t, i) => ({ no: i + 1, name: t.n, op: t.on ? 1 : 0.5, toggleLabel: t.on ? L('Жасыру', 'Скрыть') : L('Көрсету', 'Показать'), toggle: () => this.setSetting('teams', S.teams.map((x, j) => j === i ? { n: x.n, on: !x.on } : x)), del: () => this.setSetting('teams', S.teams.filter((x, j) => j !== i)),
+        first: i === 0, last: i === S.teams.length - 1, up: () => this.moveTeam(i, i - 1), down: () => this.moveTeam(i, i + 1),
+        dragStart: e => { this._dragT = i; try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', String(i)); } catch (x) {} },
+        dragOver: e => { if (this._dragT == null) return; e.preventDefault(); if (this.state.teamOver !== i) this.setState({ teamOver: i }); },
+        drop: e => { e.preventDefault(); const f = this._dragT; this._dragT = null; this.setState({ teamOver: -1 }); if (f != null) this.moveTeam(f, i); },
+        dropShadow: this.state.teamOver === i && this._dragT != null && this._dragT !== i ? '0 0 0 2px var(--color-accent)' : 'none' })),
+      teamDragEnd: () => { this._dragT = null; this.setState({ teamOver: -1 }); },
       teamCountText: (() => { const on = (S.teams || []).filter(t => t.on).length, all = (S.teams || []).length; return L('Сақинада: ' + on + ' / ' + all, 'На кольце: ' + on + ' из ' + all); })(),
       teamDraft: this.state.teamDraft, onTeamDraft: e => this.setState({ teamDraft: e.target.value }), onTeamKey: e => { if (e.key === 'Enter') { e.preventDefault(); this.addTeam(); } }, addTeam: () => this.addTeam(),
-      askResetTeams: () => this.ask(L('Тізімді қайтару керек пе?', 'Вернуть исходный список?'), L('Командалар тізімі бастапқы 27 командаға оралады.', 'Список команд вернётся к исходным 27 командам.'), L('Қайтару', 'Вернуть'), () => this.setSetting('teams', C.DEF.teams), true), fileRef: this.fileRef,
+      askResetTeams: () => { const B = this.teamsBase(); this.ask(L('Тізімді қайтару керек пе?', 'Вернуть исходный список?'), L('Командалар тізімі сақталған бастапқы тізімге оралады (' + B.length + ' команда).', 'Список команд вернётся к сохранённому исходному списку (' + B.length + ' команд).'), L('Қайтару', 'Вернуть'), () => this.setSetting('teams', B.map(t => Object.assign({}, t))), true); },
+      askSaveTeams: () => this.ask(L('Бастапқы тізімді қайта жазу керек пе?', 'Перезаписать исходный список?'), L('Ағымдағы тізім (' + (S.teams || []).length + ' команда, реті мен жасырылғандары) жаңа бастапқы тізім болады. «Бастапқы тізімді қайтару» енді осыған оралады.', 'Текущий список (' + (S.teams || []).length + ' команд, с порядком и скрытыми) станет новым исходным. «Вернуть исходный список» будет возвращать к нему.'), L('Сақтау', 'Сохранить'), () => this.setSetting('teamsBase', (S.teams || []).map(t => Object.assign({}, t))), true),
+      askFactoryTeams: () => this.ask(L('Алғашқы тізімге оралу керек пе?', 'Вернуть самый первый список?'), L('Командалар тізімі мен сақталған бастапқы тізім алғашқы 27 командаға оралады.', 'Список команд и сохранённый исходный список вернутся к самым первым 27 командам.'), L('Қайтару', 'Вернуть'), () => this.commit({ settings: Object.assign({}, this.state.settings, { teams: C.DEF.teams.map(t => Object.assign({}, t)), teamsBase: null }) }), true),
+      teamsHasBase: Array.isArray(S.teamsBase) && S.teamsBase.length > 0,
+      teamsBaseInfo: Array.isArray(S.teamsBase) && S.teamsBase.length ? L('Бастапқы тізім: ' + S.teamsBase.length + ' команда (сіз сақтағансыз)', 'Исходный список: ' + S.teamsBase.length + ' команд (сохранён вами)') : L('Бастапқы тізім: алғашқы 27 команда', 'Исходный список: самые первые 27 команд'), fileRef: this.fileRef,
       uiScale: S.uiScale,
       rootDbl: () => { if (this.isAud || pub) this.toggleFs(); },
       chrome: showChrome,
@@ -1038,8 +1348,8 @@ class Component extends DCLogic {
       showHostPanel: S.hostPanel, sessionId: s.id, ticketsN: s.tickets, ruleLabel, drawsDone: hist.length, spinLabel: fmt(S.spinSec, 0) + ' с',
       hasWinners: hist.length > 0, noWinners: hist.length === 0,
       sessionStarted: fmtDT(s.createdAt), sinceText: L(fmtDT(s.createdAt) + ' бастап', 'с ' + fmtDT(s.createdAt)),
-      primary: () => this.primary(), primaryLabel: this.primaryLabelText(ph), primaryDisabled: !['boot', 'ready', 'revealed'].includes(ph),
-      recalibrate: () => this.calibrate(), recalDisabled: ['boot', 'calibrating', 'spinning', 'preview'].includes(ph),
+      primary: () => this.primary(), primaryLabel: this.primaryLabelText(ph), primaryDisabled: !['ready', 'revealed'].includes(ph) || this.revealLock() > 0,
+      recalibrate: () => this.calibrate(), recalDisabled: ['calibrating', 'spinning', 'preview'].includes(ph),
       toggleQuick: () => this.setState({ quick: !this.state.quick, hist: false }), quickOpen: this.state.quick,
       openSettings: () => this.setState({ dlg: true, quick: false }), closeSettings: () => this.setState({ dlg: false }), dlgOpen: this.state.dlg && showChrome,
       dlgBackdrop: e => { if (e.target === e.currentTarget) this.setState({ dlg: false }); },
@@ -1051,29 +1361,46 @@ class Component extends DCLogic {
       quickToggles: [seg('sound', L('Дыбыс', 'Звук'), L('Жалпы дыбыстық сүйемелдеу', 'Общее звуковое сопровождение')), seg('confetti', 'Конфетти', L('Жеңімпаз шыққанда', 'При появлении победителя')), seg('fanfare', L('Фанфаралар', 'Фанфары'), (S.sound || !S.fanfare) ? L('Жеңімпаз әуені', 'Мелодия победителя') : L('Дыбыс өшірулі — фанфаралар естілмейді', 'Звук выключен — фанфары не прозвучат')), seg('skipNext', L('Бірден іске қосу', 'Сразу «Запустить»'), L('Келесі ұтысқа дайындықсыз', 'Без этапа подготовки')), seg('music', L('Музыка', 'Музыка'), L('Скинге сай фондық әуен', 'Фоновая мелодия скина')), choice('lang', L('Тіл', 'Язык'), L('Жазулар тілі', 'Язык надписей'), langOpts, '-q')],
       histRows: hist.slice().reverse().map(h => ({ no: h.drawNo, ticket: h.team || h.ticket, when: fmtDT(h.ts), rule: h.rule === 'repeat' ? L('қайталаумен', 'повторы') : L('қайталаусыз', 'без повторов') })),
       hasArchive: this.state.archive.length > 0,
-      archiveRows: this.state.archive.slice().reverse().map(a => ({ id: a.id, when: new Date(a.createdAt).toLocaleDateString('ru-RU'), range: a.tickets, countText: L(a.history.length + ' ұтыс', a.history.length + ' розыгр.'), tickets: a.history.map(h => h.team || h.ticket).join(', ') })),
+      resumeDisabled: ['calibrating', 'spinning', 'preview'].includes(ph),
+      archiveRows: this.state.archive.slice().reverse().map(a => ({ resume: () => this.ask(L('Сеансты жалғастыру керек пе?', 'Продолжить этот сеанс?'), L('#' + a.id + ' сеансы ' + a.history.length + ' ұтысымен және сол ережелермен қалпына келеді; калибрлеу қажет емес. ' + (s.history.length ? 'Ағымдағы сеанс мұрағатқа өтеді.' : 'Ағымдағы бос сеанс жойылады.'), 'Сеанс #' + a.id + ' восстановится с ' + a.history.length + ' розыгр. и теми же правилами; калибровка не понадобится. ' + (s.history.length ? 'Текущий сеанс уйдёт в архив.' : 'Текущий пустой сеанс будет удалён.')), L('Жалғастыру', 'Продолжить'), () => this.resumeSession(a.id)), id: a.id, when: new Date(a.createdAt).toLocaleDateString('ru-RU'), range: a.tickets, countText: L(a.history.length + ' ұтыс', a.history.length + ' розыгр.'), tickets: a.history.map(h => h.team || h.ticket).join(', ') })),
       exportCSV: () => this.exportCSV(),
       askNewSession: () => this.ask(L('Жаңа сеанс бастау керек пе?', 'Начать новый сеанс?'), L('Ағымдағы тарих мұрағатқа өтеді, қолжетімді билеттер тізімі жаңарады, калибрлеу қажет болады. Қайта калибрлеу де жаңа сеанс бастайды.', 'Текущая история уйдёт в архив, список доступных билетов обновится, понадобится калибровка. Повторная калибровка тоже начинает новый сеанс.'), L('Жаңа сеанс', 'Новый сеанс'), () => this.newSession(), true),
       askClear: () => this.ask(L('Барлық деректерді тазалау керек пе?', 'Очистить все данные?'), L('Ағымдағы сеанс тарихы мен өткен сеанстар мұрағаты жойылады. Бұл әрекетті қайтару мүмкін емес.', 'Будут удалены история текущего сеанса и архив прошлых сеансов. Действие необратимо.'), L('Тазалау', 'Очистить'), () => this.commit({ archive: [], session: this.mkSession(s.tickets, s.allowRepeats), hist: false }), true),
-      tabs: [['time', L('Уақыт және анимация', 'Время и анимация')], ['rules', L('Ережелер', 'Правила')], ['skins', L('Безендіру', 'Скины')], ['modes', L('Билеттер', 'Билеты')], ['sound', L('Дыбыс', 'Звук')], ['teams', L('Командалар', 'Команды')], ['ui', 'Интерфейс']].map(([id, label]) => ({ label, checked: this.state.tab === id, pick: () => this.setState({ tab: id }) })),
+      tabs: [['time', L('Уақыт және анимация', 'Время и анимация')], ['rules', L('Ережелер', 'Правила')], ['skins', L('Безендіру', 'Скины')], ['modes', L('Билеттер', 'Билеты')], ['sound', L('Дыбыс', 'Звук')], ['teams', L('Командалар', 'Команды')], ['ui', 'Интерфейс']].map(([id, label]) => ({ id, label, checked: this.state.tab === id, pick: () => this.setState({ tab: id }) })),
       tabTime: this.state.tab === 'time', tabRules: this.state.tab === 'rules', tabSkins: this.state.tab === 'skins', tabModes: this.state.tab === 'modes', tabSound: this.state.tab === 'sound', tabUI: this.state.tab === 'ui', tabTeams: this.state.tab === 'teams',
       spinPresets: [5, 8, 12, 20].map(v => ({ label: v + ' с', cls: S.spinSec === v ? 'btn btn-primary' : 'btn btn-secondary', pick: () => this.setSetting('spinSec', v) })),
       timeSliders: [slider('spinSec', L('Рандомайзердің айналу уақыты', 'Время вращения рандомайзера'), 3, 30, 1, v => v + ' с'), slider('calibSec', L('Калибрлеу ұзақтығы', 'Продолжительность калибровки'), 3, 30, 1, v => v + ' с'), slider('intensity', L('Айналу қарқыны', 'Интенсивность вращения'), 0.5, 1.6, 0.1, v => '×' + fmt(v, 1)), slider('digitSpeed', L('Нөмірлердің ауысу жылдамдығы', 'Скорость смены номеров'), 0.5, 2, 0.1, v => '×' + fmt(v, 1))],
       timingText: L('Үдеу ' + sec(tm.accel) + ' · айналу ' + sec(tm.decel - tm.accel) + ' · тежелу ' + sec(tm.stop - tm.decel) + ' · ашылу ' + sec(tm.R) + ' = ' + sec(T), 'Разгон ' + sec(tm.accel) + ' · вращение ' + sec(tm.decel - tm.accel) + ' · торможение ' + sec(tm.stop - tm.decel) + ' · раскрытие ' + sec(tm.R) + ' = ' + sec(T)),
-      timeToggles: [choice('fx', L('Визуалды эффектілер саны', 'Количество визуальных эффектов'), '', [[0, L('Аз', 'Мало')], [1, L('Қалыпты', 'Норма')], [2, L('Көп', 'Много')]]), seg('lowGfx', L('Жеңілдетілген графика', 'Упрощённый режим графики')), seg('flashes', L('Жарық жарқылдары', 'Световые вспышки')), choice('countdown', L('Кері санақ 3-2-1', 'Обратный отсчёт 3-2-1'), L('Іске қосар алдында, нөмір батырма басылғанда таңдалады', 'Перед стартом; номер выбирается в момент нажатия'), [[0, OFF], [3, '3 с'], [5, '5 с']]), seg('skipNext', L('Келесі ұтысқа дайындықсыз', 'Без подготовки к следующему розыгрышу'), L('Нөмір ашылғаннан кейін бірден «Іске қосу»', 'После раскрытия номера сразу «Запустить»'))],
+      timeToggles: [choice('fx', L('Визуалды эффектілер саны', 'Количество визуальных эффектов'), L('Фондағы бөлшектер, айналу кезіндегі ұшқындар, жеңіс кезіндегі конфетти мен отшашу, жарқырау, балықтар/карталар/жылқылар саны', 'Частицы на фоне, искры при вращении, конфетти и салют при победе, свечение, количество рыбок/карт/лошадей'), [[0, L('Аз', 'Мало')], [1, L('Қалыпты', 'Норма')], [2, L('Көп', 'Много')]]), seg('lowGfx', L('Жеңілдетілген графика', 'Упрощённый режим графики')), seg('flashes', L('Жарық жарқылдары', 'Световые вспышки')), choice('countdown', L('Кері санақ 3-2-1', 'Обратный отсчёт 3-2-1'), L('Іске қосар алдында, нөмір батырма басылғанда таңдалады', 'Перед стартом; номер выбирается в момент нажатия'), [[0, OFF], [3, '3 с'], [5, '5 с']]), seg('skipNext', L('Келесі ұтысқа дайындықсыз', 'Без подготовки к следующему розыгрышу'), L('Нөмір ашылғаннан кейін бірден «Іске қосу»', 'После раскрытия номера сразу «Запустить»'))],
       repeatOpts: [{ label: L('Рұқсат', 'Разрешены'), checked: s.allowRepeats, pick: () => this.setRepeats(true) }, { label: L('Тыйым', 'Запрещены'), checked: !s.allowRepeats, pick: () => this.setRepeats(false) }],
-      skinGroups: [['color', L('Түс палитралары', 'Цветовые темы')], ['season', L('Жыл мезгілдері', 'Времена года')], ['holiday', L('Мерекелік', 'Праздничные')]].map(([gid, title]) => ({ title, cards: C.SKINS.filter(k => (k.group || 'color') === gid).map(k => ({ name: k.kname && k.kname !== k.name ? L(k.kname, k.name) : k.name, desc: L(k.kdesc || SKK[k.id], k.desc), c0: k.sw[0], c1: k.sw[1], c2: k.sw[2], c3: k.sw[3], outline: S.skin === k.id ? '3px solid var(--color-accent)' : '3px solid transparent', pick: () => this.commit({ settings: Object.assign({}, this.state.settings, { skin: k.id, autoHolSkin: '' }) }) })) })),
+      updBanner: !!(this.state.upd && !this.state.updHide && !pub && !this.isAud), updBannerText: L('Жаңа нұсқа бар', 'Доступна новая версия'), updBtn: this.isFileMode() ? L('Офлайн-файлды жаңарту', 'Обновить офлайн-файл') : L('Жаңарту', 'Обновить'),
+      applyUpd: () => this.applyUpd(), hideUpd: () => this.setState({ updHide: true }), checkUpd: () => this.checkUpd(true), saveOffline: () => this.saveOffline(), reloadApp: () => location.reload(),
+      updHas: !!this.state.upd, updBusy: !!this.state.updBusy, updSaved: !!this.state.updSaved,
+      updStatus: (this.state.updMsg ? this.state.updMsg + '\n' : '') + L('Нұсқа: ' + C.BUILD, 'Версия: ' + C.BUILD) + (this.isFileMode() ? ' · офлайн' : ''),
+      updUrlVal: S.updateUrl || '', updUrlPh: this.updBase() || 'https://user.github.io/brainboy/', onUpdUrl: e => this.setSetting('updateUrl', e.target.value),
+      tUpdTitle: L('Жаңартулар', 'Обновления'), tUpdUrl: L('Сайт мекенжайы (GitHub Pages)', 'Адрес сайта (GitHub Pages)'),
+      tUpdHint: L('Онлайн нұсқа іске қосылғанда жаңа нұсқаны өзі тексереді. Офлайн-файл интернет болса сайттан жаңа нұсқаны алып, өзін ауыстыра алады — бірінші рет файлды таңдау сұралады. Офлайн-файл үшін сайт мекенжайын бір рет енгізіңіз.', 'Онлайн-версия при запуске сама проверяет обновления. Офлайн-файл при наличии интернета скачивает новую версию с сайта и заменяет себя — в первый раз браузер попросит выбрать файл. Для офлайн-файла один раз впишите адрес сайта.'),
+      tUpdCheck: L('Жаңартуды тексеру', 'Проверить обновления'), tUpdOffline: this.isFileMode() ? L('Офлайн-файлды сайттан жаңарту', 'Обновить офлайн-файл с сайта') : L('Офлайн-нұсқаны жүктеу / ауыстыру', 'Скачать / заменить офлайн-версию'), tUpdReload: L('Жаңа нұсқаны ашу', 'Открыть новую версию'),
+      ...this.editorVals(L), edClosed: !this.state.edit,
+      moreOpen: !!this.state.moreSkins, toggleMore: () => this.setState({ moreSkins: !this.state.moreSkins }),
+      moreLabel: this.state.moreSkins ? L('Жасыру', 'Скрыть') : L('Тағы… (' + C.SKINS.filter(k => k.group === 'more').length + ')', 'Ещё… (' + C.SKINS.filter(k => k.group === 'more').length + ')'),
+      moreCards: C.SKINS.filter(k => k.group === 'more').map(k => { const sw = this.skinSw(k); return { name: k.kname && k.kname !== k.name ? L(k.kname, k.name) : k.name, desc: L(k.kdesc, k.desc), c0: sw[0], c1: sw[1], c2: sw[2], c3: sw[3], outline: S.skin === k.id ? '3px solid var(--color-accent)' : '3px solid transparent', pick: () => this.commit({ settings: Object.assign({}, this.state.settings, { skin: k.id, autoHolSkin: '' }) }) }; }),
+      customCards: (S.customSkins || []).map(c => { this.regCustom(); const sw = this.skinSw({ id: c.id }); return { name: c.name, c0: sw[0], c1: sw[1], c2: sw[2], c3: sw[3], outline: S.skin === c.id ? '3px solid var(--color-accent)' : '3px solid transparent', pick: () => this.commit({ settings: Object.assign({}, this.state.settings, { skin: c.id, autoHolSkin: '' }) }), edit: () => this.openEditor(c.id, true) }; }),
+      hasCustom: (S.customSkins || []).length > 0,
+      newSkin: () => this.openEditor(S.skin),
+      tCustom: L('Менің скиндерім', 'Мои скины'), tNewSkin: L('+ Өз скиніңізді жасау', '+ Создать свой скин'), tNewHint: L('Ағымдағы скиннен басталады — кез келгенін негіз ретінде таңдауға болады', 'Начнётся с текущего скина — основу можно сменить'), tEdit: L('Өзгерту', 'Изменить'), tName: L('Атауы', 'Название'), tBgColors: L('Фон түстері', 'Цвета фона'), tGlow: L('Жарық түстері', 'Цвета подсветки'), tDensity: L('Элементтер тығыздығы', 'Плотность элементов'), tSave: L('Сақтау және қосу', 'Сохранить и включить'), tClone: L('Клондау', 'Клонировать'), tDel: L('Жою', 'Удалить'), tCancel: L('Болдырмау', 'Отмена'), tMore: L('Қосымша скиндер', 'Дополнительные скины'),
+      skinGroups: [['color', L('Түс палитралары', 'Цветовые темы')], ['season', L('Жыл мезгілдері', 'Времена года')], ['holiday', L('Мерекелік', 'Праздничные')]].map(([gid, title]) => ({ title, cards: C.SKINS.filter(k => (k.group || 'color') === gid).map(k => ({ name: k.kname && k.kname !== k.name ? L(k.kname, k.name) : k.name, desc: L(k.kdesc || SKK[k.id], k.desc), c0: this.skinSw(k)[0], c1: this.skinSw(k)[1], c2: this.skinSw(k)[2], c3: this.skinSw(k)[3], outline: S.skin === k.id ? '3px solid var(--color-accent)' : '3px solid transparent', pick: () => this.commit({ settings: Object.assign({}, this.state.settings, { skin: k.id, autoHolSkin: '' }) }) })) })),
       modeCards: C.MODES.map((m, i) => ({ kicker: L((i + 1) + '-режим', 'Режим ' + (i + 1)), name: L(MKK[m.id][0], m.name), desc: L(MKK[m.id][1], m.desc), outline: S.mode === m.id ? '3px solid var(--color-accent)' : '3px solid transparent', pick: () => this.setSetting('mode', m.id) })),
       preview: () => this.preview(), previewDisabled: ['calibrating', 'spinning', 'preview'].includes(ph),
-      soundToggles: [seg('sound', L('Дыбыс', 'Звук'), L('Жалпы қосқыш — басымдыққа ие', 'Общий переключатель — имеет приоритет')), seg('fanfare', L('Фанфаралар', 'Фанфары'), L('Механизм дыбыстарынан тәуелсіз', 'Независимо от звуков механизма')), choice('soundSet', L('Дыбыстық безендіру', 'Звуковое оформление'), '', [['brass', L('Жез', 'Латунь')], ['electro', 'Электро'], ['box', L('Музыкалық қорап', 'Шкатулка')]]), seg('muteTicks', L('Механизмнің тықылы', 'Тиканье механизма'), '', true), seg('muteMotor', L('Мотордың гуілі', 'Гул мотора'), '', true), seg('muteImpacts', L('Бекіту соққылары', 'Удары фиксации'), '', true), seg('muteChimes', L('Калибрлеу сигналдары', 'Сигналы калибровки'), '', true)],
+      soundToggles: [seg('sound', L('Дыбыс', 'Звук'), L('Жалпы қосқыш — басымдыққа ие', 'Общий переключатель — имеет приоритет')), seg('fanfare', L('Фанфаралар', 'Фанфары'), L('Механизм дыбыстарынан тәуелсіз', 'Независимо от звуков механизма')), choice('soundSet', L('Дыбыстық безендіру', 'Звуковое оформление'), L('Жез — металл тықыл мен мотор гуілі; Электро — синтезатор сигналдары мен «зарядталу»; Шкатулка — музыкалық қорап ноталары, қоңыраулар, тыныш механизм', 'Латунь — металлическое тиканье и гул мотора; Электро — синтезаторные сигналы и «зарядка»; Шкатулка — ноты музыкальной шкатулки, колокольчики, тихий механизм'), [['brass', L('Жез', 'Латунь')], ['electro', 'Электро'], ['box', L('Музыкалық қорап', 'Шкатулка')]]), seg('muteTicks', L('Механизмнің тықылы', 'Тиканье механизма'), '', true), seg('muteMotor', L('Мотордың гуілі', 'Гул мотора'), '', true), seg('muteImpacts', L('Бекіту соққылары', 'Удары фиксации'), '', true), seg('muteChimes', L('Калибрлеу сигналдары', 'Сигналы калибровки'), '', true)],
       soundSliders: [slider('vol', L('Жалпы дыбыс деңгейі', 'Общая громкость'), 0, 1, 0.05, v => Math.round(v * 100) + '%'), slider('volMech', L('Механизм дыбысының деңгейі', 'Громкость механизма'), 0, 1, 0.05, v => Math.round(v * 100) + '%'), slider('volFan', L('Фанфара дыбысының деңгейі', 'Громкость фанфар'), 0, 1, 0.05, v => Math.round(v * 100) + '%')],
       hearMech: () => { if (this.audio) this.audio.previewMech(); }, hearFanfare: () => { if (this.audio) { this.audio.unlock(); this.audio.fanfare(true); } }, hearChime: () => { if (this.audio) { this.audio.unlock(); this.audio.chime(true); } },
-      uiToggles: [choice('lang', L('Тіл', 'Язык'), L('Қазақша, орысша немесе екеуі бірге (қазақша жоғарыда)', 'Казахский, русский или оба сразу (казахский сверху)'), langOpts), seg('showDate', L('Ағымдағы күн', 'Текущая дата'), L('Экранның жоғарғы жағында', 'Вверху экрана')), seg('showStatusBar', L('Жоғарғы күй жолағы', 'Верхняя плашка этапов'), L('Калибрлеу, үдеу, тежелу және т.б.', 'Калибровка, разгон, торможение и т.д.')), seg('showWinStatus', L('«Ұтысты билет №» жазуы', 'Надпись «Выигрышный билет №»'), L('Нөмір ашылғаннан кейін жоғарыда', 'Сверху после раскрытия номера')), seg('hostPanel', L('Жүргізуші панелі', 'Панель ведущего'), L('Сол жақтағы сеанс шолуы', 'Сводка сеанса слева')), seg('showDrawNo', L('Ағымдағы ұтыс нөмірі', 'Номер текущего розыгрыша')), seg('showRemaining', L('Қалған билеттер есептегіші', 'Счётчик оставшихся билетов')), seg('mascot', L('BrainBoy маскоты', 'Маскот BrainBoy'), L('Машинаның сол жағындағы кейіпкер', 'Персонаж слева от машины')), seg('decor', L('Сәндік жазулар', 'Декоративные надписи'), L('Гравюралар мен аспап жазулары', 'Гравировки и подписи приборов')), seg('minimal', L('Минималистік сахна режимі', 'Минималистичный сценический режим'), L('Тісті доңғалақсыз, сақинасыз және фонсыз', 'Без шестерён, колец и фона')), seg('audienceHistory', L('Көрермен экранындағы тарих', 'История на экране зрителей'), L('Тек көрермен режимінде', 'Только в режиме зрителей'))],
+      uiToggles: [choice('lang', L('Тіл', 'Язык'), L('Қазақша, орысша немесе екеуі бірге (қазақша жоғарыда)', 'Казахский, русский или оба сразу (казахский сверху)'), langOpts), seg('showDate', L('Ағымдағы күн', 'Текущая дата'), L('Экранның жоғарғы жағында', 'Вверху экрана')), seg('showStatusBar', L('Жоғарғы күй жолағы', 'Верхняя плашка этапов'), L('Калибрлеу, үдеу, тежелу және т.б.', 'Калибровка, разгон, торможение и т.д.')), seg('showWinStatus', L('«Ұтысты билет №» жазуы', 'Надпись «Выигрышный билет №»'), L('Нөмір ашылғаннан кейін жоғарыда', 'Сверху после раскрытия номера')), seg('hostPanel', L('Жүргізуші панелі', 'Панель ведущего'), L('Сол жақтағы сеанс шолуы', 'Сводка сеанса слева')), seg('showDrawNo', L('Ағымдағы ұтыс нөмірі', 'Номер текущего розыгрыша')), seg('showRemaining', L('Қалған билеттер есептегіші', 'Счётчик оставшихся билетов')), seg('mascot', L('BrainBoy маскоты', 'Маскот BrainBoy'), L('Машинаның сол жағындағы кейіпкер', 'Персонаж слева от машины')), seg('mascotAttr', L('Маскот аксессуарлары', 'Аксессуары маскота'), L('Әр скинге өз бас киімі немесе заты: қыста құлақшын, Жаңа жылда Аяз ата бөркі, ғарышта скафандр…', 'У каждого скина свой головной убор или предмет: зимой ушанка, на Новый год шапка Санты, в космосе скафандр…')), seg('decor', L('Сәндік жазулар', 'Декоративные надписи'), L('Гравюралар мен аспап жазулары', 'Гравировки и подписи приборов')), seg('minimal', L('Минималистік сахна режимі', 'Минималистичный сценический режим'), L('Тісті доңғалақсыз, сақинасыз және фонсыз', 'Без шестерён, колец и фона')), seg('audienceHistory', L('Көрермен экранындағы тарих', 'История на экране зрителей'), L('Тек көрермен режимінде', 'Только в режиме зрителей'))],
       uiSliders: [slider('uiScale', L('Интерфейс масштабы', 'Масштаб интерфейса'), 0.8, 1.4, 0.05, v => Math.round(v * 100) + '%'), slider('numScale', L('Қорытынды нөмір өлшемі', 'Размер итогового номера'), 0.7, 1.5, 0.05, v => Math.round(v * 100) + '%')],
       exportSettings: () => this.download(new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' }), 'brainboy-settings.json'),
       pickImport: () => { if (this.fileRef.current) this.fileRef.current.click(); },
       onImport: e => { const f = e.target.files && e.target.files[0]; if (!f) return; f.text().then(txt => { try { const o = JSON.parse(txt), clean = {}; Object.keys(C.DEF).forEach(k => { if (o && k in o && typeof o[k] === typeof C.DEF[k]) clean[k] = o[k]; }); delete clean.tickets; if (clean.teams && !(Array.isArray(clean.teams) && clean.teams.every(t => t && typeof t.n === 'string'))) delete clean.teams; this.commit({ settings: Object.assign({}, this.state.settings, clean) }); } catch (err) {} }); e.target.value = ''; },
-      askResetSettings: () => this.ask(L('Баптауларды қалпына келтіру керек пе?', 'Сбросить настройки?'), L('Барлық параметрлер әдепкі мәндерге оралады. Тарих пен сеанс өзгермейді.', 'Все параметры вернутся к значениям по умолчанию. История и сеанс не изменятся.'), L('Қалпына келтіру', 'Сбросить'), () => this.commit({ settings: Object.assign({}, C.DEF, { tickets: s.tickets, lang: S.lang, teams: S.teams, autoHolidayDay: S.autoHolidayDay, autoSeasonKey: S.autoSeasonKey }) }), true),
+      askResetSettings: () => this.ask(L('Баптауларды қалпына келтіру керек пе?', 'Сбросить настройки?'), L('Барлық параметрлер әдепкі мәндерге оралады. Тарих пен сеанс өзгермейді.', 'Все параметры вернутся к значениям по умолчанию. История и сеанс не изменятся.'), L('Қалпына келтіру', 'Сбросить'), () => this.commit({ settings: Object.assign({}, C.DEF, { tickets: s.tickets, lang: S.lang, teams: S.teams, teamsBase: S.teamsBase, autoHolidayDay: S.autoHolidayDay, autoSeasonKey: S.autoSeasonKey }) }), true),
       confirmOpen: !!this.state.confirm, confirmTitle: this.state.confirm ? this.state.confirm.title : '', confirmBody: this.state.confirm ? this.state.confirm.body : '', confirmYesLabel: this.state.confirm ? this.state.confirm.yes : '',
       confirmYes: () => this.confirmYes(), confirmNo: () => this.setState({ confirm: null })
     };
